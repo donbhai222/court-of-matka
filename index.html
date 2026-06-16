@@ -1,2339 +1,367 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>MASTER VIP CHART</title>
+    <style>
+        :root { --dark-blue: #1a024d; --gold: #FFD700; --vip-red: #e31e24; }
+        body { background: #FFBF82; font-family: 'Arial Narrow', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
+        
+        .header { background: var(--dark-blue); padding: 10px; border-bottom: 3px solid var(--gold); }
+        .header h1 { margin: 0; font-size: 18px; color: var(--gold); text-transform: uppercase; }
 
-    
-    <title>Magic Panel Chart</title>
-    
-    <meta name="title" content="Big Magic Matka chart- Magic Panel Chart &amp; Royal Satta Hause Results">
-    <meta name="description" content="Get the fastest Big Magic Matka results, Magic Panel Chart, and Royal Satta Hause updates. Explore real magic satta charts and golden panel charts daily.&quot;">
-    
-    <meta name="keywords" content="big magic panel chart, magic panel chart, big magic matka, magic chart, real magic chart, golden panel chart, golden satta matka chart, royal satta hause, royal satta hause chart, real magic satta chart, matka result, satta matka market">
-    
-    <link rel="icon" href="https://courtofmatka.com/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="https://courtofmatka.com/favicon.ico" type="image/x-icon">
+        /* RUNNING NOTIFICATION STYLE */
+        .ticker-wrap { width: 100%; background: #000; color: #fff; padding: 6px 0; border-bottom: 2px solid var(--gold); font-family: sans-serif; font-size: 13px; font-weight: bold; overflow: hidden; }
+        .ticker-wrap marquee { vertical-align: middle; }
+        .ticker-wrap span { color: var(--gold); margin: 0 10px; }
 
+        .desc { background: #fff; width: 90%; margin: 15px auto; padding: 10px; border-left: 5px solid var(--vip-red); text-align: left; }
+        .desc ul { padding-left: 20px; font-size: 14px; margin: 0; }
 
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://courtofmatka.com/assets/css/styles.css">
+        .master-box { background: #000; margin: 15px auto; width: 90%; padding: 10px; border: 2px solid var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
+        .master-title { color: var(--gold); font-size: 12px; font-weight: bold; }
+        .master-val { color: #fff; font-size: 28px; font-weight: 900; }
 
+        .market-row { background: #fff; border: 1px solid #ddd; margin: 5px auto; width: 90%; padding: 10px; border-radius: 5px; display: flex; flex-direction: column; align-items: center; }
+        .m-name { font-weight: 900; font-size: 16px; color: #333; margin-bottom: 5px; }
+        .m-res { font-weight: 900; font-size: 20px; color: var(--vip-red); }
+
+        /* CHART CONTAINER */
+        .chart-wrapper { width: 90%; margin: 10px auto; }
+        .chart-container { background: #fff; border: 1px solid #000; overflow-x: auto; }
+        
+        .vip-table { border-collapse: collapse; width: 100%; min-width: 320px; table-layout: fixed; }
+        .vip-table th { background: #ffff00; color: #000; font-size: 10px; padding: 6px 0; border: 1px solid #000; }
+        .vip-table td { border: 1px solid #000; height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; position: relative; }
+        
+        /* DATE CELL - FIXED FOR 2 LINES */
+        .date-cell { background: #f0f0f0 !important; font-size: 11px; font-weight: bold; width: 65px !important; line-height: 1.3; white-space: normal; padding: 4px !important; text-align: center; }
+        .cell-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .p-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: bold; }
+        
+        /* BIGGER CHART NUMBERS */
+        .j-main { font-size: 22px; font-weight: 900; color: #000; margin: 0 5px; }
+        .highlight-red .j-main, .highlight-red .p-vertical { color: var(--vip-red) !important; }
+
+        /* SINGLE LOCK CELL STYLE */
+        .single-lock-cell { background: #fff5f5 !important; cursor: pointer; animation: flashBg 2s infinite; }
+        .lock-overlay { font-size: 18px; color: var(--vip-red); font-weight: bold; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        @keyframes flashBg { 0% { background: #fff5f5; } 50% { background: #ffe0e0; } 100% { background: #fff5f5; } }
+
+        /* LOCK TRIGGER BUTTON BELOW CHART */
+        .btn-unlock-trigger { background: var(--vip-red); color: white; font-size: 16px; font-weight: bold; border: 2px solid var(--gold); padding: 12px 25px; border-radius: 30px; cursor: pointer; margin: 15px auto; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.3); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* MODAL STYLES */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 10px; box-sizing: border-box; }
+        .modal-content { background: white; padding: 20px; border-radius: 15px; width: 100%; max-width: 340px; border: 3px solid var(--dark-blue); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .modal-content h3 { margin-top: 0; color: var(--dark-blue); }
+        .modal-content input[type="text"], .modal-content input[type="number"] { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+        
+        .btn-action { background: var(--dark-blue); color: var(--gold); border: none; padding: 10px 20px; font-size: 15px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 95%; margin-top: 10px; }
+        .btn-close { background: #777; color: white; margin-top: 5px; font-size: 12px; padding: 5px; width: auto; border-radius: 3px; border: none; cursor: pointer; }
+
+        /* PLAN BUTTONS */
+        .plan-box { border: 2px solid #ddd; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; background: #f9f9f9; transition: 0.2s; }
+        .plan-box:hover { border-color: var(--vip-red); background: #fff5f5; }
+        .plan-title { font-weight: bold; font-size: 16px; color: #333; }
+        .plan-price { color: var(--vip-red); font-size: 18px; font-weight: 900; margin-top: 5px; }
+
+        /* SCANNER STYLE FOR LOCAL IMAGE */
+        .qr-wrapper { width: 150px; height: 150px; margin: 15px auto; background: #fff; border: 2px dashed #333; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .qr-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .timer-display { font-size: 32px; font-weight: bold; color: var(--vip-red); margin: 15px 0; letter-spacing: 2px; }
+        .success-msg { color: green; font-size: 22px; font-weight: bold; margin: 20px 0; }
+
+        /* FLOATING SOCIAL BUTTONS WITH REAL LOGOS */
+        .social-sticky { position: fixed; bottom: 20px; left: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .btn-social { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 8px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn-social:active { transform: scale(0.9); }
+        .btn-whatsapp { background: #25D366; }
+        .btn-telegram { background: #0088cc; }
+        .btn-social svg { width: 28px; height: 28px; fill: white; }
+
+        /* SCROLL BUTTONS WITH TEXT AND ARROWS */
+        .scroll-sticky { position: fixed; bottom: 20px; right: 15px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .btn-scroll { width: 85px; height: 42px; border-radius: 8px; background: var(--dark-blue); color: var(--gold); border: 2px solid var(--gold); font-weight: bold; font-size: 10px; font-family: sans-serif; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; text-transform: uppercase; }
+        .btn-scroll span { font-size: 12px; }
+    </style>
 </head>
-
 <body>
-    
-    <div class="header-wrapper">
-        <div class="logo">
-        <div class="top1">
-            <div class="descriptionCont">
-                <div>
-                    
-                    <h1 class="site-title">
-                    <a href="/" class="title-magic">BIG</a>
-                    <a href="/" class="title-panel">MAGIC PANEL CHART</a>
-                    </h1>
-                    <p class="subtitle">Welcome to MAGIC PANEL CHART Matka</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
 
+<div class="header"><h1>MASTER VIP CHART</h1></div>
 
-    <div class="container-fluid">
+<div class="ticker-wrap">
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+        ⚠️ ध्यान दें: मास्टर VIP चार्ट का आज का लीक गेम तैयार है! <span>💥 100% फिक्स जोड़ी और अचूक पट्टी उपलब्ध है। 💥</span> हमारी सर्विस सबसे तेज़ और सबसे भरोसेमंद है। लीक गेम देखने के लिए नीचे दिए गए 'REMOVE LOCK' बटन पर क्लिक करें या सीधे WhatsApp / Telegram पर संपर्क करें। <span>🔥 आज ही जुड़ें और अपना सारा लॉस कवर करें! 🔥</span>
+    </marquee>
+</div>
 
-        <div class="main-content-wrapper">
-                <div id="top">
-        Disclaimer:  
-Royal satta hause is for educational &amp; entertainment purposes only.  
-We do not promote or encourage gambling, betting, or illegal activities.  
-Use this site at your own responsibility.
-    </div>
+<div class="desc">
+    <ul>
+        <li>सबसे तेज़ और सटीक रिजल्ट यहाँ उपलब्ध हैं।</li>
+        <li>एक्सपर्ट्स द्वारा तैयार किया गया VIP गेम।</li>
+        <li>100% भरोसेमंद और सुरक्षित सर्विस।</li>
+        <li>आज ही जुड़ें और जीत की शुरुआत करें।</li>
+    </ul>
+</div>
 
-    <div class="button-container">
-        <a href="#bottom" class="button2">Go to Bottom</a>
-    </div>
+<div class="master-box">
+    <div class="master-title">MASTER VIP CHART RESULT</div>
+    <div class="master-val" id="vipVal">---</div>
+</div>
 
-    <div class="market_dropdown_container">
-        <select id="marketSelect" class="market-dropdown" onchange="handleMarketChange(this)">
-            <option value="" disabled selected>Select Market</option>
-                            <option selected value="5">
-                    BIG MAGIC PANEL CHART</option>
-                            <option  value="6">
-                    GREAT BAZAR PANEL CHART</option>
-                    </select>
-    </div>
+<div id="liveMarketContainer"></div>
 
-    <div class="chart_container">
-        <div class="panel panel-info" 
-     style="width: 70%; --day-columns: 6;">
-    <div class="panel-heading text-light">
-        <h2>BIG MAGIC PANEL CHART</h2>
-    </div>
-    <div class="panel-body">        
-        <table class="panel-chart chart-table" cellpadding="2" style="table-layout: fixed;">
+<div class="chart-wrapper">
+    <div class="chart-container">
+        <table class="vip-table">
             <thead>
                 <tr>
-                    <th>Date</th>
-                                            <th colspan="3">Mon</th>
-                                            <th colspan="3">Tue</th>
-                                            <th colspan="3">Wed</th>
-                                            <th colspan="3">Thu</th>
-                                            <th colspan="3">Fri</th>
-                                            <th colspan="3">Sat</th>
-                                    </tr>
+                    <th style="width:65px;">DATE</th>
+                    <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+                </tr>
             </thead>
-            <tbody>
-                
-                                    <tr>
-                        <td>
-                            <p>
-                                14/07/2025<br>
-                                to<br>
-                                19/07/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>4<br>0</td>
-                                    <td class='normal'>
-                                        <span>58</span>
-                                    </td>
-                                    <td class='normal'>1<br>1<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>82</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>3<br>8</td>
-                                    <td class='red'>
-                                        <span>27</span>
-                                    </td>
-                                    <td class='red'>3<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>4<br>6</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>7<br>9<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                21/07/2025<br>
-                                to<br>
-                                26/07/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>9<br>9</td>
-                                    <td class='normal'>
-                                        <span>01</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>5<br>6</td>
-                                    <td class='red'>
-                                        <span>50</span>
-                                    </td>
-                                    <td class='red'>3<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>6<br>9</td>
-                                    <td class='normal'>
-                                        <span>17</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>4<br>5</td>
-                                    <td class='normal'>
-                                        <span>28</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>6<br>7<br>8</td>
-                                    <td class='red'>
-                                        <span>16</span>
-                                    </td>
-                                    <td class='red'>1<br>5<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>6<br>8</td>
-                                    <td class='red'>
-                                        <span>50</span>
-                                    </td>
-                                    <td class='red'>3<br>3<br>4</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                28/07/2025<br>
-                                to<br>
-                                02/08/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>80</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>67</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>6<br>6</td>
-                                    <td class='normal'>
-                                        <span>76</span>
-                                    </td>
-                                    <td class='normal'>3<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>8</td>
-                                    <td class='normal'>
-                                        <span>30</span>
-                                    </td>
-                                    <td class='normal'>1<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>85</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>8<br>9<br>9</td>
-                                    <td class='normal'>
-                                        <span>60</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>5</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                04/08/2025<br>
-                                to<br>
-                                09/08/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>2<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>11</span>
-                                    </td>
-                                    <td class='red'>5<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>5</td>
-                                    <td class='normal'>
-                                        <span>90</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>90</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>1<br>1<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>96</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>3</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>5<br>7</td>
-                                    <td class='red'>
-                                        <span>38</span>
-                                    </td>
-                                    <td class='red'>2<br>6<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                11/08/2025<br>
-                                to<br>
-                                16/08/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>5<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>19</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>57</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>7</td>
-                                    <td class='normal'>
-                                        <span>24</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>27</span>
-                                    </td>
-                                    <td class='red'>2<br>5<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>*<br>*<br>*</td>
-                                    <td class='red'>
-                                        <span>**</span>
-                                    </td>
-                                    <td class='red'>*<br>*<br>*</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>5</td>
-                                    <td class='normal'>
-                                        <span>45</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                18/08/2025<br>
-                                to<br>
-                                23/08/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>57</span>
-                                    </td>
-                                    <td class='normal'>4<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>41</span>
-                                    </td>
-                                    <td class='normal'>3<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>93</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>34</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>5</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                25/08/2025<br>
-                                to<br>
-                                30/08/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>7<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>37</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>6<br>9</td>
-                                    <td class='normal'>
-                                        <span>02</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>6</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>3<br>9</td>
-                                    <td class='red'>
-                                        <span>50</span>
-                                    </td>
-                                    <td class='red'>4<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>7</td>
-                                    <td class='normal'>
-                                        <span>04</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>7</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>6<br>8</td>
-                                    <td class='red'>
-                                        <span>83</span>
-                                    </td>
-                                    <td class='red'>1<br>4<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>52</span>
-                                    </td>
-                                    <td class='normal'>7<br>7<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                01/09/2025<br>
-                                to<br>
-                                06/09/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>4<br>7</td>
-                                    <td class='normal'>
-                                        <span>57</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>8<br>9</td>
-                                    <td class='red'>
-                                        <span>16</span>
-                                    </td>
-                                    <td class='red'>2<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>4<br>5</td>
-                                    <td class='normal'>
-                                        <span>34</span>
-                                    </td>
-                                    <td class='normal'>5<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>8</td>
-                                    <td class='normal'>
-                                        <span>71</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>1<br>2</td>
-                                    <td class='normal'>
-                                        <span>42</span>
-                                    </td>
-                                    <td class='normal'>2<br>0<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>41</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                08/09/2025<br>
-                                to<br>
-                                13/09/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>7<br>8<br>8</td>
-                                    <td class='normal'>
-                                        <span>36</span>
-                                    </td>
-                                    <td class='normal'>1<br>1<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>1<br>5</td>
-                                    <td class='normal'>
-                                        <span>78</span>
-                                    </td>
-                                    <td class='normal'>2<br>2<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>7</td>
-                                    <td class='normal'>
-                                        <span>10</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>7</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>85</span>
-                                    </td>
-                                    <td class='normal'>6<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>7<br>8</td>
-                                    <td class='red'>
-                                        <span>99</span>
-                                    </td>
-                                    <td class='red'>6<br>6<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                15/09/2025<br>
-                                to<br>
-                                20/09/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>2<br>9</td>
-                                    <td class='normal'>
-                                        <span>24</span>
-                                    </td>
-                                    <td class='normal'>5<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>6<br>7</td>
-                                    <td class='red'>
-                                        <span>44</span>
-                                    </td>
-                                    <td class='red'>6<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>6<br>7</td>
-                                    <td class='red'>
-                                        <span>61</span>
-                                    </td>
-                                    <td class='red'>5<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>65</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>5<br>9</td>
-                                    <td class='red'>
-                                        <span>83</span>
-                                    </td>
-                                    <td class='red'>6<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>25</span>
-                                    </td>
-                                    <td class='normal'>4<br>4<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                22/09/2025<br>
-                                to<br>
-                                27/09/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>6<br>0</td>
-                                    <td class='normal'>
-                                        <span>85</span>
-                                    </td>
-                                    <td class='normal'>6<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>7<br>8</td>
-                                    <td class='red'>
-                                        <span>94</span>
-                                    </td>
-                                    <td class='red'>5<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>96</span>
-                                    </td>
-                                    <td class='normal'>7<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>6</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>8</td>
-                                    <td class='normal'>
-                                        <span>17</span>
-                                    </td>
-                                    <td class='normal'>5<br>5<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>9<br>9</td>
-                                    <td class='normal'>
-                                        <span>17</span>
-                                    </td>
-                                    <td class='normal'>2<br>2<br>3</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                29/09/2025<br>
-                                to<br>
-                                04/10/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>1<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>4<br>6</td>
-                                    <td class='normal'>
-                                        <span>37</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>3</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>8</td>
-                                    <td class='normal'>
-                                        <span>78</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>5</td>
-                                    <td class='normal'>
-                                        <span>08</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>91</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>21</span>
-                                    </td>
-                                    <td class='normal'>1<br>1<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                06/10/2025<br>
-                                to<br>
-                                11/10/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>69</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>63</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>48</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>4</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>2<br>2<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>6<br>0</td>
-                                    <td class='normal'>
-                                        <span>04</span>
-                                    </td>
-                                    <td class='normal'>7<br>7<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                13/10/2025<br>
-                                to<br>
-                                18/10/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>4<br>0</td>
-                                    <td class='normal'>
-                                        <span>58</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>8</td>
-                                    <td class='normal'>
-                                        <span>59</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>8</td>
-                                    <td class='normal'>
-                                        <span>13</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>51</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>1<br>7</td>
-                                    <td class='normal'>
-                                        <span>95</span>
-                                    </td>
-                                    <td class='normal'>1<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>*<br>*<br>*</td>
-                                    <td class='red'>
-                                        <span>**</span>
-                                    </td>
-                                    <td class='red'>*<br>*<br>*</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                27/10/2025<br>
-                                to<br>
-                                01/11/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>2<br>2<br>0</td>
-                                    <td class='red'>
-                                        <span>44</span>
-                                    </td>
-                                    <td class='red'>1<br>5<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>95</span>
-                                    </td>
-                                    <td class='normal'>1<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>24</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>7</td>
-                                    <td class='normal'>
-                                        <span>09</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>5</td>
-                                    <td class='normal'>
-                                        <span>80</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>6<br>8</td>
-                                    <td class='red'>
-                                        <span>55</span>
-                                    </td>
-                                    <td class='red'>7<br>8<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                03/11/2025<br>
-                                to<br>
-                                08/11/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>3<br>8</td>
-                                    <td class='normal'>
-                                        <span>20</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>0</td>
-                                    <td class='normal'>
-                                        <span>32</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>7</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>6<br>0</td>
-                                    <td class='red'>
-                                        <span>00</span>
-                                    </td>
-                                    <td class='red'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>8</td>
-                                    <td class='red'>
-                                        <span>50</span>
-                                    </td>
-                                    <td class='red'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>6<br>8</td>
-                                    <td class='red'>
-                                        <span>72</span>
-                                    </td>
-                                    <td class='red'>1<br>2<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>8</td>
-                                    <td class='normal'>
-                                        <span>19</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>5</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                10/11/2025<br>
-                                to<br>
-                                15/11/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>7<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>61</span>
-                                    </td>
-                                    <td class='red'>3<br>3<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>6<br>6</td>
-                                    <td class='normal'>
-                                        <span>48</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>02</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>48</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>3</td>
-                                    <td class='normal'>
-                                        <span>74</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>25</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                17/11/2025<br>
-                                to<br>
-                                22/11/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>69</span>
-                                    </td>
-                                    <td class='normal'>4<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>35</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>11</span>
-                                    </td>
-                                    <td class='red'>5<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>07</span>
-                                    </td>
-                                    <td class='normal'>1<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>5</td>
-                                    <td class='normal'>
-                                        <span>28</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>6<br>0</td>
-                                    <td class='normal'>
-                                        <span>19</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>6</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                24/11/2025<br>
-                                to<br>
-                                29/11/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>8<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>76</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>4</td>
-                                    <td class='normal'>
-                                        <span>90</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>4<br>9</td>
-                                    <td class='normal'>
-                                        <span>78</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>9<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>87</span>
-                                    </td>
-                                    <td class='normal'>5<br>5<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                01/12/2025<br>
-                                to<br>
-                                06/12/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>4<br>6</td>
-                                    <td class='normal'>
-                                        <span>25</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>5</td>
-                                    <td class='normal'>
-                                        <span>21</span>
-                                    </td>
-                                    <td class='normal'>6<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>4<br>7</td>
-                                    <td class='red'>
-                                        <span>27</span>
-                                    </td>
-                                    <td class='red'>4<br>4<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>9</td>
-                                    <td class='normal'>
-                                        <span>46</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>71</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>9</td>
-                                    <td class='red'>
-                                        <span>61</span>
-                                    </td>
-                                    <td class='red'>6<br>7<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                08/12/2025<br>
-                                to<br>
-                                13/12/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>34</span>
-                                    </td>
-                                    <td class='normal'>6<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>87</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>7</td>
-                                    <td class='normal'>
-                                        <span>19</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>6<br>8</td>
-                                    <td class='red'>
-                                        <span>72</span>
-                                    </td>
-                                    <td class='red'>4<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>03</span>
-                                    </td>
-                                    <td class='normal'>4<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>46</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                15/12/2025<br>
-                                to<br>
-                                20/12/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>5<br>6<br>9</td>
-                                    <td class='normal'>
-                                        <span>03</span>
-                                    </td>
-                                    <td class='normal'>5<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>8<br>8</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>4<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>3<br>9</td>
-                                    <td class='red'>
-                                        <span>55</span>
-                                    </td>
-                                    <td class='red'>4<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>3</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>93</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>3<br>8</td>
-                                    <td class='red'>
-                                        <span>33</span>
-                                    </td>
-                                    <td class='red'>1<br>5<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                22/12/2025<br>
-                                to<br>
-                                27/12/2025
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>5<br>5<br>8</td>
-                                    <td class='red'>
-                                        <span>83</span>
-                                    </td>
-                                    <td class='red'>4<br>4<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>9</td>
-                                    <td class='normal'>
-                                        <span>35</span>
-                                    </td>
-                                    <td class='normal'>3<br>6<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>23</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>48</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>28</span>
-                                    </td>
-                                    <td class='normal'>4<br>7<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>6</td>
-                                    <td class='normal'>
-                                        <span>06</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                29/12/2025<br>
-                                to<br>
-                                03/01/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>75</span>
-                                    </td>
-                                    <td class='normal'>1<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>0</td>
-                                    <td class='normal'>
-                                        <span>63</span>
-                                    </td>
-                                    <td class='normal'>4<br>4<br>5</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>6<br>7</td>
-                                    <td class='red'>
-                                        <span>49</span>
-                                    </td>
-                                    <td class='red'>1<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>25</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>8<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>5</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                05/01/2026<br>
-                                to<br>
-                                10/01/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>6<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>64</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>56</span>
-                                    </td>
-                                    <td class='normal'>3<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>8</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>4<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>47</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>0</td>
-                                    <td class='red'>
-                                        <span>77</span>
-                                    </td>
-                                    <td class='red'>2<br>7<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                12/01/2026<br>
-                                to<br>
-                                17/01/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>6<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>2<br>4<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>9</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>6<br>7</td>
-                                    <td class='normal'>
-                                        <span>43</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>6</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>6<br>6</td>
-                                    <td class='red'>
-                                        <span>55</span>
-                                    </td>
-                                    <td class='red'>1<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>24</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>20</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>5</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                19/01/2026<br>
-                                to<br>
-                                24/01/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>93</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>60</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>4</td>
-                                    <td class='normal'>
-                                        <span>76</span>
-                                    </td>
-                                    <td class='normal'>7<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>6</td>
-                                    <td class='normal'>
-                                        <span>96</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>9</td>
-                                    <td class='normal'>
-                                        <span>45</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>67</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                26/01/2026<br>
-                                to<br>
-                                31/01/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>*<br>*<br>*</td>
-                                    <td class='red'>
-                                        <span>**</span>
-                                    </td>
-                                    <td class='red'>*<br>*<br>*</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>4</td>
-                                    <td class='normal'>
-                                        <span>95</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>53</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>21</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>07</span>
-                                    </td>
-                                    <td class='normal'>7<br>0<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>19</span>
-                                    </td>
-                                    <td class='normal'>3<br>7<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                02/02/2026<br>
-                                to<br>
-                                07/02/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>87</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>8</td>
-                                    <td class='normal'>
-                                        <span>28</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>5</td>
-                                    <td class='normal'>
-                                        <span>02</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>45</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>6<br>7</td>
-                                    <td class='normal'>
-                                        <span>56</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>0</td>
-                                    <td class='red'>
-                                        <span>77</span>
-                                    </td>
-                                    <td class='red'>4<br>5<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                09/02/2026<br>
-                                to<br>
-                                14/02/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>2<br>4<br>4</td>
-                                    <td class='red'>
-                                        <span>00</span>
-                                    </td>
-                                    <td class='red'>4<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>7</td>
-                                    <td class='normal'>
-                                        <span>63</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>1<br>3</td>
-                                    <td class='normal'>
-                                        <span>52</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>7</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>7<br>8</td>
-                                    <td class='red'>
-                                        <span>88</span>
-                                    </td>
-                                    <td class='red'>2<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>6<br>9</td>
-                                    <td class='red'>
-                                        <span>72</span>
-                                    </td>
-                                    <td class='red'>1<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='red'>7<br>8<br>9</td>
-                                    <td class='red'>
-                                        <span>49</span>
-                                    </td>
-                                    <td class='red'>2<br>7<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                16/02/2026<br>
-                                to<br>
-                                21/02/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>13</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>6<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>55</span>
-                                    </td>
-                                    <td class='red'>2<br>3<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>13</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>81</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>5<br>7</td>
-                                    <td class='normal'>
-                                        <span>51</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                23/02/2026<br>
-                                to<br>
-                                28/02/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>4<br>6<br>9</td>
-                                    <td class='red'>
-                                        <span>94</span>
-                                    </td>
-                                    <td class='red'>6<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>17</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>3</td>
-                                    <td class='normal'>
-                                        <span>71</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>21</span>
-                                    </td>
-                                    <td class='normal'>5<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>6<br>8<br>9</td>
-                                    <td class='red'>
-                                        <span>33</span>
-                                    </td>
-                                    <td class='red'>1<br>4<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                02/03/2026<br>
-                                to<br>
-                                07/03/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>6<br>8<br>0</td>
-                                    <td class='red'>
-                                        <span>49</span>
-                                    </td>
-                                    <td class='red'>2<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>09</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>4</td>
-                                                                                                                
-                                                                                                <td class='red'>*<br>*<br>*</td>
-                                    <td class='red'>
-                                        <span>**</span>
-                                    </td>
-                                    <td class='red'>*<br>*<br>*</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>3</td>
-                                    <td class='normal'>
-                                        <span>65</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>36</span>
-                                    </td>
-                                    <td class='normal'>1<br>5<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>7</td>
-                                    <td class='normal'>
-                                        <span>07</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                09/03/2026<br>
-                                to<br>
-                                14/03/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>0<br>0</td>
-                                    <td class='normal'>
-                                        <span>12</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>03</span>
-                                    </td>
-                                    <td class='normal'>4<br>4<br>5</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>3<br>4</td>
-                                    <td class='red'>
-                                        <span>88</span>
-                                    </td>
-                                    <td class='red'>2<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>0</td>
-                                    <td class='normal'>
-                                        <span>51</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>45</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>4</td>
-                                    <td class='normal'>
-                                        <span>85</span>
-                                    </td>
-                                    <td class='normal'>2<br>4<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                16/03/2026<br>
-                                to<br>
-                                21/03/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>5<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>4<br>8<br>0</td>
-                                    <td class='red'>
-                                        <span>27</span>
-                                    </td>
-                                    <td class='red'>3<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>7<br>7</td>
-                                    <td class='normal'>
-                                        <span>52</span>
-                                    </td>
-                                    <td class='normal'>5<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>7</td>
-                                    <td class='normal'>
-                                        <span>60</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>28</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>71</span>
-                                    </td>
-                                    <td class='normal'>3<br>9<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                23/03/2026<br>
-                                to<br>
-                                28/03/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>5<br>7<br>7</td>
-                                    <td class='normal'>
-                                        <span>95</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>8<br>9</td>
-                                    <td class='normal'>
-                                        <span>24</span>
-                                    </td>
-                                    <td class='normal'>1<br>1<br>2</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>8<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>7<br>9</td>
-                                    <td class='red'>
-                                        <span>77</span>
-                                    </td>
-                                    <td class='red'>2<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>5<br>7<br>9</td>
-                                    <td class='red'>
-                                        <span>11</span>
-                                    </td>
-                                    <td class='red'>2<br>3<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>47</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>6</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                30/03/2026<br>
-                                to<br>
-                                04/04/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>4<br>6</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>6</td>
-                                    <td class='normal'>
-                                        <span>91</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>5<br>0</td>
-                                    <td class='red'>
-                                        <span>61</span>
-                                    </td>
-                                    <td class='red'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>3<br>7<br>0</td>
-                                    <td class='red'>
-                                        <span>05</span>
-                                    </td>
-                                    <td class='red'>8<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>4<br>0</td>
-                                    <td class='normal'>
-                                        <span>62</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>6<br>0</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>1<br>5<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                06/04/2026<br>
-                                to<br>
-                                11/04/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>5<br>7</td>
-                                    <td class='normal'>
-                                        <span>67</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>6<br>7</td>
-                                    <td class='normal'>
-                                        <span>65</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>69</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>82</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>03</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                13/04/2026<br>
-                                to<br>
-                                18/04/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>2<br>9</td>
-                                    <td class='normal'>
-                                        <span>30</span>
-                                    </td>
-                                    <td class='normal'>4<br>6<br>0</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>6<br>9</td>
-                                    <td class='red'>
-                                        <span>77</span>
-                                    </td>
-                                    <td class='red'>4<br>5<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>5<br>9<br>9</td>
-                                    <td class='normal'>
-                                        <span>35</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>6<br>9</td>
-                                    <td class='normal'>
-                                        <span>98</span>
-                                    </td>
-                                    <td class='normal'>2<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>2<br>0</td>
-                                    <td class='red'>
-                                        <span>33</span>
-                                    </td>
-                                    <td class='red'>4<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>35</span>
-                                    </td>
-                                    <td class='normal'>3<br>4<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                20/04/2026<br>
-                                to<br>
-                                25/04/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>4<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>25</span>
-                                    </td>
-                                    <td class='normal'>6<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>84</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>2<br>0</td>
-                                    <td class='normal'>
-                                        <span>40</span>
-                                    </td>
-                                    <td class='normal'>4<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>6</td>
-                                    <td class='red'>
-                                        <span>38</span>
-                                    </td>
-                                    <td class='red'>4<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>2<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>5</td>
-                                    <td class='normal'>
-                                        <span>97</span>
-                                    </td>
-                                    <td class='normal'>1<br>7<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                27/04/2026<br>
-                                to<br>
-                                02/05/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>2<br>2<br>4</td>
-                                    <td class='normal'>
-                                        <span>89</span>
-                                    </td>
-                                    <td class='normal'>4<br>6<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>57</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>6<br>9</td>
-                                    <td class='normal'>
-                                        <span>73</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>0</td>
-                                    <td class='normal'>
-                                        <span>79</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>9</td>
-                                    <td class='normal'>
-                                        <span>86</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>3</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>3<br>9</td>
-                                    <td class='normal'>
-                                        <span>59</span>
-                                    </td>
-                                    <td class='normal'>1<br>8<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                04/05/2026<br>
-                                to<br>
-                                09/05/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>4<br>8</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>59</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>6</td>
-                                    <td class='normal'>
-                                        <span>15</span>
-                                    </td>
-                                    <td class='normal'>6<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>6<br>7</td>
-                                    <td class='normal'>
-                                        <span>43</span>
-                                    </td>
-                                    <td class='normal'>3<br>5<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>8<br>8</td>
-                                    <td class='normal'>
-                                        <span>81</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>7<br>0</td>
-                                    <td class='normal'>
-                                        <span>41</span>
-                                    </td>
-                                    <td class='normal'>5<br>8<br>8</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                11/05/2026<br>
-                                to<br>
-                                16/05/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>5<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>41</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>23</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>02</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>39</span>
-                                    </td>
-                                    <td class='normal'>2<br>3<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>87</span>
-                                    </td>
-                                    <td class='normal'>3<br>6<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>2<br>6</td>
-                                    <td class='normal'>
-                                        <span>98</span>
-                                    </td>
-                                    <td class='normal'>5<br>6<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                18/05/2026<br>
-                                to<br>
-                                23/05/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>4<br>7</td>
-                                    <td class='normal'>
-                                        <span>46</span>
-                                    </td>
-                                    <td class='normal'>3<br>3<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>8</td>
-                                    <td class='normal'>
-                                        <span>13</span>
-                                    </td>
-                                    <td class='normal'>6<br>8<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>3<br>0</td>
-                                    <td class='normal'>
-                                        <span>42</span>
-                                    </td>
-                                    <td class='normal'>1<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='red'>1<br>9<br>0</td>
-                                    <td class='red'>
-                                        <span>00</span>
-                                    </td>
-                                    <td class='red'>1<br>2<br>7</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>3<br>8</td>
-                                    <td class='normal'>
-                                        <span>31</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>8</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>5<br>5</td>
-                                    <td class='red'>
-                                        <span>27</span>
-                                    </td>
-                                    <td class='red'>5<br>5<br>7</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                25/05/2026<br>
-                                to<br>
-                                30/05/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>1<br>2<br>8</td>
-                                    <td class='normal'>
-                                        <span>17</span>
-                                    </td>
-                                    <td class='normal'>8<br>9<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>2<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>12</span>
-                                    </td>
-                                    <td class='normal'>6<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>5<br>7</td>
-                                    <td class='normal'>
-                                        <span>57</span>
-                                    </td>
-                                    <td class='normal'>1<br>2<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>9<br>9</td>
-                                    <td class='normal'>
-                                        <span>10</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>7<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>59</span>
-                                    </td>
-                                    <td class='normal'>1<br>4<br>4</td>
-                                                                                                                
-                                                                                                <td class='normal'>1<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>20</span>
-                                    </td>
-                                    <td class='normal'>2<br>2<br>6</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                01/06/2026<br>
-                                to<br>
-                                06/06/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='red'>1<br>8<br>9</td>
-                                    <td class='red'>
-                                        <span>83</span>
-                                    </td>
-                                    <td class='red'>5<br>9<br>9</td>
-                                                                                                                
-                                                                                                <td class='normal'>3<br>8<br>0</td>
-                                    <td class='normal'>
-                                        <span>13</span>
-                                    </td>
-                                    <td class='normal'>1<br>3<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>4<br>7</td>
-                                    <td class='red'>
-                                        <span>38</span>
-                                    </td>
-                                    <td class='red'>8<br>0<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>08</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>8<br>0</td>
-                                    <td class='red'>
-                                        <span>05</span>
-                                    </td>
-                                    <td class='red'>4<br>5<br>6</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>9</td>
-                                    <td class='normal'>
-                                        <span>29</span>
-                                    </td>
-                                    <td class='normal'>4<br>5<br>0</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                08/06/2026<br>
-                                to<br>
-                                13/06/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'>3<br>9<br>0</td>
-                                    <td class='normal'>
-                                        <span>26</span>
-                                    </td>
-                                    <td class='normal'>2<br>4<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>5<br>6</td>
-                                    <td class='normal'>
-                                        <span>59</span>
-                                    </td>
-                                    <td class='normal'>2<br>2<br>5</td>
-                                                                                                                
-                                                                                                <td class='normal'>6<br>7<br>7</td>
-                                    <td class='normal'>
-                                        <span>03</span>
-                                    </td>
-                                    <td class='normal'>7<br>8<br>8</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>6<br>8</td>
-                                    <td class='normal'>
-                                        <span>87</span>
-                                    </td>
-                                    <td class='normal'>2<br>5<br>0</td>
-                                                                                                                
-                                                                                                <td class='normal'>4<br>4<br>9</td>
-                                    <td class='normal'>
-                                        <span>71</span>
-                                    </td>
-                                    <td class='normal'>5<br>7<br>9</td>
-                                                                                                                
-                                                                                                <td class='red'>2<br>8<br>0</td>
-                                    <td class='red'>
-                                        <span>05</span>
-                                    </td>
-                                    <td class='red'>1<br>5<br>9</td>
-                                                                                                        </tr>
-                                    <tr>
-                        <td>
-                            <p>
-                                15/06/2026<br>
-                                to<br>
-                                20/06/2026
-                            </p>
-                        </td>
-
-                                                    
-                                                                                                <td class='normal'></td>
-                                    <td class='normal'>
-                                        <a class="lock_icon" href="register/5"
-                                            title="Register to view details">🔒</a>
-                                    </td>
-                                    <td class='normal'></td>
-                                                                                                                
-                                                            <td class='normal'></td>
-                                <td class='normal'></td>
-                                <td class='normal'></td>
-                                                                                
-                                                            <td class='normal'></td>
-                                <td class='normal'></td>
-                                <td class='normal'></td>
-                                                                                
-                                                            <td class='normal'></td>
-                                <td class='normal'></td>
-                                <td class='normal'></td>
-                                                                                
-                                                            <td class='normal'></td>
-                                <td class='normal'></td>
-                                <td class='normal'></td>
-                                                                                
-                                                            <td class='normal'></td>
-                                <td class='normal'></td>
-                                <td class='normal'></td>
-                                                                        </tr>
-                            </tbody>
+            <tbody id="chartGrid"></tbody>
         </table>
     </div>
-</div>    </div>
+</div>
+
+<button class="btn-unlock-trigger" id="unlockTriggerBtn" onclick="openStep1()">🔓 REMOVE LOCK</button>
 
 
-    <div id="unlock-section"; class="unlock-section ">
-        <a href="register/5" class="unlock-btn unlock_market_url">
-            Unlock BIG MAGIC PANEL CHART 🔑
-        </a>
-    </div>
-
-    <div id="bottom">
-        <a href="#top" class="button2">Go to Top</a>
-    </div>
-
-    <button class="fixed-refresh" onclick="window.location.reload()">Refresh</button>
-        </div>
-
-    </div>
-
-
-    
-    <div class="footer-wrapper">
-        <div class="satta-matka-block">
-    <div class="btn-red">
-        ALL RIGHTS RESERVED®<br>
-        (2026)
+<div class="modal-overlay" id="modalStep1">
+    <div class="modal-content">
+        <h3>Unlock VIP Chart</h3>
+        <p style="font-size:13px; color:#666;">Kripya apni details bharein</p>
+        <input type="text" id="userName" placeholder="Apna Naam Daalein" required>
+        <input type="number" id="userPhone" placeholder="Mobile Number Daalein" required>
+        <button class="btn-action" onclick="openStep2()">Aage Badhein</button>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
     </div>
 </div>
+
+<div class="modal-overlay" id="modalStep2">
+    <div class="modal-content">
+        <h3>VIP Subscription Plans</h3>
+        <p style="font-size:13px; color:#666;">Koi ek plan select karein</p>
+        
+        <div class="plan-box" onclick="openStep3(599, '1 Din')">
+            <div class="plan-title">1 Din Ka Plan</div>
+            <div class="plan-price">₹599</div>
+        </div>
+        
+        <div class="plan-box" onclick="openStep3(1499, '7 Din')">
+            <div class="plan-title">7 Din Ka Plan</div>
+            <div class="plan-price">₹1499</div>
+        </div>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
     </div>
+</div>
 
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="modal-overlay" id="modalStep3">
+    <div class="modal-content">
+        <h3 id="planHeading">Pay ₹599</h3>
+        <p style="font-size:13px; color:#666;">Neeche diye QR code ko scan karke pay karein</p>
+        
+        <div class="qr-wrapper">
+            <img src="paytm-qr.png.jpeg" alt="UPI QR Code">
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
-        integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous">
-    </script>
+        <input type="text" id="utrInput" placeholder="Enter 12-Digit UTR / Txn ID" required>
+        <button class="btn-action" onclick="openStep4()">Aage Badhein</button>
+        <button class="btn-close" onclick="closeAllModals()">Close</button>
+    </div>
+</div>
 
-    <script src="https://courtofmatka.com/assets/js/scripts.js"></script>
+<div class="modal-overlay" id="modalStep4">
+    <div class="modal-content">
+        <h3>Payment Verification</h3>
+        <p style="font-size:13px; color:#555;">Kripya 2 minute prateeksha karein, aapka payment verify ho raha hai...</p>
+        
+        <div class="timer-display" id="timerBox">02:00</div>
+        
+        <div id="successBox" class="success-msg" style="display:none;">🎉 SUCCESS!</div>
+        <button class="btn-close" id="timerCloseBtn" onclick="closeAllModals()" style="display:none;">Close</button>
+    </div>
+</div>
 
-    </body>
 
+<div class="social-sticky">
+    <a href="https://wa.me/918103982813?text=Hello%20Master%20VIP" target="_blank" class="btn-social btn-whatsapp" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.948 0c3.179.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.597-5.339 11.946-11.89 11.946-.193 0-.387-.002-.58-.005L0 24zm6.066-13.435c-.13-.217-.482-.347-.98-.596-.497-.248-2.338-1.155-2.698-1.286-.36-.131-.62-.196-.88.195-.26.391-1.008 1.286-1.233 1.547-.225.26-.45.293-.948.044-.497-.249-2.102-.775-4.004-2.472-1.48-1.32-2.48-2.949-2.77-3.446-.29-.497-.031-.766.218-1.014.224-.223.497-.58.746-.871.248-.29.332-.497.497-.83.166-.333.083-.622-.042-.871-.124-.249-1.008-2.43-1.382-3.326-.363-.873-.733-.756-1.008-.77l-.859-.014c-.296 0-.776.111-1.18.552-.404.441-1.544 1.511-1.544 3.682 0 2.171 1.58 4.268 1.802 4.563.222.295 3.108 4.746 7.528 6.657 1.052.454 1.873.725 2.514.929 1.057.336 2.021.289 2.783.175.849-.127 2.338-.957 2.666-1.884.328-.927.328-1.721.23-1.884z"/></svg>
+    </a>
+    <a href="https://t.me/YourUsername" target="_blank" class="btn-social btn-telegram" title="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161l-1.875 8.835c-.141.628-.512.784-1.037.492l-2.859-2.107-1.378 1.327c-.153.153-.282.282-.577.282l.205-2.915 5.306-4.794c.23-.205-.05-.319-.358-.114l-6.558 4.128-2.825-.884c-.614-.192-.627-.614.128-.91l11.036-4.254c.512-.186.96.119.789.916z"/></svg>
+    </a>
+</div>
+
+<div class="scroll-sticky">
+    <button onclick="scrollToTop()" class="btn-scroll" title="Go to Top">
+        <span>▲</span>
+        GO TO TOP
+    </button>
+    <button onclick="scrollToBottom()" class="btn-scroll" title="Go to Bottom">
+        <span>▼</span>
+        GO BOTTOM
+    </button>
+</div>
+
+<script>
+    const v = Math.random();
+    const LIVE_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Live&v=" + v;
+    const CHART_URL = "https://docs.google.com/spreadsheets/d/1Oh9iZHT-QAhSTHDhP36qdqX38ZYJ-eivfr1VtyOExJA/gviz/tq?tqx=out:csv&sheet=Chart&v=" + v;
+
+    fetch(LIVE_URL).then(r => r.text()).then(data => {
+        const rows = data.split('\n');
+        let html = '';
+        rows.forEach(row => {
+            let cols = row.split(',');
+            if(cols.length < 2) return;
+            let name = cols[0].replace(/"/g, '').trim();
+            let res = cols[1].replace(/"/g, '').trim();
+            if(name.toUpperCase().includes("MASTER VIP")) {
+                document.getElementById('vipVal').innerText = res;
+            } else {
+                html += `<div class="market-row"><span class="m-name">${name}</span><span class="m-res">${res}</span></div>`;
+            }
+        });
+        document.getElementById('liveMarketContainer').innerHTML = html;
+    });
+
+    fetch(CHART_URL).then(r => r.text()).then(data => {
+        const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
+        let html = '';
+        
+        let totalRows = rows.length;
+        let lastRowWithData = 1;
+        let lastColWithData = 1;
+        
+        // Step 1: Last updated filled cell search
+        for(let i = 1; i < totalRows; i++) {
+            for(let j = 1; j <= 16; j += 3) {
+                let jd = (rows[i][j+1] || "").trim().replace(/"/g, '');
+                if(jd !== "" && jd !== "-") {
+                    lastRowWithData = i;
+                    lastColWithData = j;
+                }
+            }
+        }
+
+        // Step 2: Next target cell logic for single lock
+        let lockRow = lastRowWithData;
+        let lockCol = lastColWithData + 3;
+
+        if (lockCol > 16) {
+            lockCol = 1;
+            lockRow = lastRowWithData + 1;
+        }
+
+        // Step 3: Render Table loop
+        for(let i = 1; i < totalRows; i++) {
+            let d = (rows[i][0] || "").trim().replace(/"/g, '');
+            html += `<tr><td class="date-cell">${d}</td>`;
+            
+            for(let j = 1; j <= 16; j += 3) {
+                let lp = (rows[i][j]||"").trim().replace(/"/g, ''), 
+                    jd = (rows[i][j+1]||"").trim().replace(/"/g, ''), 
+                    rp = (rows[i][j+2]||"").trim().replace(/"/g, '');
+                
+                let isRed = (jd.length == 2 && (jd[0] == jd[1] || Math.abs(jd[0] - jd[1]) == 5));
+                
+                // SINGLE NEXT CELL LOCKED
+                if (i === lockRow && j === lockCol) {
+                    html += `<td class="single-lock-cell" onclick="openStep1()">
+                        <div class="lock-overlay">🔒 VIP</div>
+                    </td>`;
+                } 
+                else {
+                    if (jd !== "" && jd !== "-") {
+                        html += `<td class="${isRed?'highlight-red':''}">
+                            <div class="cell-wrap">
+                                <div class="p-vertical">${lp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                                <div class="j-main">${jd}</div>
+                                <div class="p-vertical">${rp.split('').map(n=>`<span>${n}</span>`).join('')}</div>
+                            </div>
+                        </td>`;
+                    } else {
+                        html += `<td></td>`;
+                    }
+                }
+            }
+            html += `</tr>`;
+        }
+        document.getElementById('chartGrid').innerHTML = html;
+    });
+
+    // SCROLL FUNCTIONS
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function scrollToBottom() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
+
+    // MODAL CONTROL FUNCTIONS
+    function closeAllModals() {
+        document.querySelectorAll('.modal-overlay').forEach(m => m.style.display = 'none');
+    }
+
+    function openStep1() {
+        document.getElementById('modalStep1').style.display = 'flex';
+    }
+
+    function openStep2() {
+        let name = document.getElementById('userName').value.trim();
+        let phone = document.getElementById('userPhone').value.trim();
+        if(name == "" || phone == "") {
+            alert("Kripya Naam aur Mobile Number sahi se bharein!");
+            return;
+        }
+        closeAllModals();
+        document.getElementById('modalStep2').style.display = 'flex';
+    }
+
+    function openStep3(price, duration) {
+        closeAllModals();
+        document.getElementById('planHeading').innerText = `Pay ₹${price} (${duration})`;
+        document.getElementById('modalStep3').style.display = 'flex';
+    }
+
+    function openStep4() {
+        let utr = document.getElementById('utrInput').value.trim();
+        if(utr == "") {
+            alert("Kripya valid UTR ya Transaction ID dalein!");
+            return;
+        }
+        closeAllModals();
+        document.getElementById('modalStep4').style.display = 'flex';
+        
+        document.getElementById('timerBox').style.display = 'block';
+        document.getElementById('successBox').style.display = 'none';
+        document.getElementById('timerCloseBtn').style.display = 'none';
+        
+        startTimer(120);
+    }
+
+    // TIMER LOGIC
+    function startTimer(duration) {
+        let timer = duration, minutes, seconds;
+        let interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById('timerBox').innerText = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                document.getElementById('timerBox').style.display = 'none';
+                document.getElementById('successBox').style.display = 'block';
+                document.getElementById('timerCloseBtn').style.display = 'inline-block';
+            }
+        }, 1000);
+    }
+</script>
+</body>
 </html>

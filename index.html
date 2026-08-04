@@ -152,7 +152,7 @@
             font-weight: 800;
         }
 
-        .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+        .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
 
         /* Sky Blue - Go to Buttons */
         .nav-btn { 
@@ -160,7 +160,7 @@
             color: white; 
             border: 1.5px solid rgba(255,255,255,0.4); 
             border-radius: 25px; 
-            padding: 8px 18px; 
+            padding: 8px 16px; 
             display: inline-block; 
             font-size: 12px; 
             font-weight: 800; 
@@ -176,7 +176,7 @@
             color: #000000;
             border: 2px solid #fef08a;
             border-radius: 25px;
-            padding: 8px 20px;
+            padding: 8px 18px;
             font-size: 12.5px;
             font-weight: 900;
             cursor: pointer;
@@ -249,7 +249,6 @@
         .jodi { font-size: 18px; font-weight: 900; color: #0f172a; margin: 0 4px; }
         .red-house .jodi, .red-house .panna-vertical { color: var(--vip-red) !important; }
         
-        /* Clean Normal Lock Icon */
         .lock-btn { 
             font-size: 20px; 
             cursor: pointer; 
@@ -316,13 +315,13 @@
         /* Dashboard Tabs Styling */
         .dash-tabs {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             margin-bottom: 12px;
         }
         .dash-tab-btn {
             flex: 1;
-            padding: 10px 4px;
-            font-size: 12.5px;
+            padding: 9px 2px;
+            font-size: 11.5px;
             font-weight: 800;
             border: 1.5px solid var(--sky-blue);
             background: #f8fafc;
@@ -335,6 +334,88 @@
             background: var(--sky-blue);
             color: #ffffff;
             box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
+        }
+
+        /* 🏛️ MARKETS CARD STYLING */
+        .market-list-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .market-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+        .market-card:hover {
+            border-color: var(--gold);
+        }
+        .market-clock-icon {
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        .market-clock-icon:hover {
+            background: #fef08a;
+            transform: scale(1.1);
+        }
+        .market-details {
+            flex: 1;
+            text-align: center;
+            padding: 0 8px;
+        }
+        .market-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: 0.5px;
+        }
+        .market-status-badge {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 800;
+            margin-top: 3px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+        }
+        .status-running {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+        .status-closed {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+        }
+        .market-play-btn {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(22, 163, 74, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .market-play-btn:hover {
+            background: #166534;
         }
 
         /* Rate Card Grid */
@@ -360,18 +441,6 @@
             color: #16a34a;
             font-size: 14px;
             font-weight: 900;
-        }
-
-        /* Ticket Receipt Style */
-        .ticket-box {
-            background: #fefce8;
-            border: 2px dashed #f59e0b;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            text-align: left;
-            font-size: 13px;
-            color: #0f172a;
         }
 
         /* Subscription Plans Grid */
@@ -415,7 +484,10 @@
     <div class="menu-item" onclick="goHome()">
         <span>🏠</span> <span>होम पेज / Home Page</span>
     </div>
-    <div class="menu-item" onclick="openPlayGameModal()">
+    <div class="menu-item" onclick="openPlayGameModal('markets')">
+        <span>🏛️</span> <span>मार्केट्स / Markets</span>
+    </div>
+    <div class="menu-item" onclick="openPlayGameModal('play')">
         <span>🎮</span> <span>गेम डैशबोर्ड / Gaming Desk</span>
     </div>
     <div class="menu-item" onclick="openLoginFromMenu()">
@@ -435,8 +507,8 @@
 
 <!-- Top Buttons Row -->
 <div class="btn-group-row">
-    <div class="nav-btn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">Go to Bottom ↓</div>
-    <button class="btn-neon-game" onclick="openPlayGameModal()">🎮 प्ले गेम / PLAY GAME</button>
+    <div class="nav-btn" onclick="openPlayGameModal('markets')">🏛️ मार्केट्स / MARKETS</div>
+    <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
 <!-- Single Dropdown Chart Selector Button -->
@@ -465,7 +537,7 @@
 <!-- Bottom Buttons Row -->
 <div class="btn-group-row">
     <div class="nav-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Go to Top ↑</div>
-    <button class="btn-neon-game" onclick="openPlayGameModal()">🎮 प्ले गेम / PLAY GAME</button>
+    <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
 <!-- Access Panel Container -->
@@ -490,9 +562,22 @@
 
         <!-- Navigation Tabs -->
         <div class="dash-tabs">
-            <button class="dash-tab-btn active" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
+            <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
+            <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
             <button class="dash-tab-btn" id="tabBtnRates" onclick="switchDashTab('rates')">📊 रेट्स</button>
             <button class="dash-tab-btn" id="tabBtnFund" onclick="switchDashTab('fund')">💰 फंड जोड़ें</button>
+        </div>
+
+        <!-- 0. TAB: MARKETS (मार्केट्स) -->
+        <div id="dashTabMarkets">
+            <div class="notice-box">
+                <b>🏛️ LIVE MARKETS & TIMING:</b><br>
+                समय सारणी देखें (🕒 छूकर टाइमिंग देखें या 🎮 छूकर गेम खेलें)
+            </div>
+
+            <div class="market-list-box" id="marketListContainer">
+                <!-- Dynamic Market Cards Loaded via JS -->
+            </div>
         </div>
 
         <!-- 1. TAB: GAME RATES (गेम रेट्स) -->
@@ -525,7 +610,7 @@
         </div>
 
         <!-- 2. TAB: PLAY GAME (गेम खेलें) -->
-        <div id="dashTabPlay">
+        <div id="dashTabPlay" style="display:none;">
             <div id="gameFormView">
                 <div class="notice-box">
                     <b>गेम खेलें (Select Game & Number):</b><br>
@@ -547,13 +632,6 @@
                 <input type="number" id="gamePoints" placeholder="उदा. 100, 500">
 
                 <button class="btn-pay-main" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="submitGamePlay()">PLAY NOW / गेम लगाएँ 🚀</button>
-            </div>
-
-            <!-- Receipt View -->
-            <div id="gameReceiptView" style="display: none; text-align: center;">
-                <div style="color: #16a34a; font-size: 18px; font-weight: 900; margin-bottom: 8px;">✅ GAME PLAYED SUCCESSFULLY!</div>
-                <div class="ticket-box" id="ticketContent"></div>
-                <button class="btn-pay-main" onclick="resetGameForm()">एक और गेम खेलें / Play Another</button>
             </div>
         </div>
 
@@ -606,13 +684,13 @@
         <!-- Step 1: Create Account -->
         <div id="step-create-account">
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 16px;">ENTER DETAILS / विवरण दर्ज करें</span>
+              <span style="font-size: 16px;">CREATE ACCOUNT / नया खाता बनाएं</span>
               <span onclick="closeVipModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
             </div>
             
             <div class="notice-box">
                 <b>Account Activation Notice:</b><br>
-                विवरण और भुगतान जमा करने के बाद एडमिन द्वारा अकाउंट ओपन किया जाएगा।
+                गेम खेलने व चार्ट देखने के लिए कृपया विवरण भरें और एक्टिवेशन प्रक्रिया पूरी करें।
             </div>
 
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Name / नाम:</label>
@@ -758,6 +836,55 @@
 
     let currentChartType = 'matka';
 
+    // Markets Config & Timings (24 Hours Format internally)
+    const MARKETS_DATA = [
+        {
+            name: "KALYAN",
+            openBid: "4:00 PM",
+            closeBid: "6:00 PM",
+            openRes: "4:10 PM",
+            closeRes: "6:10 PM",
+            openMinutes: 16 * 60,       // 16:00 (4:00 PM)
+            closeMinutes: 18 * 60       // 18:00 (6:00 PM)
+        },
+        {
+            name: "BOMBAY SPECIAL BAZAR",
+            openBid: "3:00 PM",
+            closeBid: "5:00 PM",
+            openRes: "3:10 PM",
+            closeRes: "5:10 PM",
+            openMinutes: 15 * 60,       // 15:00 (3:00 PM)
+            closeMinutes: 17 * 60       // 17:00 (5:00 PM)
+        },
+        {
+            name: "ROYAL MATKA",
+            openBid: "3:00 PM",
+            closeBid: "5:00 PM",
+            openRes: "3:10 PM",
+            closeRes: "5:10 PM",
+            openMinutes: 15 * 60,
+            closeMinutes: 17 * 60
+        },
+        {
+            name: "RAJDHANI NIGHT",
+            openBid: "9:30 PM",
+            closeBid: "11:40 PM",
+            openRes: "9:40 PM",
+            closeRes: "11:40 PM",
+            openMinutes: 21 * 60 + 30,  // 21:30 (9:30 PM)
+            closeMinutes: 23 * 60 + 40  // 23:40 (11:40 PM)
+        },
+        {
+            name: "MAIN BAZAR",
+            openBid: "10:00 PM",
+            closeBid: "12:00 AM",
+            openRes: "10:10 PM",
+            closeRes: "12:00 AM",
+            openMinutes: 22 * 60,       // 22:00 (10:00 PM)
+            closeMinutes: 24 * 60       // 24:00 (12:00 AM)
+        }
+    ];
+
     // Side Menu Logic
     function toggleSideMenu() {
         const menu = document.getElementById('sideMenu');
@@ -779,56 +906,75 @@
 
     /* 🎮 DASHBOARD TAB SWITCHING LOGIC */
     function switchDashTab(tabName) {
+        document.getElementById('dashTabMarkets').style.display = (tabName === 'markets') ? 'block' : 'none';
         document.getElementById('dashTabPlay').style.display = (tabName === 'play') ? 'block' : 'none';
         document.getElementById('dashTabRates').style.display = (tabName === 'rates') ? 'block' : 'none';
         document.getElementById('dashTabFund').style.display = (tabName === 'fund') ? 'block' : 'none';
 
+        document.getElementById('tabBtnMarkets').classList.toggle('active', tabName === 'markets');
         document.getElementById('tabBtnPlay').classList.toggle('active', tabName === 'play');
         document.getElementById('tabBtnRates').classList.toggle('active', tabName === 'rates');
         document.getElementById('tabBtnFund').classList.toggle('active', tabName === 'fund');
+
+        if(tabName === 'markets') renderMarketsList();
     }
 
-    /* 🎮 GAME PLAY FUNCTIONS */
-    function openPlayGameModal() {
+    /* 🏛️ RENDER MARKETS WITH LIVE STATUS */
+    function renderMarketsList() {
+        const container = document.getElementById('marketListContainer');
+        const now = new Date();
+        const currentMins = now.getHours() * 60 + now.getMinutes();
+
+        let html = '';
+        MARKETS_DATA.forEach((m, idx) => {
+            // Check if betting is running
+            let isRunning = false;
+            if(currentMins >= m.openMinutes && currentMins <= m.closeMinutes) {
+                isRunning = true;
+            }
+
+            const statusClass = isRunning ? 'status-running' : 'status-closed';
+            const statusText = isRunning ? '🟢 BETTING IS RUNNING' : '🔴 BETTING IS CLOSED';
+
+            html += `
+                <div class="market-card">
+                    <div class="market-clock-icon" onclick="showMarketTiming(${idx})" title="समय सारणी देखें">🕒</div>
+                    <div class="market-details">
+                        <div class="market-title">${m.name}</div>
+                        <div class="market-status-badge ${statusClass}">${statusText}</div>
+                    </div>
+                    <button class="market-play-btn" onclick="startPlayGameProcess('${m.name}')">🎮 PLAY</button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function showMarketTiming(index) {
+        const m = MARKETS_DATA[index];
+        alert(`⏰ ${m.name} TIMINGS:\n-------------------------------------\n• Open Bid: ${m.openBid}\n• Close Bid: ${m.closeBid}\n• Open Result: ${m.openRes}\n• Close Result: ${m.closeRes}`);
+    }
+
+    /* 🎮 GAME PLAY & CREATE ACCOUNT PROCESS INTERCEPT */
+    function openPlayGameModal(tab = 'play') {
         document.getElementById('gamePlayModal').style.display = 'flex';
-        switchDashTab('play');
-        resetGameForm();
+        switchDashTab(tab);
     }
 
     function closeGameModal() {
         document.getElementById('gamePlayModal').style.display = 'none';
     }
 
+    // Play Now touch opens Create Account Process directly
     function submitGamePlay() {
-        const type = document.getElementById('gameTypeSelect').value;
-        const num = document.getElementById('gameNumber').value;
-        const points = document.getElementById('gamePoints').value;
-
-        if(!num || !points || points <= 0) {
-            alert("कृपया सही नंबर और पॉइंट्स दर्ज करें!");
-            return;
-        }
-
-        const ticketId = "TKT" + Math.floor(100000 + Math.random() * 900000);
-        const timeStr = new Date().toLocaleTimeString();
-
-        document.getElementById('ticketContent').innerHTML = `
-            <b>Ticket ID:</b> ${ticketId}<br>
-            <b>Time:</b> ${timeStr}<br>
-            <b>Game Type:</b> ${type}<br>
-            <b>Selected Number:</b> <span style="color:#dc2626; font-size:16px; font-weight:900;">${num}</span><br>
-            <b>Points/Amount:</b> ₹${points}
-        `;
-
-        document.getElementById('gameFormView').style.display = 'none';
-        document.getElementById('gameReceiptView').style.display = 'block';
+        closeGameModal();
+        openVipModal();
     }
 
-    function resetGameForm() {
-        document.getElementById('gameNumber').value = '';
-        document.getElementById('gamePoints').value = '';
-        document.getElementById('gameFormView').style.display = 'block';
-        document.getElementById('gameReceiptView').style.display = 'none';
+    function startPlayGameProcess(marketName) {
+        closeGameModal();
+        openVipModal();
     }
 
     /* 💰 ADD FUND FUNCTIONS */
@@ -974,7 +1120,10 @@
         }
     }
 
-    window.onload = loadChart;
+    window.onload = function() {
+        loadChart();
+        renderMarketsList();
+    };
 </script>
 
 <!-- Tawk.to Live Chat -->

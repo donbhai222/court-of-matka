@@ -295,6 +295,14 @@
         .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
         input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
+        /* File Input Custom Style */
+        input[type="file"] {
+            background: #f8fafc;
+            padding: 8px;
+            border: 2px dashed var(--sky-blue);
+            cursor: pointer;
+        }
+
         .modal-header-box { 
             background: var(--sky-blue); 
             color: white; 
@@ -317,11 +325,13 @@
             display: flex;
             gap: 4px;
             margin-bottom: 12px;
+            flex-wrap: wrap;
         }
         .dash-tab-btn {
             flex: 1;
-            padding: 9px 2px;
-            font-size: 11.5px;
+            min-width: 70px;
+            padding: 8px 2px;
+            font-size: 11px;
             font-weight: 800;
             border: 1.5px solid var(--sky-blue);
             background: #f8fafc;
@@ -560,12 +570,13 @@
             <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
         </div>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation Tabs (With Withdraw & Fund Tab) -->
         <div class="dash-tabs">
             <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
             <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
             <button class="dash-tab-btn" id="tabBtnRates" onclick="switchDashTab('rates')">📊 रेट्स</button>
             <button class="dash-tab-btn" id="tabBtnFund" onclick="switchDashTab('fund')">💰 फंड जोड़ें</button>
+            <button class="dash-tab-btn" id="tabBtnWithdraw" onclick="switchDashTab('withdraw')">💸 विड्रॉल</button>
         </div>
 
         <!-- 0. TAB: MARKETS (मार्केट्स) -->
@@ -645,6 +656,28 @@
             <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
         </div>
 
+        <!-- 4. NEW TAB: WITHDRAWAL (विड्रॉल) -->
+        <div id="dashTabWithdraw" style="display:none;">
+            <div class="notice-box">
+                <b>💸 WITHDRAW MONEY / पैसे निकालें:</b><br>
+                जीती हुई राशि तुरंत अपने बैंक या UPI में निकालें। (Min. ₹500)
+            </div>
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Select Method / भुगतान का तरीका:</label>
+            <select id="withdrawMethod">
+                <option value="UPI / PhonePe / GPay">GPay / PhonePe / Paytm / UPI</option>
+                <option value="Bank Transfer">Bank Account Transfer (बैंक खाता)</option>
+            </select>
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Withdrawal Amount / राशि (रुपये):</label>
+            <input type="number" id="withdrawAmount" placeholder="कम से कम ₹500">
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">UPI ID or Bank Details / विवरण दर्ज करें:</label>
+            <input type="text" id="withdrawDetails" placeholder="उदा. 9876543210@paytm या A/C No. & IFSC">
+
+            <button class="btn-pay-main" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color:#fff;" onclick="submitWithdrawalRequest()">SUBMIT WITHDRAWAL / पैसे निकालें 💸</button>
+        </div>
+
         <button class="btn-pay-main" style="background: #64748b; margin-top: 8px;" onclick="closeGameModal()">बंद करें (Close)</button>
     </div>
 </div>
@@ -699,7 +732,7 @@
                 <b>Instructions / निर्देश:</b>
                 <ul>
                     <li>QR कोड को स्कैन करें या UPI ID पर भुगतान करें।</li>
-                    <li>भुगतान के बाद 12 अंकों की UTR / Txn ID सुरक्षित रखें।</li>
+                    <li>भुगतान के बाद 12 अंकों की UTR / Txn ID एवं स्क्रीनशॉट सुरक्षित रखें।</li>
                 </ul>
             </div>
 
@@ -707,7 +740,7 @@
             <p onclick="document.getElementById('step2').style.display='none'; document.getElementById('step-create-account').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
 
-        <!-- Step 2.1: Payment Details Input -->
+        <!-- Step 2.1: Payment Details Input (WITH SCREENSHOT UPLOAD) -->
         <div id="step-pay-details" style="display:none;">
             <div class="modal-header-box">Payment Details / भुगतान विवरण</div>
 
@@ -720,6 +753,10 @@
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Transaction / UTR ID:</label>
             <input type="text" id="payUtid" placeholder="12 Digit Transaction / UTR ID">
 
+            <!-- 📸 SCREENSHOT UPLOAD FIELD -->
+            <label style="font-size: 11.5px; font-weight: 700; color: #0ea5e9;">📸 Upload Payment Screenshot / रसीद की फोटो चुनें:</label>
+            <input type="file" id="payScreenshot" accept="image/*">
+
             <button class="btn-pay-main" style="margin-top: 10px;" onclick="submitPayment()">SUBMIT PAYMENT DETAILS</button>
             <p onclick="document.getElementById('step-pay-details').style.display='none'; document.getElementById('step2').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
@@ -730,7 +767,7 @@
             <p style="font-size: 13px; font-weight: 800; color: var(--sky-blue); margin: 6px 0;">Pending Admin Approval</p>
             
             <div class="notice-box" style="text-align: left; font-size: 11.5px;">
-                आपका पेमेंट सफल रहा। अकाउंट एडमिन द्वारा जाँच के बाद ओपन किया जाएगा।
+                आपका पेमेंट विवरण और स्क्रीनशॉट प्राप्त हो गया है। एडमिन द्वारा जाँच के बाद अकाउंट ओपन कर दिया जाएगा।
             </div>
 
             <div class="next-box">
@@ -772,7 +809,7 @@
             </div>
         </div>
 
-        <!-- Step 5.1: Plan Payment -->
+        <!-- Step 5.1: Plan Payment (WITH SCREENSHOT UPLOAD) -->
         <div id="step-plan-pay" style="display:none; text-align: center;">
             <div class="modal-header-box" id="planTitleDisplay">Plan Payment</div>
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
@@ -782,6 +819,11 @@
                 <button class="copy-btn" onclick="copyPlanUpi()">COPY</button>
             </div>
             <input type="text" id="planUtidInput" placeholder="12 Digit Transaction / UTR ID">
+            
+            <!-- 📸 SCREENSHOT UPLOAD FIELD FOR SUBSCRIPTION -->
+            <label style="font-size: 11.5px; font-weight: 700; color: #0ea5e9; text-align: left; display: block;">📸 Upload Payment Screenshot:</label>
+            <input type="file" id="planScreenshot" accept="image/*">
+
             <button class="btn-pay-main" style="margin-top: 8px;" onclick="submitPlanPayment()">PAYMENT DONE</button>
         </div>
 
@@ -807,7 +849,7 @@
 
     let currentChartType = 'matka';
 
-    // Markets Config & Timings (24 Hours Format internally)
+    // Markets Config & Timings
     const MARKETS_DATA = [
         {
             name: "KALYAN",
@@ -815,8 +857,8 @@
             closeBid: "6:00 PM",
             openRes: "4:10 PM",
             closeRes: "6:10 PM",
-            openMinutes: 16 * 60,       // 16:00 (4:00 PM)
-            closeMinutes: 18 * 60       // 18:00 (6:00 PM)
+            openMinutes: 16 * 60,
+            closeMinutes: 18 * 60
         },
         {
             name: "BOMBAY SPECIAL BAZAR",
@@ -824,8 +866,8 @@
             closeBid: "5:00 PM",
             openRes: "3:10 PM",
             closeRes: "5:10 PM",
-            openMinutes: 15 * 60,       // 15:00 (3:00 PM)
-            closeMinutes: 17 * 60       // 17:00 (5:00 PM)
+            openMinutes: 15 * 60,
+            closeMinutes: 17 * 60
         },
         {
             name: "ROYAL MATKA",
@@ -842,8 +884,8 @@
             closeBid: "11:40 PM",
             openRes: "9:40 PM",
             closeRes: "11:40 PM",
-            openMinutes: 21 * 60 + 30,  // 21:30 (9:30 PM)
-            closeMinutes: 23 * 60 + 40  // 23:40 (11:40 PM)
+            openMinutes: 21 * 60 + 30,
+            closeMinutes: 23 * 60 + 40
         },
         {
             name: "MAIN BAZAR",
@@ -851,8 +893,8 @@
             closeBid: "12:00 AM",
             openRes: "10:10 PM",
             closeRes: "12:00 AM",
-            openMinutes: 22 * 60,       // 22:00 (10:00 PM)
-            closeMinutes: 24 * 60       // 24:00 (12:00 AM)
+            openMinutes: 22 * 60,
+            closeMinutes: 24 * 60
         }
     ];
 
@@ -875,7 +917,7 @@
         loadChart();
     }
 
-    /* 🎮 DASHBOARD TAB SWITCHING LOGIC (ADD FUND OPENS CREATE ACCOUNT DIRECTLY) */
+    /* 🎮 DASHBOARD TAB SWITCHING LOGIC */
     function switchDashTab(tabName) {
         if (tabName === 'fund') {
             closeGameModal();
@@ -887,11 +929,13 @@
         document.getElementById('dashTabPlay').style.display = (tabName === 'play') ? 'block' : 'none';
         document.getElementById('dashTabRates').style.display = (tabName === 'rates') ? 'block' : 'none';
         document.getElementById('dashTabFund').style.display = (tabName === 'fund') ? 'block' : 'none';
+        document.getElementById('dashTabWithdraw').style.display = (tabName === 'withdraw') ? 'block' : 'none';
 
         document.getElementById('tabBtnMarkets').classList.toggle('active', tabName === 'markets');
         document.getElementById('tabBtnPlay').classList.toggle('active', tabName === 'play');
         document.getElementById('tabBtnRates').classList.toggle('active', tabName === 'rates');
         document.getElementById('tabBtnFund').classList.toggle('active', tabName === 'fund');
+        document.getElementById('tabBtnWithdraw').classList.toggle('active', tabName === 'withdraw');
 
         if(tabName === 'markets') renderMarketsList();
     }
@@ -904,12 +948,7 @@
 
         let html = '';
         MARKETS_DATA.forEach((m, idx) => {
-            // Check if betting is running
-            let isRunning = false;
-            if(currentMins >= m.openMinutes && currentMins <= m.closeMinutes) {
-                isRunning = true;
-            }
-
+            let isRunning = (currentMins >= m.openMinutes && currentMins <= m.closeMinutes);
             const statusClass = isRunning ? 'status-running' : 'status-closed';
             const statusText = isRunning ? '🟢 BETTING IS RUNNING' : '🔴 BETTING IS CLOSED';
 
@@ -947,7 +986,6 @@
         document.getElementById('gamePlayModal').style.display = 'none';
     }
 
-    // Play Now touch opens Create Account Process directly
     function submitGamePlay() {
         closeGameModal();
         openVipModal();
@@ -958,8 +996,23 @@
         openVipModal();
     }
 
-    /* 💰 ADD FUND DIRECT TO CREATE ACCOUNT */
     function proceedToFundPay() {
+        closeGameModal();
+        openVipModal();
+    }
+
+    /* 💸 WITHDRAWAL SUBMIT PROCESS */
+    function submitWithdrawalRequest() {
+        let amt = document.getElementById('withdrawAmount').value;
+        let details = document.getElementById('withdrawDetails').value;
+
+        if(!amt || amt < 500) {
+            return alert("कम से कम ₹500 विड्रॉल राशि दर्ज करें!");
+        }
+        if(!details) {
+            return alert("कृपया अपना UPI ID या बैंक विवरण दर्ज करें!");
+        }
+
         closeGameModal();
         openVipModal();
     }
@@ -990,11 +1043,16 @@
         document.getElementById('step-pay-details').style.display='block';
     }
 
+    /* SUBMIT PAYMENT WITH SCREENSHOT CHECK */
     function submitPayment() {
         let num = document.getElementById('payNumber').value;
         let upi = document.getElementById('payUpi').value;
         let utid = document.getElementById('payUtid').value;
+        let fileInput = document.getElementById('payScreenshot');
+
         if(num.length < 10 || !upi || utid.length < 6) return alert("कृपया सभी विवरण सही से भरें");
+        if(fileInput.files.length === 0) return alert("कृपया पेमेंट स्क्रीनशॉट / फोटो भी अपलोड करें!");
+
         document.getElementById('step-pay-details').style.display='none';
         document.getElementById('step3').style.display='block';
         startTimer();
@@ -1021,9 +1079,14 @@
         alert("UPI ID Copied!");
     }
 
+    /* SUBMIT PLAN PAYMENT WITH SCREENSHOT CHECK */
     function submitPlanPayment() {
         let utid = document.getElementById('planUtidInput').value;
+        let fileInput = document.getElementById('planScreenshot');
+
         if(utid.length < 6) return alert("कृपया 12 अंकों की UTR / Transaction ID सही से दर्ज करें!");
+        if(fileInput.files.length === 0) return alert("कृपया पेमेंट स्क्रीनशॉट / फोटो अपलोड करें!");
+
         document.getElementById('step-plan-pay').style.display='none';
         document.getElementById('step-plan-timer').style.display='block';
         startPlanTimer();

@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     
+    <!-- PWA & Mobile Settings -->
+    <meta name="theme-color" content="#16a34a">
+    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22MATKA%20LOGIC%20CHART%22%2C%22short_name%22%3A%22MatkaLogic%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2316a34a%22%2C%22theme_color%22%3A%22%2316a34a%22%7D'>
+    
     <!-- SEO & Search Optimization -->
     <title>MATKA LOGIC CHART & DIAMOND PANEL CHART - Fast Results</title>
     <meta name="description" content="MATKA LOGIC CHART और DIAMOND PANEL CHART पर सबसे तेज़ और सटीक चार्ट रिजल्ट्स देखें।">
@@ -19,11 +23,11 @@
         :root { 
             --dark-blue: #0f172a; 
             --gold: #f59e0b; 
-            --sky-blue: #0ea5e9; /* Sky Blue Accent */
+            --sky-blue: #0ea5e9; 
             --vip-red: #dc2626; 
             --theme-green: #16a34a; 
             --grid-border: #334155; 
-            --bg-gradient: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); /* Green Theme Background */
+            --bg-gradient: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             --card-bg: #ffffff;
         }
         body { background: var(--bg-gradient); color: #1e293b; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin: 0; padding-bottom: 0; overflow-x: hidden; }
@@ -43,11 +47,10 @@
             flex-grow: 1;
             text-align: center;
         }
-        /* Black Title Text */
         .header h1 { 
             margin: 0; 
             font-size: 20px; 
-            color: #000000; /* Black Title */
+            color: #000000; 
             text-transform: uppercase; 
             font-weight: 900; 
             letter-spacing: 1px; 
@@ -55,7 +58,7 @@
         }
         .header-subtitle {
             font-size: 11px;
-            color: #000000; /* Subtitle Black */
+            color: #000000; 
             font-weight: 800;
             margin-top: 3px;
             letter-spacing: 0.5px;
@@ -70,6 +73,21 @@
             transition: 0.2s; 
         }
         .menu-btn:hover { color: var(--gold); }
+
+        /* PWA Install Button */
+        .pwa-btn {
+            display: none;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #000;
+            border: 1.5px solid #ffffff;
+            font-size: 11.5px;
+            font-weight: 900;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            margin: 6px auto 0 auto;
+        }
 
         /* Side Menu Panel & Overlay */
         .side-menu-overlay { 
@@ -129,7 +147,7 @@
             color: #ffffff; 
         }
 
-        /* Disclaimer */
+        /* Educational Disclaimer */
         .edu-note-box { 
             background: transparent; 
             padding: 4px 6px; 
@@ -155,7 +173,7 @@
 
         .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
 
-        /* Sky Blue - Go to Top & Go to Bottom Buttons */
+        /* Sky Blue - Go to Buttons */
         .nav-btn { 
             background: var(--sky-blue); 
             color: white; 
@@ -171,7 +189,7 @@
         }
         .nav-btn:hover { background: #0284c7; }
 
-        /* Golden Neon Background Button for Play Game */
+        /* Golden Neon Play Game Button */
         .btn-neon-game {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             color: #000000;
@@ -185,17 +203,12 @@
             align-items: center;
             gap: 6px;
             box-shadow: 0 4px 15px rgba(245, 158, 11, 0.6);
-            text-shadow: 0 1px 1px rgba(255,255,255,0.3);
             transition: 0.3s ease-in-out;
             animation: goldenPulse 1.8s infinite alternate;
         }
         @keyframes goldenPulse {
             0% { transform: scale(1); box-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
             100% { transform: scale(1.04); box-shadow: 0 0 20px rgba(251, 191, 36, 0.9); }
-        }
-        .btn-neon-game:hover {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: #ffffff;
         }
 
         /* Single Dropdown Chart Selector Button */
@@ -214,19 +227,59 @@
             transition: 0.3s;
             text-align: center;
         }
-        .chart-select-dropdown:hover, .chart-select-dropdown:focus {
-            background: var(--theme-green);
-            color: #ffffff;
-            border-color: #ffffff;
+
+        /* 🔥 HOT NUMBERS SECTION STYLING */
+        .hot-box {
+            background: #ffffff;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            margin: 10px auto 14px auto;
+            padding: 10px 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-sizing: border-box;
         }
-        .chart-select-dropdown option {
+        .hot-title {
+            font-size: 12px;
+            font-weight: 900;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .hot-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .hot-card {
             background: #0f172a;
-            color: #ffffff;
+            color: var(--gold);
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .hot-card span.badge {
+            background: var(--vip-red);
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
             font-weight: 700;
-            padding: 10px;
         }
 
-        /* Chart Title Heading Directly Attached Above Chart */
+        /* Chart Title Attached Above Chart */
         .chart-title-heading { 
             background: var(--theme-green); 
             color: #ffffff; 
@@ -235,7 +288,7 @@
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
             padding: 10px 5px;
-            margin: 15px auto 0 auto; 
+            margin: 10px auto 0 auto; 
             width: 90%; 
             max-width: 600px; 
             box-sizing: border-box;
@@ -248,7 +301,7 @@
         #chartWrapper { 
             width: 90%; 
             max-width: 600px; 
-            margin: 0 auto 10px auto; 
+            margin: 0 auto 4px auto; 
             background: #fff; 
             border: 2px solid #000; 
             border-radius: 0 0 8px 8px; 
@@ -276,8 +329,29 @@
             padding: 0; 
             transition: transform 0.2s; 
         }
-        .lock-btn:hover { 
-            transform: scale(1.2); 
+
+        /* Auto Refresh Live Status Tag */
+        .live-refresh-tag {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #15803d;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.2s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Access Panel Box */
@@ -285,7 +359,7 @@
             background: #ffffff;
             border-radius: 12px;
             padding: 20px 15px;
-            margin: 20px auto;
+            margin: 15px auto;
             width: 90%;
             max-width: 600px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -299,30 +373,25 @@
             font-weight: 900;
             margin: 0 0 6px 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         .access-panel-box p {
             color: #475569;
             font-size: 12.5px;
             font-weight: 600;
             margin: 0 0 15px 0;
-            line-height: 1.4;
         }
 
-        /* Green Main Button for Account Creation */
         .btn-pay-main { background: var(--theme-green); color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: 700; font-size: 15px; margin: 10px 0; cursor: pointer; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: 0.2s; box-sizing: border-box; }
         .btn-pay-main:hover { background: #15803d; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px); z-index: 10000; align-items: center; justify-content: center; }
         .modal-content { background: var(--card-bg); width: 95%; max-width: 650px; padding: 20px; border-radius: 14px; box-sizing: border-box; text-align: left; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); color: #1e293b; }
         
-        .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; transition: 0.2s; }
-        input:focus { border-color: var(--sky-blue); box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15); }
+        .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
+        input { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
-        /* Modal Headings styled with Sky Blue Accent */
         .modal-header-box { 
-            background: var(--sky-blue); /* Sky Blue Headings */
+            background: var(--sky-blue); 
             color: white; 
             padding: 10px 14px; 
             border-radius: 8px; 
@@ -330,34 +399,21 @@
             font-weight: 800; 
             font-size: 15px; 
             text-align: center; 
-            letter-spacing: 0.5px; 
-            box-shadow: 0 3px 8px rgba(14, 165, 233, 0.3);
         }
 
-        .notice-box { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--sky-blue); padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 11.5px; color: #334155; line-height: 1.5; word-break: break-word; box-sizing: border-box; width: 100%; }
-        .instruction-box { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 11.5px; color: #334155; line-height: 1.5; word-break: break-word; box-sizing: border-box; width: 100%; }
-        .instruction-box ul { margin: 6px 0 0 15px; padding: 0; }
-        .instruction-box li { margin-bottom: 4px; }
-
-        .upi-box { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; font-weight: 700; border: 1.5px solid #cbd5e1; color: #0f172a; box-sizing: border-box; width: 100%; }
-        .copy-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; flex-shrink: 0; }
-        
-        .next-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 11.5px; color: #334155; text-align: left; line-height: 1.6; word-break: break-word; box-sizing: border-box; width: 100%; }
-        .next-box ol { margin: 6px 0 0 15px; padding: 0; }
-        .next-box li { margin-bottom: 6px; }
+        .notice-box { background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid var(--sky-blue); padding: 12px; border-radius: 6px; margin-bottom: 12px; font-size: 11.5px; color: #334155; line-height: 1.5; }
+        .instruction-box { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 12px; border-radius: 6px; margin: 10px 0; font-size: 11.5px; color: #334155; line-height: 1.5; }
+        .upi-box { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; font-weight: 700; border: 1.5px solid #cbd5e1; color: #0f172a; }
+        .copy-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; }
+        .next-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 11.5px; color: #334155; }
 
         /* Subscription Plans Grid */
         .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
-        .sub-plan-card { border: 2px solid #cbd5e1; border-radius: 10px; padding: 10px; background: linear-gradient(145deg, #ffffff, #f1f5f9); text-align: center; transition: 0.2s; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .sub-plan-card:hover { border-color: var(--sky-blue); box-shadow: 0 6px 15px rgba(14, 165, 233, 0.2); transform: translateY(-3px); }
-        .sub-plan-logo { font-size: 24px; margin-bottom: 4px; }
+        .sub-plan-card { border: 2px solid #cbd5e1; border-radius: 10px; padding: 10px; background: linear-gradient(145deg, #ffffff, #f1f5f9); text-align: center; }
         .sub-plan-title { font-size: 12px; font-weight: 800; color: var(--dark-blue); }
         .sub-plan-price { font-size: 16px; font-weight: 900; color: var(--sky-blue); margin: 6px 0; }
-        .sub-plan-desc { font-size: 9.5px; color: #475569; line-height: 1.3; margin-bottom: 8px; font-weight: 600; }
-        .sel-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.2s; box-sizing: border-box; }
-        .sel-btn:hover { background: #0284c7; }
+        .sel-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; width: 100%; }
 
-        /* Footer Copyright Style */
         .site-footer {
             background: #0f172a;
             color: #94a3b8;
@@ -366,22 +422,19 @@
             font-size: 12px;
             font-weight: 600;
             border-top: 3px solid var(--gold);
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
         }
-        .site-footer span {
-            color: var(--gold);
-            font-weight: 800;
-        }
+        .site-footer span { color: var(--gold); font-weight: 800; }
     </style>
 </head>
 <body>
 
-<!-- Header with Corner 3-Line Menu Icon & Black Title Text -->
+<!-- Header with Corner 3-Line Menu Icon -->
 <div class="header">
     <div style="width: 26px;"></div>
     <div class="header-title-box">
         <h1>MATKA LOGIC CHART</h1>
         <div class="header-subtitle">welcome to matka logic chart</div>
+        <button id="pwaInstallBtn" class="pwa-btn" onclick="installPWA()">📲 ऐप इंस्टॉल करें (Install App)</button>
     </div>
     <div class="menu-btn" onclick="toggleSideMenu()" title="मेनू खोलें">☰</div>
 </div>
@@ -398,6 +451,9 @@
     </div>
     <div class="menu-item" onclick="openLoginFromMenu()">
         <span>🔑</span> <span>लॉगिन / Login</span>
+    </div>
+    <div class="menu-item" onclick="installPWA()">
+        <span>📲</span> <span>ऐप इंस्टॉल करें / Install App</span>
     </div>
 </div>
 
@@ -425,6 +481,14 @@
     </select>
 </div>
 
+<!-- 🔥 HOT NUMBERS ANALYTICS BOX -->
+<div class="hot-box">
+    <div class="hot-title">🔥 Trending Hot Jodis (इस महीने सबसे ज्यादा आई जोड़ियाँ)</div>
+    <div class="hot-grid" id="hotNumbersGrid">
+        <div class="hot-card">--</div>
+    </div>
+</div>
+
 <!-- Title Attached Directly Above Chart -->
 <div class="chart-title-heading" id="chartTitleDisplay">MATKA LOGIC CHART</div>
 
@@ -440,13 +504,19 @@
     </table>
 </div>
 
+<!-- Auto Refresh Live Status Tag -->
+<div class="live-refresh-tag">
+    <span class="pulse-dot"></span>
+    <span id="liveStatusText">Live Data • Auto Updating...</span>
+</div>
+
 <!-- Bottom Buttons Row -->
 <div class="btn-group-row">
     <div class="nav-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Go to Top ↑</div>
     <button class="btn-neon-game" onclick="openPlayGameModal()">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
-<!-- White Background Box Container for Access Panel -->
+<!-- Access Panel Container -->
 <div class="access-panel-box">
     <h2>ACCESS PANEL CHARTS</h2>
     <p>Create an account and complete the setup payment to view all charts</p>
@@ -460,9 +530,8 @@
 
 <div id="vipModal" class="overlay">
     <div class="modal-content">
-        <!-- Step 1: Directly Open Create Account Form -->
+        <!-- Step 1: Create Account -->
         <div id="step-create-account">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 16px;">ENTER DETAILS / विवरण दर्ज करें</span>
               <span onclick="closeVipModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
@@ -470,8 +539,7 @@
             
             <div class="notice-box">
                 <b>Account Activation Notice:</b><br>
-                विवरण और भुगतान जमा करने के बाद एडमिन द्वारा अकाउंट ओपन किया जाएगा。<br>
-                <i>(Account will be opened by admin after submitting details and payment.)</i>
+                विवरण और भुगतान जमा करने के बाद एडमिन द्वारा अकाउंट ओपन किया जाएगा।
             </div>
 
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Name / नाम:</label>
@@ -484,9 +552,8 @@
             <button class="btn-pay-main" style="background: #64748b; margin-top: 4px;" onclick="closeVipModal()">बंद करें (Close)</button>
         </div>
 
-        <!-- Step 2: Payment & Instructions -->
+        <!-- Step 2: Payment -->
         <div id="step2" style="display:none;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>One Time Account Activation</span>
                 <span onclick="closeVipModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
@@ -509,8 +576,8 @@
             <div class="instruction-box">
                 <b>Instructions / निर्देश:</b>
                 <ul>
-                    <li>QR कोड को स्कैन करें या UPI ID पर भुगतान करें。<br><i>(Scan QR or pay on UPI ID.)</i></li>
-                    <li>भुगतान के बाद 12 अंकों की UTR / Txn ID सुरक्षित रखें。<br><i>(Keep UTR / Txn ID safe after payment.)</i></li>
+                    <li>QR कोड को स्कैन करें या UPI ID पर भुगतान करें।</li>
+                    <li>भुगतान के बाद 12 अंकों की UTR / Txn ID सुरक्षित रखें।</li>
                 </ul>
             </div>
 
@@ -518,13 +585,12 @@
             <p onclick="document.getElementById('step2').style.display='none'; document.getElementById('step-create-account').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
 
-        <!-- Step 2.1: Payment Details Input Page -->
+        <!-- Step 2.1: Payment Details Input -->
         <div id="step-pay-details" style="display:none;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box">Payment Details / भुगतान विवरण</div>
 
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Mobile Number / मोबाइल नंबर:</label>
-            <input type="number" id="payNumber" placeholder="अपना मोबाइल नंबर / Mobile Number">
+            <input type="number" id="payNumber" placeholder="अपना मोबाइल नंबर">
 
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">UPI ID ( जिससे भुगतान किया ):</label>
             <input type="text" id="payUpi" placeholder="UPI ID (e.g. yourname@paytm)">
@@ -533,194 +599,140 @@
             <input type="text" id="payUtid" placeholder="12 Digit Transaction / UTR ID">
 
             <button class="btn-pay-main" style="margin-top: 10px;" onclick="submitPayment()">SUBMIT PAYMENT DETAILS</button>
-            <p style="text-align: center; font-size: 11px; color: #64748b; margin-top: 2px; font-weight: 600;">भुगतान विवरण जमा करें</p>
             <p onclick="document.getElementById('step-pay-details').style.display='none'; document.getElementById('step2').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
 
-        <!-- Step 3: Thank You & Pending Approval with Timer -->
+        <!-- Step 3: Timer Verification -->
         <div id="step3" style="display:none; text-align: center;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box">THANK YOU / धन्यवाद</div>
             <p style="font-size: 13px; font-weight: 800; color: var(--sky-blue); margin: 6px 0;">Pending Admin Approval</p>
             
             <div class="notice-box" style="text-align: left; font-size: 11.5px;">
-                आपका पेमेंट सफल रहा। अकाउंट एडमिन द्वारा जाँच के बाद ओपन किया जाएगा。<br>
-                <i>(Your payment was successful. Account will be opened after verification by admin.)</i>
+                आपका पेमेंट सफल रहा। अकाउंट एडमिन द्वारा जाँच के बाद ओपन किया जाएगा।
             </div>
 
             <div class="next-box">
                 <b>What Happens Next / आगे क्या होगा:</b>
                 <ol>
-                    <li>एडमिन आपके भुगतान की जाँच करेगा。<br><i>(Admin will check your payment.)</i></li>
-                    <li>आपका अकाउंट चुने हुए प्लान के साथ ओपन होगा。<br><i>(Your account will open with the chosen plan.)</i></li>
-                    <li>फिर आप होमपेज पर चार्ट रिजल्ट देख सकेंगे。<br><i>(Then you can view chart results on homepage.)</i></li>
+                    <li>एडमिन आपके भुगतान की जाँच करेगा।</li>
+                    <li>आपका अकाउंट चुने हुए प्लान के साथ ओपन होगा।</li>
                 </ol>
             </div>
 
-            <div style="font-size: 11.5px; font-weight: 700; margin-top: 10px; color: #334155;">Verification Timer / सत्यापन टाइमर:</div>
+            <div style="font-size: 11.5px; font-weight: 700; margin-top: 10px; color: #334155;">Verification Timer:</div>
             <div id="timerBox" style="font-size: 32px; color: var(--sky-blue); font-weight: 900; margin: 5px 0;">02:00</div>
         </div>
 
         <!-- Step 5: Subscription Plans Page -->
         <div id="step-subscription" style="display:none; text-align: center;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box">Subscription / सदस्यता लें</div>
-            <p style="margin: 0 0 10px 0; font-size: 11.5px; color: #64748b; font-weight: 600;">अपनी आवश्यकता का समय अवधि चुनें / Choose your required time duration</p>
-
             <div class="plans-grid">
-                <!-- Starter Plan -->
                 <div class="sub-plan-card">
-                    <div>
-                        <div class="sub-plan-logo">🔑</div>
-                        <div class="sub-plan-title">1 दिन के लिए खोलने का चार्ज<br>1 Day Access</div>
-                        <div class="sub-plan-price">₹1499</div>
-                        <div class="sub-plan-desc">Real-time update<br>24 Hour Access</div>
-                    </div>
-                    <button class="sel-btn" onclick="openPlanPayment('1 दिन के लिए खोलने का चार्ज (Starter - 1 Day)', '1499')">SELECT</button>
+                    <div class="sub-plan-title">1 Day Access</div>
+                    <div class="sub-plan-price">₹1499</div>
+                    <button class="sel-btn" onclick="openPlanPayment('1 Day Access', '1499')">SELECT</button>
                 </div>
-
-                <!-- Popular Plan -->
                 <div class="sub-plan-card">
-                    <div>
-                        <div class="sub-plan-logo">⚡</div>
-                        <div class="sub-plan-title">7 दिन के लिए खोलने का चार्ज<br>7 Days Access</div>
-                        <div class="sub-plan-price">₹2499</div>
-                        <div class="sub-plan-desc">Standard support<br>7 Days Access</div>
-                    </div>
-                    <button class="sel-btn" onclick="openPlanPayment('7 दिन के लिए खोलने का चार्ज (Popular - 7 Days)', '2499')">SELECT</button>
+                    <div class="sub-plan-title">7 Days Access</div>
+                    <div class="sub-plan-price">₹2499</div>
+                    <button class="sel-btn" onclick="openPlanPayment('7 Days Access', '2499')">SELECT</button>
                 </div>
-
-                <!-- Best Value Plan -->
                 <div class="sub-plan-card">
-                    <div>
-                        <div class="sub-plan-logo">⭐</div>
-                        <div class="sub-plan-title">10 दिन के लिये खोलने का चार्ज <br>10 Days Access</div>
-                        <div class="sub-plan-price">₹3499</div>
-                        <div class="sub-plan-desc">Premium support<br>Special Segment</div>
-                    </div>
-                    <button class="sel-btn" onclick="openPlanPayment('दो जोड़ी सिंगल / Close चार्ज', '3499')">SELECT</button>
+                    <div class="sub-plan-title">10 Days Access</div>
+                    <div class="sub-plan-price">₹3499</div>
+                    <button class="sel-btn" onclick="openPlanPayment('10 Days Access', '3499')">SELECT</button>
                 </div>
-
-                <!-- Ultimate Plan -->
                 <div class="sub-plan-card">
-                    <div>
-                        <div class="sub-plan-logo">💎</div>
-                        <div class="sub-plan-title">Ultimate - 1 Month</div>
-                        <div class="sub-plan-price">₹4999</div>
-                        <div class="sub-plan-desc">24/7 VIP support<br>30 Days Access</div>
-                    </div>
-                    <button class="sel-btn" onclick="openPlanPayment('Ultimate - 1 Month', '4999')">SELECT</button>
+                    <div class="sub-plan-title">1 Month VIP</div>
+                    <div class="sub-plan-price">₹4999</div>
+                    <button class="sel-btn" onclick="openPlanPayment('1 Month VIP', '4999')">SELECT</button>
                 </div>
             </div>
         </div>
 
-        <!-- Step 5.1: Plan Payment Page -->
+        <!-- Step 5.1: Plan Payment -->
         <div id="step-plan-pay" style="display:none; text-align: center;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box" id="planTitleDisplay">Plan Payment</div>
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
-
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
-            
-            <div style="font-size: 11.5px; font-weight: 700; color: #334155; text-align: left; margin-bottom: 4px;">UPI ID:</div>
             <div class="upi-box">
                 <span id="planUpiText">omkaryadav@paytm</span>
-                <button class="copy-btn" onclick="copyPlanUpi()">COPY / कॉपी करें</button>
+                <button class="copy-btn" onclick="copyPlanUpi()">COPY</button>
             </div>
-
-            <div class="instruction-box" style="text-align: left;">
-                <b>निर्देश / Instructions:</b>
-                <ul>
-                    <li>QR कोड को स्कैन करें या ऊपर दी गई UPI ID पर भुगतान करें।</li>
-                    <li>सफलतापूर्वक भुगतान के बाद 12 अंकों की UTR / Transaction ID सही से दर्ज करें।</li>
-                </ul>
-            </div>
-
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155; display: block; text-align: left;">Transaction / UTR ID:</label>
             <input type="text" id="planUtidInput" placeholder="12 Digit Transaction / UTR ID">
-
-            <button class="btn-pay-main" style="margin-top: 8px;" onclick="submitPlanPayment()">PAYMENT DONE / भुगतान हो गया</button>
-            <p onclick="document.getElementById('step-plan-pay').style.display='none'; document.getElementById('step-subscription').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
+            <button class="btn-pay-main" style="margin-top: 8px;" onclick="submitPlanPayment()">PAYMENT DONE</button>
         </div>
 
-        <!-- Step 5.2: Plan Timer Verification Page -->
+        <!-- Step 5.2: Plan Timer Verification -->
         <div id="step-plan-timer" style="display:none; text-align: center;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box">VERIFYING PAYMENT</div>
             <div id="planTimerBox" style="font-size: 34px; color: var(--sky-blue); font-weight: 900; margin: 12px 0;">01:00</div>
-            <p style="font-size: 12px; color: #64748b; font-weight: 600;">कृपया प्रतीक्षा करें...</p>
         </div>
 
-        <!-- Step 4: Success / Final Admin Notice -->
+        <!-- Step 4: Success Notice -->
         <div id="step4" style="display:none; text-align: center;">
-            <!-- Sky Blue Heading -->
             <div class="modal-header-box">SUCCESS / सफल ✅</div>
             <p style="font-size: 12px; font-weight: 800; color: var(--sky-blue); margin: 6px 0;">भुगतान सफलतापूर्वक प्राप्त हुआ</p>
-            
-            <div class="next-box" style="text-align: left; font-size: 11.5px;">
-                <b>आगे क्या होगा / What Happens Next:</b>
-                <ol>
-                    <li>एडमिन द्वारा जाँच के बाद सबस्क्रिप्शन की सेवाएँ एक्टिव कर दी जाएंगी।</li>
-                    <li>इस प्रक्रिया में कुछ घंटों का समय भी लग सकता है।</li>
-                </ol>
-            </div>
-
             <button class="btn-pay-main" style="margin-top: 10px;" onclick="closeVipModal()">CLOSE / बंद करें</button>
         </div>
     </div>
 </div>
 
 <script>
-    // CSV URL for Matka Logic Chart
+    // CSV URL for Matka Logic Chart & Diamond Panel Chart
     const CSV_MATKA = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/export?format=csv&gid=0";
-    
-    // CSV URL for Diamond Panel Chart
     const CSV_DIAMOND = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/export?format=csv&gid=0"; 
 
     let currentChartType = 'matka';
 
-    // Side Menu Toggle Logic
+    // PWA Prompt Handler
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('pwaInstallBtn').style.display = 'inline-block';
+    });
+
+    function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    document.getElementById('pwaInstallBtn').style.display = 'none';
+                }
+                deferredPrompt = null;
+            });
+        } else {
+            alert("ऐप इंस्टॉलेशन के लिए Chrome ब्राउज़र में 'Add to Home screen' विकल्प पर क्लिक करें।");
+        }
+    }
+
+    // Side Menu Logic
     function toggleSideMenu() {
         const menu = document.getElementById('sideMenu');
         const overlay = document.getElementById('sideMenuOverlay');
         const isOpen = menu.style.display === 'block';
-        
         menu.style.display = isOpen ? 'none' : 'block';
         overlay.style.display = isOpen ? 'none' : 'block';
     }
 
-    function goHome() {
-        toggleSideMenu();
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-
-    function openLoginFromMenu() {
-        toggleSideMenu();
-        openPlayGameModal(); // Opens Step 2 directly
-    }
+    function goHome() { toggleSideMenu(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+    function openLoginFromMenu() { toggleSideMenu(); openPlayGameModal(); }
 
     function switchChart(type) {
         currentChartType = type;
-
         const titleDisplay = document.getElementById('chartTitleDisplay');
-        if(type === 'matka') {
-            titleDisplay.innerText = "MATKA LOGIC CHART";
-        } else {
-            titleDisplay.innerText = "DIAMOND PANEL CHART";
-        }
-
+        titleDisplay.innerText = (type === 'matka') ? "MATKA LOGIC CHART" : "DIAMOND PANEL CHART";
         loadChart();
     }
 
     function openVipModal() { document.getElementById('vipModal').style.display='flex'; resetModal(); }
-    
     function openPlayGameModal() {
         document.getElementById('vipModal').style.display='flex';
         resetModal();
         document.getElementById('step-create-account').style.display='none';
         document.getElementById('step2').style.display='block';
     }
-
     function closeVipModal() { document.getElementById('vipModal').style.display='none'; }
     
     function resetModal() {
@@ -736,8 +748,7 @@
     }
 
     function copyUpi() {
-        let upiText = document.getElementById('upiText').innerText;
-        navigator.clipboard.writeText(upiText);
+        navigator.clipboard.writeText(document.getElementById('upiText').innerText);
         alert("UPI ID Copied / यूपीआई आईडी कॉपी हो गई है!");
     }
 
@@ -750,11 +761,7 @@
         let num = document.getElementById('payNumber').value;
         let upi = document.getElementById('payUpi').value;
         let utid = document.getElementById('payUtid').value;
-
-        if(num.length < 10 || !upi || utid.length < 6) {
-            return alert("कृपया सभी विवरण सही से भरें / Please fill all details correctly");
-        }
-
+        if(num.length < 10 || !upi || utid.length < 6) return alert("कृपया सभी विवरण सही से भरें");
         document.getElementById('step-pay-details').style.display='none';
         document.getElementById('step3').style.display='block';
         startTimer();
@@ -765,11 +772,7 @@
         let x = setInterval(() => {
             let m = Math.floor(t / 60), s = t % 60;
             document.getElementById('timerBox').innerText = `0${m}:${s < 10 ? '0' + s : s}`;
-            if(t-- <= 0) { 
-                clearInterval(x); 
-                document.getElementById('step3').style.display='none'; 
-                document.getElementById('step-subscription').style.display='block'; 
-            }
+            if(t-- <= 0) { clearInterval(x); document.getElementById('step3').style.display='none'; document.getElementById('step-subscription').style.display='block'; }
         }, 1000);
     }
 
@@ -781,16 +784,13 @@
     }
 
     function copyPlanUpi() {
-        let upiText = document.getElementById('planUpiText').innerText;
-        navigator.clipboard.writeText(upiText);
-        alert("UPI ID Copied / यूपीआई आईडी कॉपी हो गई है!");
+        navigator.clipboard.writeText(document.getElementById('planUpiText').innerText);
+        alert("UPI ID Copied!");
     }
 
     function submitPlanPayment() {
         let utid = document.getElementById('planUtidInput').value;
-        if(utid.length < 6) {
-            return alert("कृपया 12 अंकों की UTR / Transaction ID सही से दर्ज करें!");
-        }
+        if(utid.length < 6) return alert("कृपया 12 अंकों की UTR / Transaction ID सही से दर्ज करें!");
         document.getElementById('step-plan-pay').style.display='none';
         document.getElementById('step-plan-timer').style.display='block';
         startPlanTimer();
@@ -801,14 +801,11 @@
         let x = setInterval(() => {
             let m = Math.floor(t / 60), s = t % 60;
             document.getElementById('planTimerBox').innerText = `0${m}:${s < 10 ? '0' + s : s}`;
-            if(t-- <= 0) { 
-                clearInterval(x); 
-                document.getElementById('step-plan-timer').style.display='none'; 
-                document.getElementById('step4').style.display='block'; 
-            }
+            if(t-- <= 0) { clearInterval(x); document.getElementById('step-plan-timer').style.display='none'; document.getElementById('step4').style.display='block'; }
         }, 1000);
     }
 
+    // MAIN LOAD CHART & ANALYTICS FUNCTION
     async function loadChart() {
         const targetUrl = (currentChartType === 'matka') ? CSV_MATKA : CSV_DIAMOND;
 
@@ -817,11 +814,19 @@
             const data = await res.text();
             const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
             let html = '', lockShown = false;
+            let jodiFrequency = {};
+
             for(let i=1; i<rows.length; i++) {
                 let d = (rows[i][0] || "").trim(); if(!d) continue;
                 html += `<tr><td class="date-box">${d}</td>`;
                 for(let j=1; j<=16; j+=3) {
                     let lp=(rows[i][j]||"").trim(), jd=(rows[i][j+1]||"").trim(), rp=(rows[i][j+2]||"").trim();
+                    
+                    // Hot Numbers Count Logic
+                    if(jd && jd.length === 2 && !isNaN(jd)) {
+                        jodiFrequency[jd] = (jodiFrequency[jd] || 0) + 1;
+                    }
+
                     if(!jd && !lp) {
                         if(!lockShown) { 
                             html += `<td onclick="openVipModal()"><span class="lock-btn">🔒</span></td>`; 
@@ -842,15 +847,45 @@
                 html += `</tr>`;
             }
             document.getElementById('gridData').innerHTML = html;
+
+            // Compute & Render Hot Numbers
+            renderHotNumbers(jodiFrequency);
+
+            // Update Auto-Refresh Time Tag
+            const currentTime = new Date().toLocaleTimeString();
+            document.getElementById('liveStatusText').innerText = `Live Data • Auto Refreshed at ${currentTime}`;
+
         } catch(e) { 
             console.log(e); 
             document.getElementById('gridData').innerHTML = '<tr><td colspan="7" style="padding: 15px;">डेटा लोड करने में त्रुटि हुई।</td></tr>';
         }
     }
-    window.onload = loadChart;
+
+    // Render Hot Numbers Grid
+    function renderHotNumbers(freqMap) {
+        let sorted = Object.entries(freqMap).sort((a,b) => b[1] - a[1]).slice(0, 4);
+        let container = document.getElementById('hotNumbersGrid');
+        
+        if(sorted.length === 0) {
+            container.innerHTML = `<div class="hot-card">डेटा लोड हो रहा है...</div>`;
+            return;
+        }
+
+        let html = '';
+        sorted.forEach(([jodi, count]) => {
+            html += `<div class="hot-card">🎯 ${jodi} <span class="badge">${count}x</span></div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    // Initial Load & 30-Second Auto Refresh Loop
+    window.onload = () => {
+        loadChart();
+        setInterval(loadChart, 30000); // Auto-Refresh every 30 seconds
+    };
 </script>
 
-<!--Start of Tawk.to Script-->
+<!-- Tawk.to Live Chat -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
@@ -862,7 +897,6 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>

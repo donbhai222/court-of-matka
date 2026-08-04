@@ -255,6 +255,35 @@
         .lock-btn { color: var(--vip-red); font-size: 20px; font-weight: bold; cursor: pointer; background: #fef2f2; padding: 6px 12px; border-radius: 6px; border: 1px dashed var(--vip-red); display: inline-block; transition: 0.2s; }
         .lock-btn:hover { background: #fee2e2; }
 
+        /* White Box Container for Access Panel Section */
+        .access-panel-box {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .access-panel-box h2 {
+            color: #0f172a;
+            font-size: 18px;
+            font-weight: 900;
+            margin: 0 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .access-panel-box p {
+            color: #475569;
+            font-size: 12.5px;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+        }
+
         /* Red Background for Main 'Khata Banaye' / Join VIP Button */
         .btn-pay-main { background: var(--vip-red); color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; font-weight: 700; font-size: 15px; margin: 10px 0; cursor: pointer; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); transition: 0.2s; box-sizing: border-box; }
         .btn-pay-main:hover { background: #b91c1c; }
@@ -381,10 +410,12 @@
     <button class="btn-neon-game" onclick="openPlayGameModal()">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
-<div class="site-desc" style="font-size: 13px; font-weight: 700; margin: 15px 5px; color: #334155; text-shadow: 0 1px 2px rgba(255,255,255,0.6);">People get more from Game with a BIG STAR PINAL CHART and BOMBAY SPECIAL VIP CHART.</div>
-
-<!-- Red Background Button -->
-<button class="btn-pay-main" style="width:90%; max-width:360px;" onclick="openVipModal()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
+<!-- White Background Box Container for Access Panel -->
+<div class="access-panel-box">
+    <h2>ACCESS PANEL CHARTS</h2>
+    <p>Create an account and complete the setup payment to view all charts</p>
+    <button class="btn-pay-main" style="width:100%; max-width:360px; margin: 0 auto;" onclick="openVipModal()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
+</div>
 
 <!-- Footer Copyright Notice -->
 <footer class="site-footer">

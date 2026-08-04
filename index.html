@@ -251,9 +251,19 @@
         .jodi { font-size: 18px; font-weight: 900; color: #0f172a; margin: 0 4px; }
         .red-house .jodi, .red-house .panna-vertical { color: var(--vip-red) !important; }
         
-        /* Clean Lock Button */
-        .lock-btn { color: var(--vip-red); font-size: 20px; font-weight: bold; cursor: pointer; background: #fef2f2; padding: 6px 12px; border-radius: 6px; border: 1px dashed var(--vip-red); display: inline-block; transition: 0.2s; }
-        .lock-btn:hover { background: #fee2e2; }
+        /* Clean Normal Lock Icon without Red Box/Border */
+        .lock-btn { 
+            font-size: 20px; 
+            cursor: pointer; 
+            display: inline-block; 
+            background: transparent; 
+            border: none; 
+            padding: 0; 
+            transition: transform 0.2s; 
+        }
+        .lock-btn:hover { 
+            transform: scale(1.2); 
+        }
 
         /* White Box Container for Access Panel Section */
         .access-panel-box {

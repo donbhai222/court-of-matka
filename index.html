@@ -59,6 +59,14 @@
             margin-top: 3px;
             letter-spacing: 0.5px;
         }
+        .profile-header-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: #ffffff;
+            transition: 0.2s;
+            user-select: none;
+        }
+        .profile-header-btn:hover { color: var(--gold); }
         .menu-btn { 
             font-size: 26px; 
             color: #ffffff; 
@@ -474,9 +482,9 @@
 </head>
 <body>
 
-<!-- Header with Corner 3-Line Menu Icon -->
+<!-- Header with Corner Profile Icon & 3-Line Menu Icon -->
 <div class="header">
-    <div style="width: 26px;"></div>
+    <div class="profile-header-btn" onclick="openProfileModal()" title="मेरी प्रोफाइल / My Profile">👤</div>
     <div class="header-title-box">
         <h1>MATKA LOGIC CHART</h1>
         <div class="header-subtitle">welcome to matka logic chart</div>
@@ -490,6 +498,9 @@
     <div class="side-menu-header">
         <span>MENU / मेनू</span>
         <span onclick="toggleSideMenu()" style="cursor:pointer; font-size:18px;">✕</span>
+    </div>
+    <div class="menu-item" onclick="openProfileModal()">
+        <span>👤</span> <span>प्रोफाइल / Profile</span>
     </div>
     <div class="menu-item" onclick="goHome()">
         <span>🏠</span> <span>होम पेज / Home Page</span>
@@ -561,6 +572,37 @@
 <footer class="site-footer">
     All Rights Reserved <span>2026</span> © MATKA LOGIC CHART
 </footer>
+
+<!-- 👤 USER PROFILE MODAL -->
+<div id="profileModal" class="overlay">
+    <div class="modal-content" style="max-width: 480px;">
+        <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>👤 USER PROFILE / मेरी प्रोफाइल</span>
+            <span onclick="closeProfileModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
+        </div>
+
+        <div style="text-align: center; padding: 10px 0;">
+            <div style="font-size: 55px; line-height: 1; margin-bottom: 5px;">👤</div>
+            <h3 id="profName" style="margin: 4px 0 2px 0; color: #0f172a; font-size: 18px;">Guest User</h3>
+            <p id="profPhone" style="margin: 0; color: #64748b; font-size: 12.5px; font-weight: 700;">+91 Not Registered</p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px; margin: 12px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; font-weight: 700;">
+                <span>💰 Wallet Balance:</span>
+                <span id="profBalance" style="color: #16a34a; font-weight: 900; font-size: 15px;">₹0.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700;">
+                <span>👑 Account Status:</span>
+                <span id="profStatus" style="color: #dc2626; font-weight: 800;">Free / Unverified</span>
+            </div>
+        </div>
+
+        <button class="btn-pay-main" style="background: var(--sky-blue);" onclick="closeProfileModal(); openVipModal();">🔑 Login / Create Account</button>
+        <button class="btn-pay-main" style="background: #dc2626; margin-top: 4px;" onclick="logoutUser()">🚪 Reset Profile / लॉगआउट</button>
+        <button class="btn-pay-main" style="background: #64748b; margin-top: 4px;" onclick="closeProfileModal()">बंद करें (Close)</button>
+    </div>
+</div>
 
 <!-- 🎮 GAMING DASHBOARD MODAL -->
 <div id="gamePlayModal" class="overlay">
@@ -656,7 +698,7 @@
             <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
         </div>
 
-        <!-- 4. NEW TAB: WITHDRAWAL (विड्रॉल) -->
+        <!-- 4. TAB: WITHDRAWAL (विड्रॉल) -->
         <div id="dashTabWithdraw" style="display:none;">
             <div class="notice-box">
                 <b>💸 WITHDRAW MONEY / पैसे निकालें:</b><br>
@@ -910,6 +952,37 @@
     function goHome() { toggleSideMenu(); window.scrollTo({top: 0, behavior: 'smooth'}); }
     function openLoginFromMenu() { toggleSideMenu(); openVipModal(); }
 
+    /* 👤 USER PROFILE SYSTEM FUNCTIONS */
+    function openProfileModal() {
+        if (document.getElementById('sideMenu').style.display === 'block') {
+            toggleSideMenu();
+        }
+        
+        let savedUser = JSON.parse(localStorage.getItem('userProfileData')) || {
+            name: 'Guest User',
+            phone: 'Not Registered',
+            balance: 0,
+            status: 'Free / Unverified'
+        };
+
+        document.getElementById('profName').innerText = savedUser.name;
+        document.getElementById('profPhone').innerText = "+91 " + savedUser.phone;
+        document.getElementById('profBalance').innerText = "₹" + savedUser.balance + ".00";
+        document.getElementById('profStatus').innerText = savedUser.status;
+
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    function closeProfileModal() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    function logoutUser() {
+        localStorage.removeItem('userProfileData');
+        alert("प्रोफाइल डेटा रीसेट कर दिया गया है!");
+        openProfileModal();
+    }
+
     function switchChart(type) {
         currentChartType = type;
         const titleDisplay = document.getElementById('chartTitleDisplay');
@@ -1027,8 +1100,21 @@
     }
 
     function goPay() {
-        if(!document.getElementById('vName').value || document.getElementById('vPhone').value.length < 10) return alert("सही जानकारी भरें / Please fill correct details");
-        document.getElementById('payNumber').value = document.getElementById('vPhone').value;
+        let name = document.getElementById('vName').value;
+        let phone = document.getElementById('vPhone').value;
+
+        if(!name || phone.length < 10) return alert("सही जानकारी भरें / Please fill correct details");
+        
+        // Save to Local Profile
+        let profile = {
+            name: name,
+            phone: phone,
+            balance: 0,
+            status: "Pending Verification"
+        };
+        localStorage.setItem('userProfileData', JSON.stringify(profile));
+
+        document.getElementById('payNumber').value = phone;
         document.getElementById('step-create-account').style.display='none';
         document.getElementById('step2').style.display='block';
     }

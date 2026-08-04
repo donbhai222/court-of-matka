@@ -505,9 +505,9 @@
     </p>
 </div>
 
-<!-- Top Buttons Row -->
+<!-- Top Buttons Row (With Go to Bottom & Play Game) -->
 <div class="btn-group-row">
-    <div class="nav-btn" onclick="openPlayGameModal('markets')">🏛️ मार्केट्स / MARKETS</div>
+    <div class="nav-btn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">Go to Bottom ↓</div>
     <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
@@ -560,7 +560,7 @@
             <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
         </div>
 
-        <!-- Navigation Tabs -->
+        <!-- Navigation Tabs (MARKETS IS KEPT HERE) -->
         <div class="dash-tabs">
             <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
             <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>

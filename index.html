@@ -35,12 +35,11 @@
             border-bottom: 3px solid var(--gold); 
             box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
             display: flex; 
-            justify-content: space-between; 
+            justify-content: center; 
             align-items: center; 
             position: relative; 
         }
         .header-title-box {
-            flex-grow: 1;
             text-align: center;
         }
         .header h1 { 
@@ -59,19 +58,12 @@
             margin-top: 3px;
             letter-spacing: 0.5px;
         }
-        .profile-header-btn {
-            font-size: 22px;
-            cursor: pointer;
-            color: #ffffff;
-            transition: 0.2s;
-            user-select: none;
-        }
-        .profile-header-btn:hover { color: var(--gold); }
         .menu-btn { 
+            position: absolute;
+            right: 14px;
             font-size: 26px; 
             color: #ffffff; 
             cursor: pointer; 
-            padding: 0 5px; 
             user-select: none; 
             line-height: 1; 
             transition: 0.2s; 
@@ -200,15 +192,15 @@
             100% { transform: scale(1.04); box-shadow: 0 0 20px rgba(251, 191, 36, 0.9); }
         }
 
-        /* Single Dropdown Chart Selector Button */
+        /* Single Dropdown Chart Selector Button (Slightly Reduced Width/Padding) */
         .chart-selector-container { margin: 10px 0 6px 0; display: flex; justify-content: center; }
         .chart-select-dropdown { 
             background: #0f172a; 
             color: var(--gold); 
             border: 2px solid var(--gold); 
             border-radius: 25px; 
-            padding: 9px 18px; 
-            font-size: 13px; 
+            padding: 7px 11px; 
+            font-size: 12px; 
             font-weight: 800; 
             cursor: pointer; 
             outline: none;
@@ -482,9 +474,8 @@
 </head>
 <body>
 
-<!-- Header with Corner Profile Icon & 3-Line Menu Icon -->
+<!-- Clean Header with Centered Title & Right Menu Icon -->
 <div class="header">
-    <div class="profile-header-btn" onclick="openProfileModal()" title="मेरी प्रोफाइल / My Profile">👤</div>
     <div class="header-title-box">
         <h1>MATKA LOGIC CHART</h1>
         <div class="header-subtitle">welcome to matka logic chart</div>
@@ -612,7 +603,7 @@
             <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
         </div>
 
-        <!-- Navigation Tabs (With Withdraw & Fund Tab) -->
+        <!-- Navigation Tabs -->
         <div class="dash-tabs">
             <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
             <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
@@ -621,19 +612,17 @@
             <button class="dash-tab-btn" id="tabBtnWithdraw" onclick="switchDashTab('withdraw')">💸 विड्रॉल</button>
         </div>
 
-        <!-- 0. TAB: MARKETS (मार्केट्स) -->
+        <!-- 0. TAB: MARKETS -->
         <div id="dashTabMarkets">
             <div class="notice-box">
                 <b>🏛️ LIVE MARKETS & TIMING:</b><br>
                 समय सारणी देखें (🕒 छूकर टाइमिंग देखें या 🎮 छूकर गेम खेलें)
             </div>
 
-            <div class="market-list-box" id="marketListContainer">
-                <!-- Dynamic Market Cards Loaded via JS -->
-            </div>
+            <div class="market-list-box" id="marketListContainer"></div>
         </div>
 
-        <!-- 1. TAB: GAME RATES (गेम रेट्स) -->
+        <!-- 1. TAB: GAME RATES -->
         <div id="dashTabRates" style="display:none;">
             <div class="notice-box">
                 <b>📊 GAME RATES / गेम रेट सूची:</b><br>
@@ -662,7 +651,7 @@
             <button class="btn-pay-main" style="margin-top: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="switchDashTab('play')">अभी गेम खेलें 🚀</button>
         </div>
 
-        <!-- 2. TAB: PLAY GAME (गेम खेलें) -->
+        <!-- 2. TAB: PLAY GAME -->
         <div id="dashTabPlay" style="display:none;">
             <div id="gameFormView">
                 <div class="notice-box">
@@ -688,7 +677,7 @@
             </div>
         </div>
 
-        <!-- 3. TAB: ADD FUND (फंड जोड़ें) -->
+        <!-- 3. TAB: ADD FUND -->
         <div id="dashTabFund" style="display:none;">
             <div class="notice-box">
                 <b>💰 ADD FUND / वॉलेट बैलेंस जोड़ें:</b><br>
@@ -698,7 +687,7 @@
             <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
         </div>
 
-        <!-- 4. TAB: WITHDRAWAL (विड्रॉल) -->
+        <!-- 4. TAB: WITHDRAWAL -->
         <div id="dashTabWithdraw" style="display:none;">
             <div class="notice-box">
                 <b>💸 WITHDRAW MONEY / पैसे निकालें:</b><br>
@@ -782,7 +771,7 @@
             <p onclick="document.getElementById('step2').style.display='none'; document.getElementById('step-create-account').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
 
-        <!-- Step 2.1: Payment Details Input (WITH SCREENSHOT UPLOAD) -->
+        <!-- Step 2.1: Payment Details Input -->
         <div id="step-pay-details" style="display:none;">
             <div class="modal-header-box">Payment Details / भुगतान विवरण</div>
 
@@ -795,7 +784,6 @@
             <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Transaction / UTR ID:</label>
             <input type="text" id="payUtid" placeholder="12 Digit Transaction / UTR ID">
 
-            <!-- 📸 SCREENSHOT UPLOAD FIELD -->
             <label style="font-size: 11.5px; font-weight: 700; color: #0ea5e9;">📸 Upload Payment Screenshot / रसीद की फोटो चुनें:</label>
             <input type="file" id="payScreenshot" accept="image/*">
 
@@ -851,7 +839,7 @@
             </div>
         </div>
 
-        <!-- Step 5.1: Plan Payment (WITH SCREENSHOT UPLOAD) -->
+        <!-- Step 5.1: Plan Payment -->
         <div id="step-plan-pay" style="display:none; text-align: center;">
             <div class="modal-header-box" id="planTitleDisplay">Plan Payment</div>
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
@@ -862,7 +850,6 @@
             </div>
             <input type="text" id="planUtidInput" placeholder="12 Digit Transaction / UTR ID">
             
-            <!-- 📸 SCREENSHOT UPLOAD FIELD FOR SUBSCRIPTION -->
             <label style="font-size: 11.5px; font-weight: 700; color: #0ea5e9; text-align: left; display: block;">📸 Upload Payment Screenshot:</label>
             <input type="file" id="planScreenshot" accept="image/*">
 
@@ -1105,7 +1092,6 @@
 
         if(!name || phone.length < 10) return alert("सही जानकारी भरें / Please fill correct details");
         
-        // Save to Local Profile
         let profile = {
             name: name,
             phone: phone,
@@ -1129,7 +1115,6 @@
         document.getElementById('step-pay-details').style.display='block';
     }
 
-    /* SUBMIT PAYMENT WITH SCREENSHOT CHECK */
     function submitPayment() {
         let num = document.getElementById('payNumber').value;
         let upi = document.getElementById('payUpi').value;
@@ -1165,7 +1150,6 @@
         alert("UPI ID Copied!");
     }
 
-    /* SUBMIT PLAN PAYMENT WITH SCREENSHOT CHECK */
     function submitPlanPayment() {
         let utid = document.getElementById('planUtidInput').value;
         let fileInput = document.getElementById('planScreenshot');

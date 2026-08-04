@@ -560,7 +560,7 @@
             <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
         </div>
 
-        <!-- Navigation Tabs (MARKETS IS KEPT HERE) -->
+        <!-- Navigation Tabs -->
         <div class="dash-tabs">
             <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
             <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
@@ -639,39 +639,10 @@
         <div id="dashTabFund" style="display:none;">
             <div class="notice-box">
                 <b>💰 ADD FUND / वॉलेट बैलेंस जोड़ें:</b><br>
-                गेम खेलने के लिए न्यूनतम राशि <b>₹1,000</b> जोड़ें।
+                फंड जोड़ने या गेम खेलने के लिए नया खाता बनाएँ।
             </div>
 
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Amount / राशि दर्ज करें (Min ₹1000):</label>
-            <input type="number" id="fundAmount" placeholder="उदा. 1000, 2000, 5000" min="1000">
-
-            <button class="btn-pay-main" onclick="proceedToFundPay()">क्यूआर कोड दिखाएं / NEXT →</button>
-
-            <!-- QR Section for Add Fund -->
-            <div id="fundQrSection" style="display:none; text-align:center; margin-top:10px;">
-                <div style="font-size:15px; font-weight:800; color:#16a34a;">भुगतान राशि: ₹<span id="displayFundAmt">1000</span></div>
-                
-                <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
-                
-                <div style="font-size: 11.5px; font-weight: 700; color: #334155; text-align: left; margin-bottom: 4px;">UPI ID:</div>
-                <div class="upi-box">
-                    <span id="fundUpiText">omkaryadav@paytm</span>
-                    <button class="copy-btn" onclick="copyFundUpi()">COPY / कॉपी करें</button>
-                </div>
-
-                <div class="instruction-box">
-                    <b>निर्देश:</b>
-                    <ul>
-                        <li>क्यूआर कोड पर पेमेंट करें।</li>
-                        <li>भुगतान के बाद 12 अंकों का UTR ID दर्ज करें।</li>
-                    </ul>
-                </div>
-
-                <label style="font-size: 11.5px; font-weight: 700; color: #334155; text-align:left; display:block;">12 Digit UTR / Transaction ID:</label>
-                <input type="text" id="fundUtid" placeholder="12 अंकों का UTR ID दर्ज करें">
-
-                <button class="btn-pay-main" style="background:#16a34a;" onclick="submitFundDetails()">SUBMIT FUND REQUEST</button>
-            </div>
+            <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
         </div>
 
         <button class="btn-pay-main" style="background: #64748b; margin-top: 8px;" onclick="closeGameModal()">बंद करें (Close)</button>
@@ -904,8 +875,14 @@
         loadChart();
     }
 
-    /* 🎮 DASHBOARD TAB SWITCHING LOGIC */
+    /* 🎮 DASHBOARD TAB SWITCHING LOGIC (ADD FUND OPENS CREATE ACCOUNT DIRECTLY) */
     function switchDashTab(tabName) {
+        if (tabName === 'fund') {
+            closeGameModal();
+            openVipModal();
+            return;
+        }
+
         document.getElementById('dashTabMarkets').style.display = (tabName === 'markets') ? 'block' : 'none';
         document.getElementById('dashTabPlay').style.display = (tabName === 'play') ? 'block' : 'none';
         document.getElementById('dashTabRates').style.display = (tabName === 'rates') ? 'block' : 'none';
@@ -958,6 +935,10 @@
 
     /* 🎮 GAME PLAY & CREATE ACCOUNT PROCESS INTERCEPT */
     function openPlayGameModal(tab = 'play') {
+        if (tab === 'fund') {
+            openVipModal();
+            return;
+        }
         document.getElementById('gamePlayModal').style.display = 'flex';
         switchDashTab(tab);
     }
@@ -977,30 +958,10 @@
         openVipModal();
     }
 
-    /* 💰 ADD FUND FUNCTIONS */
+    /* 💰 ADD FUND DIRECT TO CREATE ACCOUNT */
     function proceedToFundPay() {
-        let amt = parseInt(document.getElementById('fundAmount').value);
-        if(!amt || amt < 1000) {
-            alert("न्यूनतम फंड जोड़ने की राशि ₹1,000 होनी चाहिए!");
-            return;
-        }
-        document.getElementById('displayFundAmt').innerText = amt;
-        document.getElementById('fundQrSection').style.display = 'block';
-    }
-
-    function copyFundUpi() {
-        navigator.clipboard.writeText(document.getElementById('fundUpiText').innerText);
-        alert("UPI ID कॉपी हो गई है!");
-    }
-
-    function submitFundDetails() {
-        let utid = document.getElementById('fundUtid').value;
-        if(utid.length < 6) {
-            alert("कृपया सही 12 अंकों की UTR / Transaction ID दर्ज करें!");
-            return;
-        }
-        alert("आपका फंड जोड़ने का अनुरोध प्राप्त हो गया है। एडमिन द्वारा जाँच के बाद बैलेंस जोड़ दिया जाएगा।");
         closeGameModal();
+        openVipModal();
     }
 
     /* VIP & Payment Modals */

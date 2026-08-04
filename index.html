@@ -4,10 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     
-    <!-- PWA & Mobile Settings -->
-    <meta name="theme-color" content="#16a34a">
-    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22MATKA%20LOGIC%20CHART%22%2C%22short_name%22%3A%22MatkaLogic%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2316a34a%22%2C%22theme_color%22%3A%22%2316a34a%22%7D'>
-    
     <!-- SEO & Search Optimization -->
     <title>MATKA LOGIC CHART & DIAMOND PANEL CHART - Fast Results</title>
     <meta name="description" content="MATKA LOGIC CHART और DIAMOND PANEL CHART पर सबसे तेज़ और सटीक चार्ट रिजल्ट्स देखें।">
@@ -73,21 +69,6 @@
             transition: 0.2s; 
         }
         .menu-btn:hover { color: var(--gold); }
-
-        /* PWA Install Button */
-        .pwa-btn {
-            display: none;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #000;
-            border: 1.5px solid #ffffff;
-            font-size: 11.5px;
-            font-weight: 900;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            margin: 6px auto 0 auto;
-        }
 
         /* Side Menu Panel & Overlay */
         .side-menu-overlay { 
@@ -228,57 +209,6 @@
             text-align: center;
         }
 
-        /* 🔥 HOT NUMBERS SECTION STYLING */
-        .hot-box {
-            background: #ffffff;
-            border: 2px solid var(--gold);
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            margin: 10px auto 14px auto;
-            padding: 10px 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            box-sizing: border-box;
-        }
-        .hot-title {
-            font-size: 12px;
-            font-weight: 900;
-            color: #0f172a;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .hot-grid {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .hot-card {
-            background: #0f172a;
-            color: var(--gold);
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-size: 14px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        .hot-card span.badge {
-            background: var(--vip-red);
-            color: #fff;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: 700;
-        }
-
         /* Chart Title Attached Above Chart */
         .chart-title-heading { 
             background: var(--theme-green); 
@@ -301,7 +231,7 @@
         #chartWrapper { 
             width: 90%; 
             max-width: 600px; 
-            margin: 0 auto 4px auto; 
+            margin: 0 auto 10px auto; 
             background: #fff; 
             border: 2px solid #000; 
             border-radius: 0 0 8px 8px; 
@@ -328,30 +258,6 @@
             border: none; 
             padding: 0; 
             transition: transform 0.2s; 
-        }
-
-        /* Auto Refresh Live Status Tag */
-        .live-refresh-tag {
-            font-size: 10.5px;
-            font-weight: 700;
-            color: #15803d;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        .pulse-dot {
-            width: 7px;
-            height: 7px;
-            background: #22c55e;
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 1.2s infinite alternate;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Access Panel Box */
@@ -388,7 +294,7 @@
         .modal-content { background: var(--card-bg); width: 95%; max-width: 650px; padding: 20px; border-radius: 14px; box-sizing: border-box; text-align: left; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.4); color: #1e293b; }
         
         .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
-        input { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
+        input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
         .modal-header-box { 
             background: var(--sky-blue); 
@@ -406,6 +312,18 @@
         .upi-box { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; font-weight: 700; border: 1.5px solid #cbd5e1; color: #0f172a; }
         .copy-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; }
         .next-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 11.5px; color: #334155; }
+
+        /* Game Ticket Receipt Style */
+        .ticket-box {
+            background: #fefce8;
+            border: 2px dashed #f59e0b;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: left;
+            font-size: 13px;
+            color: #0f172a;
+        }
 
         /* Subscription Plans Grid */
         .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
@@ -434,7 +352,6 @@
     <div class="header-title-box">
         <h1>MATKA LOGIC CHART</h1>
         <div class="header-subtitle">welcome to matka logic chart</div>
-        <button id="pwaInstallBtn" class="pwa-btn" onclick="installPWA()">📲 ऐप इंस्टॉल करें (Install App)</button>
     </div>
     <div class="menu-btn" onclick="toggleSideMenu()" title="मेनू खोलें">☰</div>
 </div>
@@ -449,11 +366,11 @@
     <div class="menu-item" onclick="goHome()">
         <span>🏠</span> <span>होम पेज / Home Page</span>
     </div>
-    <div class="menu-item" onclick="openLoginFromMenu()">
-        <span>🔑</span> <span>लॉगिन / Login</span>
+    <div class="menu-item" onclick="openPlayGameModal()">
+        <span>🎮</span> <span>ऑनलाइन खेलें / Play Game</span>
     </div>
-    <div class="menu-item" onclick="installPWA()">
-        <span>📲</span> <span>ऐप इंस्टॉल करें / Install App</span>
+    <div class="menu-item" onclick="openLoginFromMenu()">
+        <span>🔑</span> <span>लॉगिन / VIP Access</span>
     </div>
 </div>
 
@@ -481,14 +398,6 @@
     </select>
 </div>
 
-<!-- 🔥 HOT NUMBERS ANALYTICS BOX -->
-<div class="hot-box">
-    <div class="hot-title">🔥 Trending Hot Jodis (इस महीने सबसे ज्यादा आई जोड़ियाँ)</div>
-    <div class="hot-grid" id="hotNumbersGrid">
-        <div class="hot-card">--</div>
-    </div>
-</div>
-
 <!-- Title Attached Directly Above Chart -->
 <div class="chart-title-heading" id="chartTitleDisplay">MATKA LOGIC CHART</div>
 
@@ -502,12 +411,6 @@
         </thead>
         <tbody id="gridData"></tbody>
     </table>
-</div>
-
-<!-- Auto Refresh Live Status Tag -->
-<div class="live-refresh-tag">
-    <span class="pulse-dot"></span>
-    <span id="liveStatusText">Live Data • Auto Updating...</span>
 </div>
 
 <!-- Bottom Buttons Row -->
@@ -528,6 +431,51 @@
     All Rights Reserved <span>2026</span> © MATKA LOGIC CHART
 </footer>
 
+<!-- 🎮 GAME PLAY MODAL -->
+<div id="gamePlayModal" class="overlay">
+    <div class="modal-content">
+        <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>🎮 LIVE GAME DESK / गेम खेलें</span>
+            <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
+        </div>
+
+        <div id="gameFormView">
+            <div class="notice-box">
+                <b>गेम खेलें (Select Game & Digit):</b><br>
+                अपना गेम टाइप चुनें, नंबर डालें और पॉइंट्स सेट करके गेम प्ले करें।
+            </div>
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Game Type / गेम का प्रकार:</label>
+            <select id="gameTypeSelect">
+                <option value="Single Digit">Single Digit (सिंगल डिजिट)</option>
+                <option value="Jodi Rate">Jodi Rate (जोड़ी)</option>
+                <option value="Single Panna">Single Panna (सिंगल पाना)</option>
+                <option value="Double Panna">Double Panna (डबल पाना)</option>
+            </select>
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Number / अंक दर्ज करें:</label>
+            <input type="number" id="gameNumber" placeholder="उदा. 5, 48, या 123">
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Points / Amount (रुपये/पॉइंट्स):</label>
+            <input type="number" id="gamePoints" placeholder="उदा. 100, 500">
+
+            <button class="btn-pay-main" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="submitGamePlay()">PLAY NOW / गेम लगाएँ 🚀</button>
+            <button class="btn-pay-main" style="background: #64748b;" onclick="closeGameModal()">बंद करें (Close)</button>
+        </div>
+
+        <!-- Ticket Receipt View -->
+        <div id="gameReceiptView" style="display: none; text-align: center;">
+            <div style="color: #16a34a; font-size: 18px; font-weight: 900; margin-bottom: 8px;">✅ GAME PLAYED SUCCESSFULLY!</div>
+            
+            <div class="ticket-box" id="ticketContent"></div>
+
+            <button class="btn-pay-main" onclick="resetGameForm()">एक और गेम खेलें / Play Another</button>
+            <button class="btn-pay-main" style="background: #64748b;" onclick="closeGameModal()">बंद करें (Close)</button>
+        </div>
+    </div>
+</div>
+
+<!-- VIP ACCESS & ACCOUNT MODAL -->
 <div id="vipModal" class="overlay">
     <div class="modal-content">
         <!-- Step 1: Create Account -->
@@ -685,28 +633,6 @@
 
     let currentChartType = 'matka';
 
-    // PWA Prompt Handler
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        document.getElementById('pwaInstallBtn').style.display = 'inline-block';
-    });
-
-    function installPWA() {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    document.getElementById('pwaInstallBtn').style.display = 'none';
-                }
-                deferredPrompt = null;
-            });
-        } else {
-            alert("ऐप इंस्टॉलेशन के लिए Chrome ब्राउज़र में 'Add to Home screen' विकल्प पर क्लिक करें।");
-        }
-    }
-
     // Side Menu Logic
     function toggleSideMenu() {
         const menu = document.getElementById('sideMenu');
@@ -717,7 +643,7 @@
     }
 
     function goHome() { toggleSideMenu(); window.scrollTo({top: 0, behavior: 'smooth'}); }
-    function openLoginFromMenu() { toggleSideMenu(); openPlayGameModal(); }
+    function openLoginFromMenu() { toggleSideMenu(); openVipModal(); }
 
     function switchChart(type) {
         currentChartType = type;
@@ -726,13 +652,50 @@
         loadChart();
     }
 
-    function openVipModal() { document.getElementById('vipModal').style.display='flex'; resetModal(); }
+    /* 🎮 GAME PLAY FUNCTIONS */
     function openPlayGameModal() {
-        document.getElementById('vipModal').style.display='flex';
-        resetModal();
-        document.getElementById('step-create-account').style.display='none';
-        document.getElementById('step2').style.display='block';
+        document.getElementById('gamePlayModal').style.display = 'flex';
+        resetGameForm();
     }
+
+    function closeGameModal() {
+        document.getElementById('gamePlayModal').style.display = 'none';
+    }
+
+    function submitGamePlay() {
+        const type = document.getElementById('gameTypeSelect').value;
+        const num = document.getElementById('gameNumber').value;
+        const points = document.getElementById('gamePoints').value;
+
+        if(!num || !points || points <= 0) {
+            alert("कृपया सही नंबर और पॉइंट्स दर्ज करें!");
+            return;
+        }
+
+        const ticketId = "TKT" + Math.floor(100000 + Math.random() * 900000);
+        const timeStr = new Date().toLocaleTimeString();
+
+        document.getElementById('ticketContent').innerHTML = `
+            <b>Ticket ID:</b> ${ticketId}<br>
+            <b>Time:</b> ${timeStr}<br>
+            <b>Game Type:</b> ${type}<br>
+            <b>Selected Number:</b> <span style="color:#dc2626; font-size:16px; font-weight:900;">${num}</span><br>
+            <b>Points/Amount:</b> ₹${points}
+        `;
+
+        document.getElementById('gameFormView').style.display = 'none';
+        document.getElementById('gameReceiptView').style.display = 'block';
+    }
+
+    function resetGameForm() {
+        document.getElementById('gameNumber').value = '';
+        document.getElementById('gamePoints').value = '';
+        document.getElementById('gameFormView').style.display = 'block';
+        document.getElementById('gameReceiptView').style.display = 'none';
+    }
+
+    /* VIP & Payment Modals */
+    function openVipModal() { document.getElementById('vipModal').style.display='flex'; resetModal(); }
     function closeVipModal() { document.getElementById('vipModal').style.display='none'; }
     
     function resetModal() {
@@ -805,7 +768,7 @@
         }, 1000);
     }
 
-    // MAIN LOAD CHART & ANALYTICS FUNCTION
+    // MAIN LOAD CHART FUNCTION
     async function loadChart() {
         const targetUrl = (currentChartType === 'matka') ? CSV_MATKA : CSV_DIAMOND;
 
@@ -814,18 +777,12 @@
             const data = await res.text();
             const rows = data.split('\n').filter(r => r.trim() !== '').map(r => r.split(','));
             let html = '', lockShown = false;
-            let jodiFrequency = {};
 
             for(let i=1; i<rows.length; i++) {
                 let d = (rows[i][0] || "").trim(); if(!d) continue;
                 html += `<tr><td class="date-box">${d}</td>`;
                 for(let j=1; j<=16; j+=3) {
                     let lp=(rows[i][j]||"").trim(), jd=(rows[i][j+1]||"").trim(), rp=(rows[i][j+2]||"").trim();
-                    
-                    // Hot Numbers Count Logic
-                    if(jd && jd.length === 2 && !isNaN(jd)) {
-                        jodiFrequency[jd] = (jodiFrequency[jd] || 0) + 1;
-                    }
 
                     if(!jd && !lp) {
                         if(!lockShown) { 
@@ -848,41 +805,13 @@
             }
             document.getElementById('gridData').innerHTML = html;
 
-            // Compute & Render Hot Numbers
-            renderHotNumbers(jodiFrequency);
-
-            // Update Auto-Refresh Time Tag
-            const currentTime = new Date().toLocaleTimeString();
-            document.getElementById('liveStatusText').innerText = `Live Data • Auto Refreshed at ${currentTime}`;
-
         } catch(e) { 
             console.log(e); 
             document.getElementById('gridData').innerHTML = '<tr><td colspan="7" style="padding: 15px;">डेटा लोड करने में त्रुटि हुई।</td></tr>';
         }
     }
 
-    // Render Hot Numbers Grid
-    function renderHotNumbers(freqMap) {
-        let sorted = Object.entries(freqMap).sort((a,b) => b[1] - a[1]).slice(0, 4);
-        let container = document.getElementById('hotNumbersGrid');
-        
-        if(sorted.length === 0) {
-            container.innerHTML = `<div class="hot-card">डेटा लोड हो रहा है...</div>`;
-            return;
-        }
-
-        let html = '';
-        sorted.forEach(([jodi, count]) => {
-            html += `<div class="hot-card">🎯 ${jodi} <span class="badge">${count}x</span></div>`;
-        });
-        container.innerHTML = html;
-    }
-
-    // Initial Load & 30-Second Auto Refresh Loop
-    window.onload = () => {
-        loadChart();
-        setInterval(loadChart, 30000); // Auto-Refresh every 30 seconds
-    };
+    window.onload = loadChart;
 </script>
 
 <!-- Tawk.to Live Chat -->

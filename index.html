@@ -127,13 +127,13 @@
             color: #ffffff; 
         }
 
-        /* Dark Blue Disclaimer (4 Lines, Clean Text, No Background) */
+        /* Dark Blue Disclaimer (Strictly 4 Lines) */
         .edu-note-box { 
             background: transparent; 
-            padding: 6px 10px; 
+            padding: 4px 6px; 
             margin: 6px auto; 
-            width: 92%; 
-            max-width: 580px; 
+            width: 96%; 
+            max-width: 600px; 
             border: none;
             box-shadow: none; 
             box-sizing: border-box; 
@@ -141,8 +141,8 @@
         }
         .edu-note-box p { 
             margin: 0; 
-            font-size: 12px; 
-            line-height: 1.5; 
+            font-size: 10.5px; 
+            line-height: 1.4; 
             font-weight: 600; 
             color: #0f172a; /* Dark Blue */
         }
@@ -211,26 +211,35 @@
             padding: 10px;
         }
 
-        /* Heading directly attached above the Chart */
+        /* Heading Directly Attached Above the Chart with Green Background */
         .chart-title-heading { 
-            margin: 12px 0 0px 0; 
-            color: var(--vip-red); 
-            font-size: 18px; 
+            background: #16a34a; /* Vibrant Green */
+            color: #ffffff; 
+            font-size: 16px; 
             font-weight: 900; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
-            text-shadow: 0 1px 2px rgba(255,255,255,0.8); 
+            padding: 10px 5px;
+            margin: 15px auto 0 auto; 
+            width: 90%; 
+            max-width: 600px; 
+            box-sizing: border-box;
+            border: 2px solid #000;
+            border-bottom: none; /* Connected seamlessly to chart top */
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         #chartWrapper { 
             width: 90%; 
             max-width: 600px; 
-            margin: 2px auto 10px auto; 
+            margin: 0 auto 10px auto; 
             background: #fff; 
             border: 2px solid #000; 
-            border-radius: 6px; 
+            border-radius: 0 0 8px 8px; 
             overflow-x: auto; 
             box-shadow: 0 6px 20px rgba(0,0,0,0.15); 
+            box-sizing: border-box;
         }
         table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
         th { background: #facc15; color: #000; font-size: 11px; padding: 8px 0; border: 1px solid var(--grid-border); font-weight: 800; }
@@ -327,13 +336,13 @@
     </div>
 </div>
 
-<!-- Dark Blue Disclaimer (Strictly 4 Lines, No Background) -->
+<!-- Dark Blue Disclaimer (Strictly 4 Lines) -->
 <div class="edu-note-box">
     <p>
-        <strong>Educational Disclaimer:</strong><br>
-        This website is strictly for educational and entertainment purposes only.<br>
-        All information and charts are based on historical & statistical calculations.<br>
-        We do not promote, encourage, or support any illegal activities or gambling.
+        <strong>Educational Disclaimer:</strong> For educational & entertainment purposes only.<br>
+        All content and charts are based on historical & statistical calculations.<br>
+        We do not promote, encourage, or support any illegal activities or gambling.<br>
+        Please abide by your local laws before accessing this platform.
     </p>
 </div>
 
@@ -351,7 +360,7 @@
     </select>
 </div>
 
-<!-- Title Attached Directly Above Chart -->
+<!-- Title Attached Directly Above Chart with Green Background -->
 <div class="chart-title-heading" id="chartTitleDisplay">BOMBAY SPECIAL VIP CHART</div>
 
 <div id="chartWrapper">

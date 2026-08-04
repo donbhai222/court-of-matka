@@ -192,21 +192,23 @@
             100% { transform: scale(1.04); box-shadow: 0 0 20px rgba(251, 191, 36, 0.9); }
         }
 
-        /* Single Dropdown Chart Selector Button (Slightly Reduced Width/Padding) */
+        /* Compact Chart/Market Selector Button (Reduced Width on Both Sides) */
         .chart-selector-container { margin: 10px 0 6px 0; display: flex; justify-content: center; }
         .chart-select-dropdown { 
             background: #0f172a; 
             color: var(--gold); 
             border: 2px solid var(--gold); 
-            border-radius: 25px; 
-            padding: 7px 11px; 
-            font-size: 12px; 
+            border-radius: 20px; 
+            padding: 5px 8px; 
+            font-size: 11px; 
             font-weight: 800; 
             cursor: pointer; 
             outline: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             transition: 0.3s;
             text-align: center;
+            max-width: 210px;
+            width: auto;
         }
 
         /* Chart Title Attached Above Chart */
@@ -474,7 +476,7 @@
 </head>
 <body>
 
-<!-- Clean Header with Centered Title & Right Menu Icon -->
+<!-- Header with Centered Title & Right Menu Icon -->
 <div class="header">
     <div class="header-title-box">
         <h1>MATKA LOGIC CHART</h1>
@@ -517,13 +519,13 @@
     </p>
 </div>
 
-<!-- Top Buttons Row (With Go to Bottom & Play Game) -->
+<!-- Top Buttons Row -->
 <div class="btn-group-row">
     <div class="nav-btn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">Go to Bottom ↓</div>
     <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
-<!-- Single Dropdown Chart Selector Button -->
+<!-- Single Compact Dropdown Chart Selector Button -->
 <div class="chart-selector-container">
     <select class="chart-select-dropdown" id="chartSelectDropdown" onchange="switchChart(this.value)">
         <option value="matka">📊 MATKA LOGIC CHART</option>
@@ -939,7 +941,7 @@
     function goHome() { toggleSideMenu(); window.scrollTo({top: 0, behavior: 'smooth'}); }
     function openLoginFromMenu() { toggleSideMenu(); openVipModal(); }
 
-    /* 👤 USER PROFILE SYSTEM FUNCTIONS */
+    /* USER PROFILE SYSTEM FUNCTIONS */
     function openProfileModal() {
         if (document.getElementById('sideMenu').style.display === 'block') {
             toggleSideMenu();
@@ -977,7 +979,7 @@
         loadChart();
     }
 
-    /* 🎮 DASHBOARD TAB SWITCHING LOGIC */
+    /* DASHBOARD TAB SWITCHING LOGIC */
     function switchDashTab(tabName) {
         if (tabName === 'fund') {
             closeGameModal();
@@ -1000,7 +1002,7 @@
         if(tabName === 'markets') renderMarketsList();
     }
 
-    /* 🏛️ RENDER MARKETS WITH LIVE STATUS */
+    /* RENDER MARKETS WITH LIVE STATUS */
     function renderMarketsList() {
         const container = document.getElementById('marketListContainer');
         const now = new Date();
@@ -1032,7 +1034,7 @@
         alert(`⏰ ${m.name} TIMINGS:\n-------------------------------------\n• Open Bid: ${m.openBid}\n• Close Bid: ${m.closeBid}\n• Open Result: ${m.openRes}\n• Close Result: ${m.closeRes}`);
     }
 
-    /* 🎮 GAME PLAY & CREATE ACCOUNT PROCESS INTERCEPT */
+    /* GAME PLAY & CREATE ACCOUNT PROCESS INTERCEPT */
     function openPlayGameModal(tab = 'play') {
         if (tab === 'fund') {
             openVipModal();
@@ -1061,7 +1063,7 @@
         openVipModal();
     }
 
-    /* 💸 WITHDRAWAL SUBMIT PROCESS */
+    /* WITHDRAWAL SUBMIT PROCESS */
     function submitWithdrawalRequest() {
         let amt = document.getElementById('withdrawAmount').value;
         let details = document.getElementById('withdrawDetails').value;

@@ -127,33 +127,31 @@
             color: #ffffff; 
         }
 
-        /* Dark Blue Educational Box Description */
+        /* Dark Blue Disclaimer (4 Lines, Clean Text, No Background) */
         .edu-note-box { 
-            background: #0f172a; 
-            color: #f8fafc; 
-            padding: 14px 16px; 
-            margin: 14px auto; 
-            width: 90%; 
-            max-width: 520px; 
-            border-left: 5px solid var(--gold); 
-            border-radius: 8px; 
-            text-align: left; 
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.25); 
+            background: transparent; 
+            padding: 6px 10px; 
+            margin: 6px auto; 
+            width: 92%; 
+            max-width: 580px; 
+            border: none;
+            box-shadow: none; 
             box-sizing: border-box; 
+            text-align: center;
         }
         .edu-note-box p { 
             margin: 0; 
-            font-size: 12.5px; 
-            line-height: 1.6; 
-            font-weight: 400; 
-            color: #cbd5e1;
+            font-size: 12px; 
+            line-height: 1.5; 
+            font-weight: 600; 
+            color: #0f172a; /* Dark Blue */
         }
         .edu-note-box strong {
-            color: var(--gold);
-            font-weight: 700;
+            color: #1e3a8a; /* Deep Dark Blue */
+            font-weight: 800;
         }
 
-        .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+        .btn-group-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
 
         .nav-btn { background: var(--vip-red); color: white; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 25px; padding: 8px 18px; display: inline-block; font-size: 12px; font-weight: 700; cursor: pointer; box-shadow: 0 3px 8px rgba(220, 38, 38, 0.4); transition: 0.2s; }
         .nav-btn:hover { background: #b91c1c; }
@@ -186,7 +184,7 @@
         }
 
         /* Single Dropdown Chart Selector Button */
-        .chart-selector-container { margin: 12px 0; display: flex; justify-content: center; }
+        .chart-selector-container { margin: 10px 0 6px 0; display: flex; justify-content: center; }
         .chart-select-dropdown { 
             background: #0f172a; 
             color: var(--gold); 
@@ -213,10 +211,27 @@
             padding: 10px;
         }
 
-        /* Heading above the Chart */
-        .chart-title-heading { margin: 15px 0 8px 0; color: var(--vip-red); font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
+        /* Heading directly attached above the Chart */
+        .chart-title-heading { 
+            margin: 12px 0 0px 0; 
+            color: var(--vip-red); 
+            font-size: 18px; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8); 
+        }
 
-        #chartWrapper { width: 90%; max-width: 600px; margin: 5px auto 10px auto; background: #fff; border: 2px solid #000; border-radius: 6px; overflow-x: auto; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        #chartWrapper { 
+            width: 90%; 
+            max-width: 600px; 
+            margin: 2px auto 10px auto; 
+            background: #fff; 
+            border: 2px solid #000; 
+            border-radius: 6px; 
+            overflow-x: auto; 
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15); 
+        }
         table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
         th { background: #facc15; color: #000; font-size: 11px; padding: 8px 0; border: 1px solid var(--grid-border); font-weight: 800; }
         td { border: 1px solid var(--grid-border); height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
@@ -312,10 +327,13 @@
     </div>
 </div>
 
-<!-- Dark Blue English Educational & Entertainment Purpose Description -->
+<!-- Dark Blue Disclaimer (Strictly 4 Lines, No Background) -->
 <div class="edu-note-box">
     <p>
-        <strong>Educational Disclaimer:</strong> This website is strictly intended for <b>educational and entertainment purposes</b> only. All information, numerical charts, and updates provided here are derived from statistical calculations and historical data. We do not promote or encourage any illegal activities or gambling. Please browse responsibly.
+        <strong>Educational Disclaimer:</strong><br>
+        This website is strictly for educational and entertainment purposes only.<br>
+        All information and charts are based on historical & statistical calculations.<br>
+        We do not promote, encourage, or support any illegal activities or gambling.
     </p>
 </div>
 
@@ -333,7 +351,7 @@
     </select>
 </div>
 
-<!-- Dynamic Title Above Chart -->
+<!-- Title Attached Directly Above Chart -->
 <div class="chart-title-heading" id="chartTitleDisplay">BOMBAY SPECIAL VIP CHART</div>
 
 <div id="chartWrapper">
@@ -572,7 +590,7 @@
     // CSV URL for Bombay Special VIP Chart
     const CSV_BOMBAY = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/export?format=csv&gid=0";
     
-    // CSV URL for Master VIP Chart (Same Google Sheet link added)
+    // CSV URL for Master VIP Chart
     const CSV_MASTER = "https://docs.google.com/spreadsheets/d/1z7pEP9CAcp5xozZR_hPVzsEBEYrzQ8gbYusHpfWYBxQ/export?format=csv&gid=0"; 
 
     let currentChartType = 'bombay';
@@ -594,7 +612,7 @@
 
     function openLoginFromMenu() {
         toggleSideMenu();
-        openPlayGameModal(); // Opens Step 2 directly (Process after Create Account)
+        openPlayGameModal(); // Opens Step 2 directly
     }
 
     function switchChart(type) {
@@ -612,7 +630,7 @@
 
     function openVipModal() { document.getElementById('vipModal').style.display='flex'; resetModal(); }
     
-    // Open directly to Step 2 (Process after Create Account / Login)
+    // Open directly to Step 2
     function openPlayGameModal() {
         document.getElementById('vipModal').style.display='flex';
         resetModal();

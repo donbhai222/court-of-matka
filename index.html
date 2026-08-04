@@ -313,7 +313,56 @@
         .copy-btn { background: var(--sky-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; font-weight: 600; }
         .next-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; margin: 10px 0; font-size: 11.5px; color: #334155; }
 
-        /* Game Ticket Receipt Style */
+        /* Dashboard Tabs Styling */
+        .dash-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .dash-tab-btn {
+            flex: 1;
+            padding: 10px 4px;
+            font-size: 12.5px;
+            font-weight: 800;
+            border: 1.5px solid var(--sky-blue);
+            background: #f8fafc;
+            color: var(--dark-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .dash-tab-btn.active {
+            background: var(--sky-blue);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
+        }
+
+        /* Rate Card Grid */
+        .rate-card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .rate-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .rate-item strong {
+            color: #16a34a;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        /* Ticket Receipt Style */
         .ticket-box {
             background: #fefce8;
             border: 2px dashed #f59e0b;
@@ -367,7 +416,7 @@
         <span>🏠</span> <span>होम पेज / Home Page</span>
     </div>
     <div class="menu-item" onclick="openPlayGameModal()">
-        <span>🎮</span> <span>ऑनलाइन खेलें / Play Game</span>
+        <span>🎮</span> <span>गेम डैशबोर्ड / Gaming Desk</span>
     </div>
     <div class="menu-item" onclick="openLoginFromMenu()">
         <span>🔑</span> <span>लॉगिन / VIP Access</span>
@@ -431,47 +480,123 @@
     All Rights Reserved <span>2026</span> © MATKA LOGIC CHART
 </footer>
 
-<!-- 🎮 GAME PLAY MODAL -->
+<!-- 🎮 GAMING DASHBOARD MODAL -->
 <div id="gamePlayModal" class="overlay">
     <div class="modal-content">
         <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
-            <span>🎮 LIVE GAME DESK / गेम खेलें</span>
+            <span>🎮 GAME DASHBOARD</span>
             <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
         </div>
 
-        <div id="gameFormView">
+        <!-- Navigation Tabs -->
+        <div class="dash-tabs">
+            <button class="dash-tab-btn active" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
+            <button class="dash-tab-btn" id="tabBtnRates" onclick="switchDashTab('rates')">📊 रेट्स</button>
+            <button class="dash-tab-btn" id="tabBtnFund" onclick="switchDashTab('fund')">💰 फंड जोड़ें</button>
+        </div>
+
+        <!-- 1. TAB: GAME RATES (गेम रेट्स) -->
+        <div id="dashTabRates" style="display:none;">
             <div class="notice-box">
-                <b>गेम खेलें (Select Game & Digit):</b><br>
-                अपना गेम टाइप चुनें, नंबर डालें और पॉइंट्स सेट करके गेम प्ले करें।
+                <b>📊 GAME RATES / गेम रेट सूची:</b><br>
+                हमारे गेमिंग प्लेटफार्म पर आपको मिलने वाले बेस्ट रेट्स:
             </div>
 
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Game Type / गेम का प्रकार:</label>
-            <select id="gameTypeSelect">
-                <option value="Single Digit">Single Digit (सिंगल डिजिट)</option>
-                <option value="Jodi Rate">Jodi Rate (जोड़ी)</option>
-                <option value="Single Panna">Single Panna (सिंगल पाना)</option>
-                <option value="Double Panna">Double Panna (डबल पाना)</option>
-            </select>
+            <div class="rate-card-grid">
+                <div class="rate-item">
+                    <span>1. Single Ank (सिंगल अंक)</span>
+                    <strong>₹100 = ₹1,000</strong>
+                </div>
+                <div class="rate-item">
+                    <span>2. Jodi Rate (जोड़ी)</span>
+                    <strong>₹100 = ₹10,000</strong>
+                </div>
+                <div class="rate-item">
+                    <span>3. Double Panna (डबल पाना)</span>
+                    <strong>₹100 = ₹30,000</strong>
+                </div>
+                <div class="rate-item">
+                    <span>4. Single Panna (सिंगल पाना)</span>
+                    <strong>₹100 = ₹60,000</strong>
+                </div>
+            </div>
 
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Number / अंक दर्ज करें:</label>
-            <input type="number" id="gameNumber" placeholder="उदा. 5, 48, या 123">
-
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Points / Amount (रुपये/पॉइंट्स):</label>
-            <input type="number" id="gamePoints" placeholder="उदा. 100, 500">
-
-            <button class="btn-pay-main" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="submitGamePlay()">PLAY NOW / गेम लगाएँ 🚀</button>
-            <button class="btn-pay-main" style="background: #64748b;" onclick="closeGameModal()">बंद करें (Close)</button>
+            <button class="btn-pay-main" style="margin-top: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="switchDashTab('play')">अभी गेम खेलें 🚀</button>
         </div>
 
-        <!-- Ticket Receipt View -->
-        <div id="gameReceiptView" style="display: none; text-align: center;">
-            <div style="color: #16a34a; font-size: 18px; font-weight: 900; margin-bottom: 8px;">✅ GAME PLAYED SUCCESSFULLY!</div>
-            
-            <div class="ticket-box" id="ticketContent"></div>
+        <!-- 2. TAB: PLAY GAME (गेम खेलें) -->
+        <div id="dashTabPlay">
+            <div id="gameFormView">
+                <div class="notice-box">
+                    <b>गेम खेलें (Select Game & Number):</b><br>
+                    अपनी पसंद का गेम टाइप चुनें, नंबर दर्ज करें और पॉइंट्स लगाएँ।
+                </div>
 
-            <button class="btn-pay-main" onclick="resetGameForm()">एक और गेम खेलें / Play Another</button>
-            <button class="btn-pay-main" style="background: #64748b;" onclick="closeGameModal()">बंद करें (Close)</button>
+                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Game Type / गेम का प्रकार:</label>
+                <select id="gameTypeSelect">
+                    <option value="Single Ank (100 -> 1000)">1. Single Ank (सिंगल अंक)</option>
+                    <option value="Jodi Rate (100 -> 10000)">2. Jodi Rate (जोड़ी)</option>
+                    <option value="Double Panna (100 -> 30000)">3. Double Panna (डबल पाना)</option>
+                    <option value="Single Panna (100 -> 60000)">4. Single Panna (सिंगल पाना)</option>
+                </select>
+
+                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Number / अंक दर्ज करें:</label>
+                <input type="number" id="gameNumber" placeholder="उदा. 5, 48, या 123">
+
+                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Points / Amount (रुपये/पॉइंट्स):</label>
+                <input type="number" id="gamePoints" placeholder="उदा. 100, 500">
+
+                <button class="btn-pay-main" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="submitGamePlay()">PLAY NOW / गेम लगाएँ 🚀</button>
+            </div>
+
+            <!-- Receipt View -->
+            <div id="gameReceiptView" style="display: none; text-align: center;">
+                <div style="color: #16a34a; font-size: 18px; font-weight: 900; margin-bottom: 8px;">✅ GAME PLAYED SUCCESSFULLY!</div>
+                <div class="ticket-box" id="ticketContent"></div>
+                <button class="btn-pay-main" onclick="resetGameForm()">एक और गेम खेलें / Play Another</button>
+            </div>
         </div>
+
+        <!-- 3. TAB: ADD FUND (फंड जोड़ें) -->
+        <div id="dashTabFund" style="display:none;">
+            <div class="notice-box">
+                <b>💰 ADD FUND / वॉलेट बैलेंस जोड़ें:</b><br>
+                गेम खेलने के लिए न्यूनतम राशि <b>₹1,000</b> जोड़ें।
+            </div>
+
+            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Amount / राशि दर्ज करें (Min ₹1000):</label>
+            <input type="number" id="fundAmount" placeholder="उदा. 1000, 2000, 5000" min="1000">
+
+            <button class="btn-pay-main" onclick="proceedToFundPay()">क्यूआर कोड दिखाएं / NEXT →</button>
+
+            <!-- QR Section for Add Fund -->
+            <div id="fundQrSection" style="display:none; text-align:center; margin-top:10px;">
+                <div style="font-size:15px; font-weight:800; color:#16a34a;">भुगतान राशि: ₹<span id="displayFundAmt">1000</span></div>
+                
+                <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
+                
+                <div style="font-size: 11.5px; font-weight: 700; color: #334155; text-align: left; margin-bottom: 4px;">UPI ID:</div>
+                <div class="upi-box">
+                    <span id="fundUpiText">omkaryadav@paytm</span>
+                    <button class="copy-btn" onclick="copyFundUpi()">COPY / कॉपी करें</button>
+                </div>
+
+                <div class="instruction-box">
+                    <b>निर्देश:</b>
+                    <ul>
+                        <li>क्यूआर कोड पर पेमेंट करें।</li>
+                        <li>भुगतान के बाद 12 अंकों का UTR ID दर्ज करें।</li>
+                    </ul>
+                </div>
+
+                <label style="font-size: 11.5px; font-weight: 700; color: #334155; text-align:left; display:block;">12 Digit UTR / Transaction ID:</label>
+                <input type="text" id="fundUtid" placeholder="12 अंकों का UTR ID दर्ज करें">
+
+                <button class="btn-pay-main" style="background:#16a34a;" onclick="submitFundDetails()">SUBMIT FUND REQUEST</button>
+            </div>
+        </div>
+
+        <button class="btn-pay-main" style="background: #64748b; margin-top: 8px;" onclick="closeGameModal()">बंद करें (Close)</button>
     </div>
 </div>
 
@@ -652,9 +777,21 @@
         loadChart();
     }
 
+    /* 🎮 DASHBOARD TAB SWITCHING LOGIC */
+    function switchDashTab(tabName) {
+        document.getElementById('dashTabPlay').style.display = (tabName === 'play') ? 'block' : 'none';
+        document.getElementById('dashTabRates').style.display = (tabName === 'rates') ? 'block' : 'none';
+        document.getElementById('dashTabFund').style.display = (tabName === 'fund') ? 'block' : 'none';
+
+        document.getElementById('tabBtnPlay').classList.toggle('active', tabName === 'play');
+        document.getElementById('tabBtnRates').classList.toggle('active', tabName === 'rates');
+        document.getElementById('tabBtnFund').classList.toggle('active', tabName === 'fund');
+    }
+
     /* 🎮 GAME PLAY FUNCTIONS */
     function openPlayGameModal() {
         document.getElementById('gamePlayModal').style.display = 'flex';
+        switchDashTab('play');
         resetGameForm();
     }
 
@@ -692,6 +829,32 @@
         document.getElementById('gamePoints').value = '';
         document.getElementById('gameFormView').style.display = 'block';
         document.getElementById('gameReceiptView').style.display = 'none';
+    }
+
+    /* 💰 ADD FUND FUNCTIONS */
+    function proceedToFundPay() {
+        let amt = parseInt(document.getElementById('fundAmount').value);
+        if(!amt || amt < 1000) {
+            alert("न्यूनतम फंड जोड़ने की राशि ₹1,000 होनी चाहिए!");
+            return;
+        }
+        document.getElementById('displayFundAmt').innerText = amt;
+        document.getElementById('fundQrSection').style.display = 'block';
+    }
+
+    function copyFundUpi() {
+        navigator.clipboard.writeText(document.getElementById('fundUpiText').innerText);
+        alert("UPI ID कॉपी हो गई है!");
+    }
+
+    function submitFundDetails() {
+        let utid = document.getElementById('fundUtid').value;
+        if(utid.length < 6) {
+            alert("कृपया सही 12 अंकों की UTR / Transaction ID दर्ज करें!");
+            return;
+        }
+        alert("आपका फंड जोड़ने का अनुरोध प्राप्त हो गया है। एडमिन द्वारा जाँच के बाद बैलेंस जोड़ दिया जाएगा।");
+        closeGameModal();
     }
 
     /* VIP & Payment Modals */

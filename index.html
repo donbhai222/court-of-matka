@@ -297,7 +297,7 @@
         .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
         input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
-        /* Payment App Option Buttons Style with Icons & Names */
+        /* Payment App Option Buttons Style with Original App Logos */
         .upi-apps-container {
             display: flex;
             justify-content: center;
@@ -326,10 +326,10 @@
             gap: 4px;
         }
         .upi-app-btn img {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
         }
         .upi-app-btn:hover {
             border-color: var(--sky-blue);
@@ -797,18 +797,18 @@
 
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Direct Payment Apps Options with Logos -->
+            <!-- Direct Payment Apps Options with Real Logos -->
             <div class="upi-apps-container">
                 <a id="gpayBtn" href="#" class="upi-app-btn">
-                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-pay-icon.png" alt="GPay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo_%282020%29.svg" alt="GPay">
                     Google Pay
                 </a>
                 <a id="phonepeBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
                     PhonePe
                 </a>
                 <a id="paytmAppBtn" href="#" class="upi-app-btn">
-                    <img src="https://icon.icepanel.io/Technology/svg/Paytm.svg" alt="Paytm">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm">
                     Paytm App
                 </a>
             </div>
@@ -873,7 +873,7 @@
             <div style="font-size: 12.5px; font-weight: 800; color: #dc2626; margin-top: 4px;">Please wait, don't back</div>
         </div>
 
-        <!-- Step 5: Subscription Plans Page (Hindi & English with Specific Logos) -->
+        <!-- Step 5: Subscription Plans Page -->
         <div id="step-subscription" style="display:none; text-align: center;">
             <div class="modal-header-box">Subscription Plans / सदस्यता योजनाएं</div>
             <div class="plans-grid">
@@ -914,18 +914,18 @@
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Plan Apps Options with Logos -->
+            <!-- Plan Apps Options with Real Logos -->
             <div class="upi-apps-container">
                 <a id="planGpayBtn" href="#" class="upi-app-btn">
-                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-pay-icon.png" alt="GPay">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo_%282020%29.svg" alt="GPay">
                     Google Pay
                 </a>
                 <a id="planPhonepeBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe">
                     PhonePe
                 </a>
                 <a id="planPaytmAppBtn" href="#" class="upi-app-btn">
-                    <img src="https://icon.icepanel.io/Technology/svg/Paytm.svg" alt="Paytm">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="Paytm">
                     Paytm App
                 </a>
             </div>
@@ -1022,7 +1022,7 @@
     function updateUpiLinks(upiId, amount, namePrefix) {
         let upiLink = `upi://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         
-        // Direct Links for mobile apps with logos enabled
+        // Direct Links for mobile apps with original brand logos
         document.getElementById(namePrefix + 'gpayBtn').href = `tez://upi/pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         document.getElementById(namePrefix + 'phonepeBtn').href = `phonepe://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         document.getElementById(namePrefix + 'paytmAppBtn').href = `paytmmp://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;

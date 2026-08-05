@@ -297,7 +297,7 @@
         .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
         input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
-        /* Payment App Option Buttons Style with Real Logos */
+        /* Payment App Option Buttons Style with Only Names (No Logos) */
         .upi-apps-container {
             display: flex;
             justify-content: center;
@@ -308,33 +308,25 @@
         .upi-app-btn {
             flex: 1;
             min-width: 95px;
-            padding: 8px 6px;
+            padding: 10px 8px;
             background: #f8fafc;
             border: 2px solid #cbd5e1;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
             color: #0f172a;
             transition: 0.2s;
             text-decoration: none;
             display: inline-flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
         }
         .upi-app-btn:hover {
             border-color: var(--sky-blue);
             background: #f0f9ff;
             transform: translateY(-2px);
-        }
-        .upi-app-logo {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            border-radius: 4px;
         }
 
         /* File Input Custom Style */
@@ -797,20 +789,11 @@
 
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Direct Payment Apps Options with Real Logos -->
+            <!-- Direct Payment Apps Options with Only Names (No Logos) -->
             <div class="upi-apps-container">
-                <a id="gpayBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-google-pay-logo-icon-download-in-svg-png-gif-file-formats--gpay-payment-brand-vol-5-pack-logos-icons-3030268.png?f=webp&w=256" alt="GPay" class="upi-app-logo">
-                    Google Pay
-                </a>
-                <a id="phonepeBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-wallet-bank-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe" class="upi-app-logo">
-                    PhonePe
-                </a>
-                <a id="paytmAppBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-paytm-logo-icon-download-in-svg-png-gif-file-formats--payment-wallet-bank-brand-vol-7-pack-logos-icons-3030279.png?f=webp&w=256" alt="Paytm" class="upi-app-logo">
-                    Paytm App
-                </a>
+                <a id="gpayBtn" href="#" class="upi-app-btn">Google Pay</a>
+                <a id="phonepeBtn" href="#" class="upi-app-btn">PhonePe</a>
+                <a id="paytmAppBtn" href="#" class="upi-app-btn">Paytm App</a>
             </div>
             
             <div style="font-size: 11.5px; font-weight: 700; color: #334155; text-align: left; margin-bottom: 4px;">UPI ID:</div>
@@ -822,7 +805,7 @@
             <div class="instruction-box">
                 <b>Instructions / निर्देश:</b>
                 <ul>
-                    <li>ऊपर दिए गए ऐप लोगो पर क्लिक करके सीधे भुगतान करें या QR कोड स्कैन करें[cite: 1]।</li>
+                    <li>ऊपर दिए गए ऐप के नाम पर क्लिक करके सीधे भुगतान करें या QR कोड स्कैन करें[cite: 1]।</li>
                     <li>भुगतान के बाद 12 अंकों की UTR / Txn ID एवं स्क्रीनशॉट सुरक्षित रखें।</li>
                 </ul>
             </div>
@@ -913,20 +896,11 @@
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Plan Apps Options with Real Logos -->
+            <!-- Plan Apps Options with Only Names (No Logos) -->
             <div class="upi-apps-container">
-                <a id="planGpayBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-google-pay-logo-icon-download-in-svg-png-gif-file-formats--gpay-payment-brand-vol-5-pack-logos-icons-3030268.png?f=webp&w=256" alt="GPay" class="upi-app-logo">
-                    Google Pay
-                </a>
-                <a id="planPhonepeBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-wallet-bank-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe" class="upi-app-logo">
-                    PhonePe
-                </a>
-                <a id="planPaytmAppBtn" href="#" class="upi-app-btn">
-                    <img src="https://cdn.iconscout.com/icon/free/png-512/free-paytm-logo-icon-download-in-svg-png-gif-file-formats--payment-wallet-bank-brand-vol-7-pack-logos-icons-3030279.png?f=webp&w=256" alt="Paytm" class="upi-app-logo">
-                    Paytm App
-                </a>
+                <a id="planGpayBtn" href="#" class="upi-app-btn">Google Pay</a>
+                <a id="planPhonepeBtn" href="#" class="upi-app-btn">PhonePe</a>
+                <a id="planPaytmAppBtn" href="#" class="upi-app-btn">Paytm App</a>
             </div>
 
             <div class="upi-box">
@@ -939,6 +913,7 @@
             <input type="file" id="planScreenshot" accept="image/*">
 
             <button class="btn-pay-main" style="margin-top: 8px;" onclick="submitPlanPayment()">PAYMENT DONE</button>
+            <p onclick="document.getElementById('step-plan-pay').style.display='none'; document.getElementById('step-subscription').style.display='block';" style="color:var(--sky-blue); cursor:pointer; font-size:12px; margin-top:8px; text-align: center; font-weight: 700;">← वापस जाएं (Back)</p>
         </div>
 
         <!-- Step 5.2: Plan Timer Verification -->

@@ -228,6 +228,7 @@
             box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
+        /* Fixed Table Scroll & Responsive Width */
         #chartWrapper { 
             width: 90%; 
             max-width: 600px; 
@@ -239,14 +240,14 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15); 
             box-sizing: border-box;
         }
-        table { border-collapse: collapse; width: 100%; min-width: 300px; table-layout: fixed; }
+        table { border-collapse: collapse; width: 100%; min-width: 520px; table-layout: fixed; }
         th { background: #facc15; color: #000; font-size: 11px; padding: 8px 0; border: 1px solid var(--grid-border); font-weight: 800; }
         td { border: 1px solid var(--grid-border); height: 50px; background: #fff; vertical-align: middle; text-align: center; padding: 0; }
         
-        .date-box { background: #e2e8f0 !important; font-size: 10px; font-weight: 700; width: 45px !important; color: #334155; }
+        .date-box { background: #e2e8f0 !important; font-size: 10px; font-weight: 700; width: 55px !important; color: #334155; }
         .cell-content { display: flex; align-items: center; justify-content: center; width: 100%; }
         .panna-vertical { display: flex; flex-direction: column; font-size: 8px; line-height: 0.9; width: 10px; font-weight: 700; color: #475569; }
-        .jodi { font-size: 18px; font-weight: 900; color: #0f172a; margin: 0 4px; }
+        .jodi { font-size: 17px; font-weight: 900; color: #0f172a; margin: 0 3px; }
         .red-house .jodi, .red-house .panna-vertical { color: var(--vip-red) !important; }
 
         /* Timer UI Styling */
@@ -257,10 +258,10 @@
             border-radius: 12px;
             padding: 12px 15px;
             margin: 15px auto;
-            width: 90%;
-            max-width: 600px;
+            width: 100%;
             box-shadow: 0 4px 15px rgba(0,0,0,0.25);
             box-sizing: border-box;
+            text-align: center;
         }
         .timer-title {
             font-size: 13px;
@@ -273,33 +274,30 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .timer-btn {
             background: var(--sky-blue);
             color: #ffffff;
             border: none;
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             cursor: pointer;
             transition: 0.2s;
-        }
-        .timer-btn:hover {
-            background: #0284c7;
         }
         .timer-btn.active {
             background: var(--gold);
             color: #000000;
         }
         .timer-display {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             color: #38bdf8;
             font-family: monospace;
             letter-spacing: 2px;
-            margin: 6px 0;
+            margin: 4px 0;
         }
         .wait-warning-box {
             background: #fffbeeb0;
@@ -309,7 +307,7 @@
             border-radius: 8px;
             font-size: 11.5px;
             font-weight: 800;
-            margin-top: 10px;
+            margin-top: 8px;
             line-height: 1.4;
             display: flex;
             align-items: center;
@@ -422,48 +420,6 @@
             line-height: 1.5;
         }
 
-        /* Dashboard Tabs Styling */
-        .dash-tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-        .dash-tab-btn {
-            flex: 1;
-            min-width: 70px;
-            padding: 8px 2px;
-            font-size: 11px;
-            font-weight: 800;
-            border: 1.5px solid var(--sky-blue);
-            background: #f8fafc;
-            color: var(--dark-blue);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .dash-tab-btn.active {
-            background: var(--sky-blue);
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.4);
-        }
-
-        /* Markets Styling */
-        .market-list-box { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .market-card { display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 2px solid #e2e8f0; border-radius: 10px; padding: 10px 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .market-clock-icon { font-size: 24px; cursor: pointer; background: #f1f5f9; padding: 6px; border-radius: 50%; }
-        .market-details { flex: 1; text-align: center; padding: 0 8px; }
-        .market-title { font-size: 14px; font-weight: 900; color: #0f172a; }
-        .market-status-badge { display: inline-block; font-size: 10.5px; font-weight: 800; margin-top: 3px; padding: 3px 8px; border-radius: 12px; text-transform: uppercase; }
-        .status-running { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
-        .status-closed { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
-        .market-play-btn { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: #ffffff; border: none; border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 900; cursor: pointer; }
-
-        /* Rate Card Grid */
-        .rate-card-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .rate-item { display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 12px 14px; border-radius: 8px; border-left: 4px solid var(--gold); font-size: 13px; font-weight: 700; color: #0f172a; }
-        .rate-item strong { color: #16a34a; font-size: 14px; font-weight: 900; }
-
         .site-footer { background: #0f172a; color: #94a3b8; padding: 16px; margin-top: 30px; font-size: 12px; font-weight: 600; border-top: 3px solid var(--gold); }
         .site-footer span { color: var(--gold); font-weight: 800; }
     </style>
@@ -492,12 +448,6 @@
     <div class="menu-item" onclick="goHome()">
         <span>🏠</span> <span>होम पेज / Home Page</span>
     </div>
-    <div class="menu-item" onclick="openPlayGameModal('markets')">
-        <span>🏛️</span> <span>मार्केट्स / Markets</span>
-    </div>
-    <div class="menu-item" onclick="openPlayGameModal('play')">
-        <span>🎮</span> <span>गेम डैशबोर्ड / Gaming Desk</span>
-    </div>
     <div class="menu-item" onclick="openLoginFromMenu()">
         <span>🔑</span> <span>लॉगिन / VIP Access</span>
     </div>
@@ -516,7 +466,7 @@
 <!-- Top Buttons Row -->
 <div class="btn-group-row">
     <div class="nav-btn" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">Go to Bottom ↓</div>
-    <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
+    <button class="btn-neon-game" onclick="openVipModal()">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
 <!-- Single Compact Dropdown Chart Selector Button -->
@@ -530,11 +480,12 @@
 <!-- Title Attached Directly Above Chart -->
 <div class="chart-title-heading" id="chartTitleDisplay">MATKA LOGIC CHART</div>
 
+<!-- Full 6 Days Chart Display -->
 <div id="chartWrapper">
     <table>
         <thead>
             <tr>
-                <th style="width:45px;">DATE</th>
+                <th style="width:55px;">DATE</th>
                 <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
             </tr>
         </thead>
@@ -542,26 +493,10 @@
     </table>
 </div>
 
-<!-- ⏱️ TIMER SECTION WITH BILINGUAL WAIT WARNING -->
-<div class="timer-box-container">
-    <div class="timer-title">⏳ Auto Refresh Timer / ऑटो टाइमर</div>
-    <div class="timer-buttons">
-        <button class="timer-btn active" id="btnTimer1" onclick="setTimer(1)">1 Minute (1 मिनट)</button>
-        <button class="timer-btn" id="btnTimer2" onclick="setTimer(2)">2 Minute (2 मिनट)</button>
-    </div>
-    <div class="timer-display" id="timerClock">01:00</div>
-    
-    <!-- ⚠️ Notice Below Timers -->
-    <div class="wait-warning-box">
-        <span>⚠️</span>
-        <span>कृपया प्रतीक्षा करें, बैक न करें / Please wait, do not press back</span>
-    </div>
-</div>
-
 <!-- Bottom Buttons Row -->
 <div class="btn-group-row">
     <div class="nav-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Go to Top ↑</div>
-    <button class="btn-neon-game" onclick="openPlayGameModal('play')">🎮 प्ले गेम / PLAY GAME</button>
+    <button class="btn-neon-game" onclick="openVipModal()">🎮 प्ले गेम / PLAY GAME</button>
 </div>
 
 <!-- Access Panel Container -->
@@ -576,135 +511,10 @@
     All Rights Reserved <span>2026</span> © MATKA LOGIC CHART
 </footer>
 
-<!-- 👤 USER PROFILE MODAL -->
-<div id="profileModal" class="overlay">
-    <div class="modal-content" style="max-width: 480px;">
-        <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
-            <span>👤 USER PROFILE / मेरी प्रोफाइल</span>
-            <span onclick="closeProfileModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
-        </div>
-
-        <div style="text-align: center; padding: 10px 0;">
-            <div style="font-size: 55px; line-height: 1; margin-bottom: 5px;">👤</div>
-            <h3 id="profName" style="margin: 4px 0 2px 0; color: #0f172a; font-size: 18px;">Guest User</h3>
-            <p id="profPhone" style="margin: 0; color: #64748b; font-size: 12.5px; font-weight: 700;">+91 Not Registered</p>
-        </div>
-
-        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px; margin: 12px 0;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; font-weight: 700;">
-                <span>💰 Wallet Balance:</span>
-                <span id="profBalance" style="color: #16a34a; font-weight: 900; font-size: 15px;">₹0.00</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700;">
-                <span>👑 Account Status:</span>
-                <span id="profStatus" style="color: #dc2626; font-weight: 800;">Free / Unverified</span>
-            </div>
-        </div>
-
-        <button class="btn-pay-main" style="background: var(--sky-blue);" onclick="closeProfileModal(); openVipModal();">🔑 Login / Create Account</button>
-        <button class="btn-pay-main" style="background: #dc2626; margin-top: 4px;" onclick="logoutUser()">🚪 Reset Profile / लॉगआउट</button>
-        <button class="btn-pay-main" style="background: #64748b; margin-top: 4px;" onclick="closeProfileModal()">बंद करें (Close)</button>
-    </div>
-</div>
-
-<!-- 🎮 GAMING DASHBOARD MODAL -->
-<div id="gamePlayModal" class="overlay">
-    <div class="modal-content">
-        <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
-            <span>🎮 GAME DASHBOARD</span>
-            <span onclick="closeGameModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="dash-tabs">
-            <button class="dash-tab-btn active" id="tabBtnMarkets" onclick="switchDashTab('markets')">🏛️ मार्केट्स</button>
-            <button class="dash-tab-btn" id="tabBtnPlay" onclick="switchDashTab('play')">🎮 खेलें</button>
-            <button class="dash-tab-btn" id="tabBtnRates" onclick="switchDashTab('rates')">📊 रेट्स</button>
-            <button class="dash-tab-btn" id="tabBtnFund" onclick="switchDashTab('fund')">💰 फंड जोड़ें</button>
-            <button class="dash-tab-btn" id="tabBtnWithdraw" onclick="switchDashTab('withdraw')">💸 विड्रॉल</button>
-        </div>
-
-        <!-- 0. TAB: MARKETS -->
-        <div id="dashTabMarkets">
-            <div class="notice-box">
-                <b>🏛️ LIVE MARKETS & TIMING:</b><br>
-                समय सारणी देखें (🕒 छूकर टाइमिंग देखें या 🎮 छूकर गेम खेलें)
-            </div>
-            <div class="market-list-box" id="marketListContainer"></div>
-        </div>
-
-        <!-- 1. TAB: GAME RATES -->
-        <div id="dashTabRates" style="display:none;">
-            <div class="notice-box">
-                <b>📊 GAME RATES / गेम रेट सूची:</b><br>
-                हमारे गेमिंग प्लेटफार्म पर आपको मिलने वाले बेस्ट रेट्स:
-            </div>
-            <div class="rate-card-grid">
-                <div class="rate-item"><span>1. Single Ank (सिंगल अंक)</span><strong>₹100 = ₹1,000</strong></div>
-                <div class="rate-item"><span>2. Jodi Rate (जोड़ी)</span><strong>₹100 = ₹10,000</strong></div>
-                <div class="rate-item"><span>3. Double Panna (डबल पाना)</span><strong>₹100 = ₹30,000</strong></div>
-                <div class="rate-item"><span>4. Single Panna (सिंगल पाना)</span><strong>₹100 = ₹60,000</strong></div>
-            </div>
-            <button class="btn-pay-main" style="margin-top: 15px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="switchDashTab('play')">अभी गेम खेलें 🚀</button>
-        </div>
-
-        <!-- 2. TAB: PLAY GAME -->
-        <div id="dashTabPlay" style="display:none;">
-            <div id="gameFormView">
-                <div class="notice-box">
-                    <b>गेम खेलें (Select Game & Number):</b><br>
-                    अपनी पसंद का गेम टाइप चुनें, नंबर दर्ज करें और पॉइंट्स लगाएँ।
-                </div>
-                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Game Type / गेम का प्रकार:</label>
-                <select id="gameTypeSelect">
-                    <option value="Single Ank (100 -> 1000)">1. Single Ank (सिंगल अंक)</option>
-                    <option value="Jodi Rate (100 -> 10000)">2. Jodi Rate (जोड़ी)</option>
-                    <option value="Double Panna (100 -> 30000)">3. Double Panna (डबल पाना)</option>
-                    <option value="Single Panna (100 -> 60000)">4. Single Panna (सिंगल पाना)</option>
-                </select>
-                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Enter Number / अंक दर्ज करें:</label>
-                <input type="number" id="gameNumber" placeholder="उदा. 5, 48, या 123">
-                <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Points / Amount (रुपये/पॉइंट्स):</label>
-                <input type="number" id="gamePoints" placeholder="उदा. 100, 500">
-                <button class="btn-pay-main" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#000;" onclick="submitGamePlay()">PLAY NOW / गेम लगाएँ 🚀</button>
-            </div>
-        </div>
-
-        <!-- 3. TAB: ADD FUND -->
-        <div id="dashTabFund" style="display:none;">
-            <div class="notice-box">
-                <b>💰 ADD FUND / वॉलेट बैलेंस जोड़ें:</b><br>
-                फंड जोड़ने या गेम खेलने के लिए नया खाता बनाएँ।
-            </div>
-            <button class="btn-pay-main" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#fff;" onclick="proceedToFundPay()">खाता बनाएँ / CREATE ACCOUNT 🔑</button>
-        </div>
-
-        <!-- 4. TAB: WITHDRAWAL -->
-        <div id="dashTabWithdraw" style="display:none;">
-            <div class="notice-box">
-                <b>💸 WITHDRAW MONEY / पैसे निकालें:</b><br>
-                जीती हुई राशि तुरंत अपने बैंक या UPI में निकालें। (Min. ₹500)
-            </div>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Select Method / भुगतान का तरीका:</label>
-            <select id="withdrawMethod">
-                <option value="UPI / PhonePe / GPay">GPay / PhonePe / Paytm / UPI</option>
-                <option value="Bank Transfer">Bank Account Transfer (बैंक खाता)</option>
-            </select>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">Withdrawal Amount / राशि (रुपये):</label>
-            <input type="number" id="withdrawAmount" placeholder="कम से कम ₹500">
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155;">UPI ID or Bank Details / विवरण दर्ज करें:</label>
-            <input type="text" id="withdrawDetails" placeholder="उदा. 9876543210@paytm या A/C No. & IFSC">
-            <button class="btn-pay-main" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color:#fff;" onclick="submitWithdrawalRequest()">SUBMIT WITHDRAWAL / पैसे निकालें 💸</button>
-        </div>
-
-        <button class="btn-pay-main" style="background: #64748b; margin-top: 8px;" onclick="closeGameModal()">बंद करें (Close)</button>
-    </div>
-</div>
-
-<!-- VIP ACCESS MODAL -->
+<!-- VIP ACCESS & PAYMENT MODAL -->
 <div id="vipModal" class="overlay">
     <div class="modal-content">
-        <!-- Step 1: User Info & Subscription Choice -->
+        <!-- Step 1: Select Plan & User Info -->
         <div id="step-create-account">
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span style="font-size: 16px;">SELECT PLAN & CREATE ACCOUNT</span>
@@ -715,31 +525,27 @@
                 गेम खेलने व चार्ट देखने के लिए प्लान चुनें और रजिस्ट्रेशन पूरा करें।
             </div>
 
-            <!-- 🎯 Updated 4 Subscription Plans with Logos -->
+            <!-- Subscription Plans with Icons -->
             <label style="font-size: 11.5px; font-weight: 800; color: #334155; margin-bottom: 6px; display: block;">Select Subscription Plan / प्लान चुनें:</label>
             <div class="plan-grid">
-                <!-- 1 Day Plan -->
                 <div class="plan-card selected" onclick="selectPlan('1day', 199, this)">
                     <div class="plan-icon">🔑</div>
                     <div class="plan-title">STARTER PLAN</div>
                     <div class="plan-duration">1 Day Access</div>
                     <div class="plan-price">₹199</div>
                 </div>
-                <!-- 7 Days Plan -->
                 <div class="plan-card" onclick="selectPlan('7day', 499, this)">
                     <div class="plan-icon">⚡</div>
                     <div class="plan-title">PRO TRADER</div>
                     <div class="plan-duration">7 Days Access</div>
                     <div class="plan-price">₹499</div>
                 </div>
-                <!-- 10 Days Plan -->
                 <div class="plan-card" onclick="selectPlan('10day', 699, this)">
                     <div class="plan-icon">⭐</div>
                     <div class="plan-title">PREMIUM VIP</div>
                     <div class="plan-duration">10 Days Access</div>
                     <div class="plan-price">₹699</div>
                 </div>
-                <!-- 1 Month Plan -->
                 <div class="plan-card" onclick="selectPlan('1month', 1299, this)">
                     <div class="plan-icon">💎</div>
                     <div class="plan-title">ULTIMATE ELITE</div>
@@ -756,10 +562,10 @@
             <button class="btn-pay-main" style="background: #64748b; margin-top: 4px;" onclick="closeVipModal()">बंद करें (Close)</button>
         </div>
 
-        <!-- Step 2: Payment & Admin Verification Notice -->
+        <!-- Step 2: Payment Gateway + Timer + Warning Below Timer -->
         <div id="step2" style="display:none;">
             <div class="modal-header-box" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Account Activation Payment</span>
+                <span>PAYMENT & ACTIVATION</span>
                 <span onclick="closeVipModal()" style="font-size: 20px; font-weight: bold; color: #ffffff; cursor: pointer;">✕</span>
             </div>
             <p style="margin: 0 0 10px 0; text-align: center; font-size: 11.5px; color: #64748b; font-weight: 600;">अकाउंट एक्टिवेशन भुगतान</p>
@@ -776,7 +582,27 @@
                 <button class="copy-btn" onclick="copyUpi()">Copy UPI</button>
             </div>
 
-            <!-- 📝 Added 2 Lines regarding Admin Check Process -->
+            <!-- ⏱️ PAYMENT TIMER SECTION WITH WARNING EXACTLY BELOW TIMER -->
+            <div class="timer-box-container">
+                <div class="timer-title">⏳ Payment Completion Timer / पेमेंट समय</div>
+                
+                <!-- 1 Min & 2 Min Timer Selector Buttons -->
+                <div class="timer-buttons">
+                    <button class="timer-btn active" id="pBtn1" onclick="selectPayTimer(1)">1 Min (1 मिनट)</button>
+                    <button class="timer-btn" id="pBtn2" onclick="selectPayTimer(2)">2 Min (2 मिनट)</button>
+                </div>
+
+                <!-- Live Countdown Clock -->
+                <div class="timer-display" id="payTimerClock">01:00</div>
+
+                <!-- WARNING MESSAGE RIGHT BELOW PAYMENT TIMER -->
+                <div class="wait-warning-box">
+                    <span>⚠️</span>
+                    <span>कृपया प्रतीक्षा करें, बैक न करें / Please wait, do not press back</span>
+                </div>
+            </div>
+
+            <!-- Admin Verification Info Box -->
             <div class="admin-process-box">
                 <p>📋 एडमिन द्वारा चेक करने के बाद अकाउंट ओपन कर दिया जाएगा।</p>
                 <p>⏳ इस प्रक्रिया में कुछ घंटों का टाइम भी लग सकता है।</p>
@@ -799,54 +625,44 @@
 </div>
 
 <script>
-    // State & Markets Data
+    // State Data
     let userData = JSON.parse(localStorage.getItem('userData')) || { name: 'Guest User', phone: '', balance: 0, status: 'Free / Unverified' };
     let selectedPlanAmount = 199;
     let selectedPlanKey = '1day';
 
-    const markets = [
-        { name: 'KALYAN MATKA', open: '04:00 PM', close: '06:00 PM', status: 'running' },
-        { name: 'MILAN DAY', open: '03:00 PM', close: '05:00 PM', status: 'running' },
-        { name: 'TIME BAZAR', open: '01:00 PM', close: '02:00 PM', status: 'closed' },
-        { name: 'SRIDEVI DAY', open: '11:30 AM', close: '12:30 PM', status: 'closed' },
-        { name: 'RAJDHANI NIGHT', open: '09:30 PM', close: '11:45 PM', status: 'running' }
-    ];
+    // Payment Timer State
+    let paySeconds = 60;
+    let selectedPayMinutes = 1;
+    let payTimerInterval = null;
 
-    // Timer Implementation Logic
-    let timerDuration = 60; 
-    let currentSeconds = 60;
-    let timerInterval = null;
+    function startPayTimer() {
+        if (payTimerInterval) clearInterval(payTimerInterval);
+        paySeconds = selectedPayMinutes * 60;
+        updatePayTimerDisplay();
 
-    function startTimer() {
-        if (timerInterval) clearInterval(timerInterval);
-        currentSeconds = timerDuration;
-        updateTimerDisplay();
-
-        timerInterval = setInterval(() => {
-            currentSeconds--;
-            if (currentSeconds <= 0) {
-                currentSeconds = timerDuration;
-                generateChartData(); // Refresh chart data on timer complete
+        payTimerInterval = setInterval(() => {
+            paySeconds--;
+            if (paySeconds <= 0) {
+                paySeconds = selectedPayMinutes * 60;
             }
-            updateTimerDisplay();
+            updatePayTimerDisplay();
         }, 1000);
     }
 
-    function setTimer(minutes) {
-        timerDuration = minutes * 60;
-        document.getElementById('btnTimer1').classList.toggle('active', minutes === 1);
-        document.getElementById('btnTimer2').classList.toggle('active', minutes === 2);
-        startTimer();
+    function selectPayTimer(mins) {
+        selectedPayMinutes = mins;
+        document.getElementById('pBtn1').classList.toggle('active', mins === 1);
+        document.getElementById('pBtn2').classList.toggle('active', mins === 2);
+        startPayTimer();
     }
 
-    function updateTimerDisplay() {
-        const mins = Math.floor(currentSeconds / 60);
-        const secs = currentSeconds % 60;
-        document.getElementById('timerClock').innerText = 
-            `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    function updatePayTimerDisplay() {
+        const m = Math.floor(paySeconds / 60);
+        const s = paySeconds % 60;
+        document.getElementById('payTimerClock').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    // Chart Data
+    // Full 6 Days Chart Data Generation (MON to SAT)
     function generateChartData() {
         const tbody = document.getElementById('gridData');
         tbody.innerHTML = '';
@@ -855,6 +671,7 @@
         dates.forEach(dateStr => {
             const tr = document.createElement('tr');
             let rowHtml = `<td class="date-box">${dateStr}</td>`;
+            // 6 Complete Days Data (MON - SAT)
             for (let i = 0; i < 6; i++) {
                 const isRed = Math.random() > 0.7;
                 const panna1 = Math.floor(100 + Math.random() * 899);
@@ -906,27 +723,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function openProfileModal() {
-        toggleSideMenu();
-        updateProfileUI();
-        document.getElementById('profileModal').style.display = 'flex';
-    }
-
-    function closeProfileModal() {
-        document.getElementById('profileModal').style.display = 'none';
-    }
-
-    function openPlayGameModal(tabName = 'markets') {
-        if (document.getElementById('sideMenu').style.display === 'block') toggleSideMenu();
-        renderMarkets();
-        switchDashTab(tabName);
-        document.getElementById('gamePlayModal').style.display = 'flex';
-    }
-
-    function closeGameModal() {
-        document.getElementById('gamePlayModal').style.display = 'none';
-    }
-
     function openVipModal() {
         document.getElementById('step-create-account').style.display = 'block';
         document.getElementById('step2').style.display = 'none';
@@ -935,58 +731,12 @@
 
     function closeVipModal() {
         document.getElementById('vipModal').style.display = 'none';
+        if (payTimerInterval) clearInterval(payTimerInterval);
     }
 
     function openLoginFromMenu() {
         toggleSideMenu();
         openVipModal();
-    }
-
-    function updateProfileUI() {
-        document.getElementById('profName').innerText = userData.name || 'Guest User';
-        document.getElementById('profPhone').innerText = userData.phone ? '+91 ' + userData.phone : '+91 Not Registered';
-        document.getElementById('profBalance').innerText = '₹' + parseFloat(userData.balance).toFixed(2);
-        document.getElementById('profStatus').innerText = userData.status;
-    }
-
-    function logoutUser() {
-        localStorage.removeItem('userData');
-        userData = { name: 'Guest User', phone: '', balance: 0, status: 'Free / Unverified' };
-        updateProfileUI();
-        alert('प्रोफाइल रिसेट हो गई है!');
-        closeProfileModal();
-    }
-
-    function switchDashTab(tabId) {
-        const tabs = ['Markets', 'Play', 'Rates', 'Fund', 'Withdraw'];
-        tabs.forEach(t => {
-            const el = document.getElementById('dashTab' + t);
-            const btn = document.getElementById('tabBtn' + t);
-            if (el) el.style.display = 'none';
-            if (btn) btn.classList.remove('active');
-        });
-        const activeCap = tabId.charAt(0).toUpperCase() + tabId.slice(1);
-        const activeTab = document.getElementById('dashTab' + activeCap);
-        const activeBtn = document.getElementById('tabBtn' + activeCap);
-        if (activeTab) activeTab.style.display = 'block';
-        if (activeBtn) activeBtn.classList.add('active');
-    }
-
-    function renderMarkets() {
-        const container = document.getElementById('marketListContainer');
-        container.innerHTML = '';
-        markets.forEach(m => {
-            const card = document.createElement('div');
-            card.className = 'market-card';
-            card.innerHTML = `
-                <span class="market-clock-icon" title="Timing: ${m.open} - ${m.close}" onclick="alert('${m.name}\\nOpen: ${m.open}\\nClose: ${m.close}')">🕒</span>
-                <div class="market-details">
-                    <div class="market-title">${m.name}</div>
-                    <span class="market-status-badge ${m.status === 'running' ? 'status-running' : 'status-closed'}">${m.status}</span>
-                </div>
-                <button class="market-play-btn" onclick="switchDashTab('play')">🎮 PLAY</button>`;
-            container.appendChild(card);
-        });
     }
 
     function goPay() {
@@ -1001,6 +751,7 @@
         localStorage.setItem('userData', JSON.stringify(userData));
         document.getElementById('step-create-account').style.display = 'none';
         document.getElementById('step2').style.display = 'block';
+        startPayTimer();
     }
 
     function copyUpi() {
@@ -1022,42 +773,6 @@
         closeVipModal();
     }
 
-    function submitGamePlay() {
-        const type = document.getElementById('gameTypeSelect').value;
-        const num = document.getElementById('gameNumber').value;
-        const points = document.getElementById('gamePoints').value;
-        if (!num || !points || points <= 0) {
-            alert('कृपया वैध अंक और पॉइंट्स दर्ज करें।');
-            return;
-        }
-        if (userData.status.includes('Free') || userData.status.includes('Pending')) {
-            alert('गेम खेलने के लिए कृपया पहले अपना खाता एक्टिवेट करें या एडमिन अप्रूवल की प्रतीक्षा करें!');
-            closeGameModal();
-            openVipModal();
-            return;
-        }
-        alert(`सफलतापूर्वक गेम लग गया!\nप्रकार: ${type}\nअंक: ${num}\nपॉइंट्स: ₹${points}`);
-    }
-
-    function proceedToFundPay() {
-        closeGameModal();
-        openVipModal();
-    }
-
-    function submitWithdrawalRequest() {
-        const amount = document.getElementById('withdrawAmount').value;
-        const details = document.getElementById('withdrawDetails').value.trim();
-        if (amount < 500) {
-            alert('न्यूनतम निकासी राशि ₹500 है।');
-            return;
-        }
-        if (!details) {
-            alert('कृपया अपनी UPI ID या बैंक विवरण दर्ज करें।');
-            return;
-        }
-        alert('आपकी विड्रॉल रिक्वेस्ट सबमिट हो गई है।');
-    }
-
     function switchChart(chartType) {
         const titleDisplay = document.getElementById('chartTitleDisplay');
         titleDisplay.innerText = chartType === 'diamond' ? 'DIAMOND PANEL CHART' : 'MATKA LOGIC CHART';
@@ -1066,7 +781,6 @@
 
     window.onload = function() {
         generateChartData();
-        startTimer();
     };
 </script>
 </body>

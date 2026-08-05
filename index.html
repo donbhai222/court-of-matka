@@ -297,31 +297,39 @@
         .qr-img { width: 160px; height: auto; border: 2px solid #cbd5e1; border-radius: 8px; margin: 10px auto; display: block; }
         input, select { width: 100%; padding: 11px 14px; margin: 8px 0; border: 1.5px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 13px; outline: none; }
         
-        /* Payment App Option Buttons Style with Only Names (No Logos) */
+        /* Payment App Option Buttons Style with Icons & Names */
         .upi-apps-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin: 12px 0;
             flex-wrap: wrap;
         }
         .upi-app-btn {
             flex: 1;
             min-width: 95px;
-            padding: 10px 8px;
+            padding: 9px 6px;
             background: #f8fafc;
             border: 2px solid #cbd5e1;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             color: #0f172a;
             transition: 0.2s;
             text-decoration: none;
             display: inline-flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 4px;
+        }
+        .upi-app-btn img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            border-radius: 4px;
         }
         .upi-app-btn:hover {
             border-color: var(--sky-blue);
@@ -789,11 +797,20 @@
 
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Direct Payment Apps Options with Only Names (No Logos) -->
+            <!-- Direct Payment Apps Options with Logos -->
             <div class="upi-apps-container">
-                <a id="gpayBtn" href="#" class="upi-app-btn">Google Pay</a>
-                <a id="phonepeBtn" href="#" class="upi-app-btn">PhonePe</a>
-                <a id="paytmAppBtn" href="#" class="upi-app-btn">Paytm App</a>
+                <a id="gpayBtn" href="#" class="upi-app-btn">
+                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-pay-icon.png" alt="GPay">
+                    Google Pay
+                </a>
+                <a id="phonepeBtn" href="#" class="upi-app-btn">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe">
+                    PhonePe
+                </a>
+                <a id="paytmAppBtn" href="#" class="upi-app-btn">
+                    <img src="https://icon.icepanel.io/Technology/svg/Paytm.svg" alt="Paytm">
+                    Paytm App
+                </a>
             </div>
             
             <div style="font-size: 11.5px; font-weight: 700; color: #334155; text-align: left; margin-bottom: 4px;">UPI ID:</div>
@@ -805,7 +822,7 @@
             <div class="instruction-box">
                 <b>Instructions / निर्देश:</b>
                 <ul>
-                    <li>ऊपर दिए गए ऐप के नाम पर क्लिक करके सीधे भुगतान करें या QR कोड स्कैन करें।</li>
+                    <li>ऊपर दिए गए ऐप के लोगो पर क्लिक करके सीधे भुगतान करें या QR कोड स्कैन करें।</li>
                     <li>भुगतान के बाद 12 अंकों की UTR / Txn ID एवं स्क्रीनशॉट सुरक्षित रखें।</li>
                 </ul>
             </div>
@@ -856,33 +873,33 @@
             <div style="font-size: 12.5px; font-weight: 800; color: #dc2626; margin-top: 4px;">Please wait, don't back</div>
         </div>
 
-        <!-- Step 5: Subscription Plans Page (Hindi & English with Professional Logo) -->
+        <!-- Step 5: Subscription Plans Page (Hindi & English with Specific Logos) -->
         <div id="step-subscription" style="display:none; text-align: center;">
             <div class="modal-header-box">Subscription Plans / सदस्यता योजनाएं</div>
             <div class="plans-grid">
                 <div class="sub-plan-card">
-                    <div class="sub-plan-icon">⭐</div>
+                    <div class="sub-plan-icon">🔑</div>
                     <div class="sub-plan-title">Starter</div>
                     <div class="sub-plan-desc">1 दिन के लिए खोलने का चार्ज<br>(1 Day Access)</div>
                     <div class="sub-plan-price">₹1499</div>
                     <button class="sel-btn" onclick="openPlanPayment('Starter (1 Day)', 1499)">SELECT / चुनें</button>
                 </div>
                 <div class="sub-plan-card">
-                    <div class="sub-plan-icon">🥈</div>
+                    <div class="sub-plan-icon">⚡</div>
                     <div class="sub-plan-title">Silver</div>
                     <div class="sub-plan-desc">7 दिन के लिए खोलने का चार्ज<br>(7 Days Access)</div>
                     <div class="sub-plan-price">₹2499</div>
                     <button class="sel-btn" onclick="openPlanPayment('Silver (7 Days)', 2499)">SELECT / चुनें</button>
                 </div>
                 <div class="sub-plan-card">
-                    <div class="sub-plan-icon">🥇</div>
+                    <div class="sub-plan-icon">⭐</div>
                     <div class="sub-plan-title">Gold</div>
                     <div class="sub-plan-desc">10 दिन के लिए खोलने का चार्ज<br>(10 Days Access)</div>
                     <div class="sub-plan-price">₹3499</div>
                     <button class="sel-btn" onclick="openPlanPayment('Gold (10 Days)', 3499)">SELECT / चुनें</button>
                 </div>
                 <div class="sub-plan-card">
-                    <div class="sub-plan-icon">👑</div>
+                    <div class="sub-plan-icon">💎</div>
                     <div class="sub-plan-title">Platinum</div>
                     <div class="sub-plan-desc">1 महीने के लिए खोलने का चार्ज<br>(1 Month Access)</div>
                     <div class="sub-plan-price">₹4999</div>
@@ -897,11 +914,20 @@
             <div style="font-size: 24px; font-weight: 900; color: var(--sky-blue); margin: 6px 0;" id="planPriceDisplay">₹0</div>
             <img src="paytm-png.jpeg" class="qr-img" alt="QR Code">
 
-            <!-- Plan Apps Options with Only Names (No Logos) -->
+            <!-- Plan Apps Options with Logos -->
             <div class="upi-apps-container">
-                <a id="planGpayBtn" href="#" class="upi-app-btn">Google Pay</a>
-                <a id="planPhonepeBtn" href="#" class="upi-app-btn">PhonePe</a>
-                <a id="planPaytmAppBtn" href="#" class="upi-app-btn">Paytm App</a>
+                <a id="planGpayBtn" href="#" class="upi-app-btn">
+                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-pay-icon.png" alt="GPay">
+                    Google Pay
+                </a>
+                <a id="planPhonepeBtn" href="#" class="upi-app-btn">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/free-phonepe-logo-icon-download-in-svg-png-gif-file-formats--payment-app-brand-vol-7-pack-logos-icons-3030282.png?f=webp&w=256" alt="PhonePe">
+                    PhonePe
+                </a>
+                <a id="planPaytmAppBtn" href="#" class="upi-app-btn">
+                    <img src="https://icon.icepanel.io/Technology/svg/Paytm.svg" alt="Paytm">
+                    Paytm App
+                </a>
             </div>
 
             <div class="upi-box">
@@ -996,7 +1022,7 @@
     function updateUpiLinks(upiId, amount, namePrefix) {
         let upiLink = `upi://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         
-        // Direct Links for mobile apps
+        // Direct Links for mobile apps with logos enabled
         document.getElementById(namePrefix + 'gpayBtn').href = `tez://upi/pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         document.getElementById(namePrefix + 'phonepeBtn').href = `phonepe://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;
         document.getElementById(namePrefix + 'paytmAppBtn').href = `paytmmp://pay?pa=${upiId}&pn=Omkar%20Yadav&am=${amount}&cu=INR`;

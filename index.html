@@ -1213,14 +1213,15 @@
     }
 
     function openPlanPayment(planName, price) {
+        // Force hide subscription step and show plan payment step cleanly
+        document.getElementById('step-subscription').style.display = 'none';
+        document.getElementById('step-plan-pay').style.display = 'block';
+
         document.getElementById('planTitleDisplay').innerText = planName;
         document.getElementById('planPriceDisplay').innerText = "₹" + price;
         
         // Update plan UPI links with exact price amount
         updateUpiLinks("omkaryadav@paytm", price, "plan");
-
-        document.getElementById('step-subscription').style.display='none';
-        document.getElementById('step-plan-pay').style.display='block';
     }
 
     function copyPlanUpi() {

@@ -39,18 +39,17 @@ body{
     box-shadow:0 4px 15px rgba(245,158,11,0.3);
 }
 .header h1{
-    font-size:16px;
+    font-size:18px;
     font-weight:900;
     color:#dc2626;
     letter-spacing:1px;
     margin-bottom:3px;
     text-transform:uppercase;
-    font-family:'Arial Black','Segoe UI',sans-serif;
-    -webkit-text-stroke:0.4px #7f1d1d;
+    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
+    line-height:1.1;
 }
 .header h1 .black{
     color:#111827;
-    -webkit-text-stroke:0.4px #000;
 }
 .header .sub-title{
     font-size:9px;
@@ -99,7 +98,7 @@ body{
     color:#ffffff;
     border:2px solid #0284c7;
     border-radius:8px;
-    font-size:10.5px;
+    font-size:11px;
     font-weight:900;
     cursor:pointer;
     text-transform:uppercase;
@@ -109,15 +108,11 @@ body{
     align-items:center;
     justify-content:center;
     white-space:nowrap;
-    font-family:inherit;
-    text-shadow:0 1px 2px rgba(0,0,0,0.2);
-}
-.btn-goto:hover{
-    background:linear-gradient(135deg,#0ea5e9,#0284c7);
-    transform:translateY(-1px);
+    font-family:'Impact','Arial Black',sans-serif;
+    letter-spacing:1px;
 }
 
-/* PLAY GAME - LIGHT ORANGE + DARK ORANGE MIX */
+/* PLAY GAME - ORANGE GRADIENT */
 .btn-play{
     flex:1;
     padding:11px 12px;
@@ -125,54 +120,54 @@ body{
     color:#ffffff;
     border:2px solid #9a3412;
     border-radius:8px;
-    font-size:10.5px;
+    font-size:11px;
     font-weight:900;
     cursor:pointer;
     text-transform:uppercase;
-    box-shadow:0 3px 12px rgba(234,88,12,0.5),inset 0 1px 3px rgba(255,255,255,0.3);
+    box-shadow:0 3px 12px rgba(234,88,12,0.5);
     text-decoration:none;
     display:inline-flex;
     align-items:center;
     justify-content:center;
     white-space:nowrap;
-    font-family:inherit;
-    text-shadow:0 1px 2px rgba(0,0,0,0.3);
+    font-family:'Impact','Arial Black',sans-serif;
+    letter-spacing:1px;
     animation:playBlink 1.5s infinite;
 }
 @keyframes playBlink{
-    0%,100%{transform:scale(1);box-shadow:0 3px 12px rgba(234,88,12,0.5),inset 0 1px 3px rgba(255,255,255,0.3);}
-    50%{transform:scale(1.02);box-shadow:0 6px 20px rgba(249,115,22,0.8),inset 0 1px 3px rgba(255,255,255,0.4);}
-}
-.btn-play:hover{
-    background:linear-gradient(135deg,#f97316 0%,#ea580c 40%,#c2410c 70%,#9a3412 100%);
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.02);}
 }
 
-/* ============ CHART TITLE - EXTRA BOLD NO NEON ============ */
-.chart-title-wrap{
-    padding:0 12px 10px;
+/* ============ CHART CONTAINER - TITLE + TABLE CHIPKE HUE ============ */
+.chart-container{
+    margin:0 8px 12px;
+    border:2px solid var(--border-dark);
+    border-radius:10px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
+
+/* ============ CHART TITLE - CHHOTA + CHIPKA HUA ============ */
 .chart-title{
-    width:100%;
     background:var(--bg-pink);
     color:#ffffff;
-    padding:18px 12px;
-    border-radius:10px;
-    font-size:15px;
+    padding:12px 10px;
+    font-size:14px;
     font-weight:900;
-    font-family:'Arial Black','Segoe UI',sans-serif;
+    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
     text-align:center;
-    letter-spacing:2.5px;
+    letter-spacing:2px;
     text-transform:uppercase;
-    -webkit-text-stroke:1.2px #ffffff;
-    text-shadow:0 2px 4px rgba(0,0,0,0.35);
-    box-shadow:0 6px 20px rgba(236,72,153,0.5);
-    border:2px solid #fbcfe8;
+    line-height:1.1;
+    text-shadow:0 2px 4px rgba(0,0,0,0.3);
+    border-bottom:2px solid var(--border-dark);
 }
 
 /* ============ TABLE ============ */
 .chart-wrapper{
     width:100%;
-    padding:0 8px 8px;
     overflow-x:hidden;
 }
 table{
@@ -180,7 +175,6 @@ table{
     width:100%;
     table-layout:fixed;
     background:#fff;
-    border:2px solid var(--border-dark);
 }
 thead th{
     background:var(--bg-yellow);
@@ -191,6 +185,7 @@ thead th{
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 thead th.date-h{width:52px;}
 tbody td{
@@ -201,7 +196,6 @@ tbody td{
     background:#fff;
     height:58px;
     position:relative;
-    font-family:'Segoe UI',sans-serif;
 }
 
 /* ============ DATE BOX ============ */
@@ -212,15 +206,17 @@ tbody td{
     color:#1e40af;
     line-height:1.15;
     padding:4px 2px;
+    font-family:'Impact','Arial Black',sans-serif;
+    letter-spacing:0.3px;
 }
 .date-box .d1,.date-box .d2{
-    font-size:8.5px;
+    font-size:9px;
     font-weight:900;
     color:#1e40af;
     line-height:1.15;
 }
 .date-box .to{
-    font-size:7px;
+    font-size:8px;
     color:#1e40af;
     font-weight:900;
     margin:1px 0;
@@ -237,40 +233,36 @@ tbody td{
     min-height:54px;
 }
 
-/* ============ PANNA (side 3 digits) - NO NEON ============ */
+/* ============ PANNA ============ */
 .panna{
     display:flex;
     flex-direction:column;
-    font-size:9.5px;
+    font-size:10px;
     line-height:1.1;
     font-weight:900;
     color:#111827;
-    width:11px;
+    width:12px;
     align-items:center;
-    -webkit-text-stroke:0.2px #111827;
+    font-family:'Impact','Arial Black',sans-serif;
+    letter-spacing:0.3px;
 }
 
-/* ============ JODI - EXTRA BOLD NO NEON ============ */
+/* ============ JODI - EXTRA BOLD ============ */
 .jodi{
-    font-size:16px;
+    font-size:20px;
     font-weight:900;
     color:#111827;
     margin:0 3px;
     letter-spacing:1px;
-    font-family:'Arial Black','Segoe UI',sans-serif;
-    min-width:26px;
+    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
+    min-width:28px;
     text-align:center;
-    -webkit-text-stroke:0.6px #000;
-    text-shadow:0 1px 2px rgba(0,0,0,0.15);
+    line-height:1;
 }
 
 /* ============ RED HOUSE ============ */
 .red-house .jodi,
 .red-house .panna{color:#dc2626!important;}
-.red-house .jodi{
-    -webkit-text-stroke:0.6px #7f1d1d;
-    text-shadow:0 1px 2px rgba(0,0,0,0.15);
-}
 
 /* ============ LOCK CELL ============ */
 .lock-cell{
@@ -291,18 +283,18 @@ tbody td{
     padding:14px;
 }
 .show-more-btn{
-    padding:11px 28px;
+    padding:12px 30px;
     background:linear-gradient(135deg,#a78bfa,#7c3aed);
     color:#fff;
     border:none;
     border-radius:8px;
-    font-size:12px;
+    font-size:13px;
     font-weight:900;
     cursor:pointer;
     letter-spacing:1px;
     text-transform:uppercase;
     box-shadow:0 4px 12px rgba(139,92,246,0.4);
-    font-family:inherit;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 
 /* ============ CTA ============ */
@@ -316,12 +308,13 @@ tbody td{
     box-shadow:0 4px 20px rgba(0,0,0,0.08);
 }
 .cta-title{
-    font-size:16px;
+    font-size:18px;
     font-weight:900;
     color:#1e40af;
     margin-bottom:6px;
     text-transform:uppercase;
-    letter-spacing:0.5px;
+    letter-spacing:1px;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 .cta-sub{
     font-size:11px;
@@ -337,13 +330,14 @@ tbody td{
     color:#fff;
     padding:15px;
     border-radius:10px;
-    font-size:14px;
+    font-size:15px;
     font-weight:900;
     text-decoration:none;
     text-transform:uppercase;
     box-shadow:0 5px 20px rgba(22,163,74,0.4);
     text-align:center;
-    letter-spacing:1px;
+    letter-spacing:1.5px;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 
 /* ============ BOTTOM ============ */
@@ -358,12 +352,13 @@ tbody td{
     color:#fff;
     text-align:center;
     padding:14px 15px;
-    font-size:10px;
+    font-size:11px;
     font-weight:900;
     letter-spacing:0.5px;
     text-transform:uppercase;
     border-radius:14px 14px 0 0;
     margin:0 12px;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 
 /* ============ FLOATS ============ */
@@ -400,7 +395,7 @@ tbody td{
     cursor:pointer;
     z-index:9998;
     border:none;
-    font-family:inherit;
+    font-family:'Impact','Arial Black',sans-serif;
 }
 
 .loading{text-align:center;padding:40px 20px;color:#1e40af;font-size:13px;font-weight:900;}
@@ -427,22 +422,22 @@ tbody td{
     <a href="#" onclick="playGame();return false;" class="btn-play">PLAY GAME / गेम खेलें 🎮</a>
 </div>
 
-<div class="chart-title-wrap">
+<!-- CHART CONTAINER (TITLE + TABLE CHIPKE HUE) -->
+<div class="chart-container">
     <div class="chart-title">ROYAL MAGIC PANEL CHART</div>
-</div>
-
-<div class="chart-wrapper">
-    <table>
-        <thead>
-            <tr>
-                <th class="date-h">DATE</th>
-                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
-            </tr>
-        </thead>
-        <tbody id="chartBody">
-            <tr><td colspan="7" class="loading">Loading...</td></tr>
-        </tbody>
-    </table>
+    <div class="chart-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th class="date-h">DATE</th>
+                    <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
+                </tr>
+            </thead>
+            <tbody id="chartBody">
+                <tr><td colspan="7" class="loading">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="show-more-wrap">

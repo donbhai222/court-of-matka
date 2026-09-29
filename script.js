@@ -35,7 +35,7 @@ function showMore(firstLoad) {
     const end = Math.min(shownRows + ROWS_PER_LOAD, allRows.length);
 
     for (let i = shownRows; i < end; i++) {
-        tbody.appendChild(buildRow(allRows[i], i === allRows.length - 1));
+        tbody.appendChild(buildRow(allRows[i]));
     }
     shownRows = end;
 
@@ -49,22 +49,27 @@ function showMore(firstLoad) {
 }
 
 // ================= BUILD ROW =================
-function buildRow(row, isLastDataRow) {
+function buildRow(row) {
     const tr = document.createElement('tr');
 
-    // DATE
+    // DATE CELL - Poora date upar, to bich, poora date neeche
     const dateTd = document.createElement('td');
     dateTd.className = 'date-box';
     const dateText = row[0].trim();
+
     if (dateText.toLowerCase().includes(' to ')) {
         const parts = dateText.split(/ to /i).map(s => s.trim());
-        dateTd.innerHTML = `<div class="d1">${parts[0]}</div><div class="to">to</div><div class="d2">${parts[1]}</div>`;
+        dateTd.innerHTML = `
+            <div class="d-full">${parts[0]}</div>
+            <div class="d-to">to</div>
+            <div class="d-full">${parts[1]}</div>
+        `;
     } else {
-        dateTd.innerHTML = `<div class="d1">${dateText}</div>`;
+        dateTd.innerHTML = `<div class="d-full">${dateText}</div>`;
     }
     tr.appendChild(dateTd);
 
-    // 6 days - find first empty cell for this row
+    // 6 days - lock sirf pehla empty cell me
     let lockPlaced = false;
     for (let j = 1; j <= 6; j++) {
         const td = document.createElement('td');
@@ -72,31 +77,20 @@ function buildRow(row, isLastDataRow) {
 
         if (!val || val === '🔒' || val.toUpperCase() === 'LOCKED') {
             if (!lockPlaced) {
-                // 🔒 SIRF PEHLA EMPTY CELL ME LOCK
                 td.className = 'lock-cell';
                 td.innerHTML = `<div class="lock-btn">🔒</div>`;
                 td.onclick = () => location.href = 'subscription.html';
                 lockPlaced = true;
             }
-            // Baaki empty cells khaali
         } else if (val.includes('-')) {
             const parts = val.split('-');
             if (parts.length === 3) {
                 const [left, jodi, right] = parts.map(p => p.trim());
                 const isRed = jodi.length === 2 && (jodi[0] === jodi[1] || Math.abs(jodi[0] - jodi[1]) === 5);
                 if (isRed) td.classList.add('red-house');
-
-                // Determine neon color for jodi
-                let neonClass = '';
-                if (isRed) neonClass = 'red-neon';
-                else {
-                    const jn = parseInt(jodi);
-                    if (jn % 3 === 0) neonClass = 'green-neon';
-                }
-
                 td.innerHTML = `<div class="cell-content">
                     <div class="panna">${left.split('').map(n => `<span>${n}</span>`).join('')}</div>
-                    <div class="jodi ${neonClass}">${jodi}</div>
+                    <div class="jodi">${jodi}</div>
                     <div class="panna">${right.split('').map(n => `<span>${n}</span>`).join('')}</div>
                 </div>`;
             } else {

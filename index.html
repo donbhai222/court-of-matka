@@ -45,11 +45,22 @@ body{
     letter-spacing:1px;
     margin-bottom:3px;
     text-transform:uppercase;
-    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
+    font-family:'Arial Black','Helvetica',sans-serif;
     line-height:1.1;
+    /* FAKE BOLD - 4 direction shadow */
+    text-shadow:
+        -0.7px -0.7px 0 #dc2626,
+        0.7px -0.7px 0 #dc2626,
+        -0.7px 0.7px 0 #dc2626,
+        0.7px 0.7px 0 #dc2626;
 }
 .header h1 .black{
     color:#111827;
+    text-shadow:
+        -0.7px -0.7px 0 #111827,
+        0.7px -0.7px 0 #111827,
+        -0.7px 0.7px 0 #111827,
+        0.7px 0.7px 0 #111827;
 }
 .header .sub-title{
     font-size:9px;
@@ -108,8 +119,13 @@ body{
     align-items:center;
     justify-content:center;
     white-space:nowrap;
-    font-family:'Impact','Arial Black',sans-serif;
-    letter-spacing:1px;
+    font-family:'Arial Black',sans-serif;
+    letter-spacing:0.5px;
+    text-shadow:
+        -0.5px -0.5px 0 #ffffff,
+        0.5px -0.5px 0 #ffffff,
+        -0.5px 0.5px 0 #ffffff,
+        0.5px 0.5px 0 #ffffff;
 }
 
 /* PLAY GAME - ORANGE GRADIENT */
@@ -130,8 +146,13 @@ body{
     align-items:center;
     justify-content:center;
     white-space:nowrap;
-    font-family:'Impact','Arial Black',sans-serif;
-    letter-spacing:1px;
+    font-family:'Arial Black',sans-serif;
+    letter-spacing:0.5px;
+    text-shadow:
+        -0.5px -0.5px 0 #7c2d12,
+        0.5px -0.5px 0 #7c2d12,
+        -0.5px 0.5px 0 #7c2d12,
+        0.5px 0.5px 0 #7c2d12;
     animation:playBlink 1.5s infinite;
 }
 @keyframes playBlink{
@@ -139,7 +160,7 @@ body{
     50%{transform:scale(1.02);}
 }
 
-/* ============ CHART CONTAINER - TITLE + TABLE CHIPKE HUE ============ */
+/* ============ CHART CONTAINER ============ */
 .chart-container{
     margin:0 8px 12px;
     border:2px solid var(--border-dark);
@@ -149,20 +170,29 @@ body{
     box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* ============ CHART TITLE - CHHOTA + CHIPKA HUA ============ */
+/* ============ CHART TITLE - EXTRA BOLD (FAKE BOLD) ============ */
 .chart-title{
     background:var(--bg-pink);
     color:#ffffff;
     padding:12px 10px;
-    font-size:14px;
+    font-size:15px;
     font-weight:900;
-    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
+    font-family:'Arial Black','Helvetica',sans-serif;
     text-align:center;
-    letter-spacing:2px;
+    letter-spacing:1.5px;
     text-transform:uppercase;
     line-height:1.1;
-    text-shadow:0 2px 4px rgba(0,0,0,0.3);
     border-bottom:2px solid var(--border-dark);
+    /* FAKE BOLD - 8 direction shadow */
+    text-shadow:
+        -1px -1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        -1px 1px 0 #ffffff,
+        1px 1px 0 #ffffff,
+        -1px 0 0 #ffffff,
+        1px 0 0 #ffffff,
+        0 -1px 0 #ffffff,
+        0 1px 0 #ffffff;
 }
 
 /* ============ TABLE ============ */
@@ -185,7 +215,12 @@ thead th{
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
-    font-family:'Impact','Arial Black',sans-serif;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.4px -0.4px 0 #111827,
+        0.4px -0.4px 0 #111827,
+        -0.4px 0.4px 0 #111827,
+        0.4px 0.4px 0 #111827;
 }
 thead th.date-h{width:52px;}
 tbody td{
@@ -206,14 +241,19 @@ tbody td{
     color:#1e40af;
     line-height:1.15;
     padding:4px 2px;
-    font-family:'Impact','Arial Black',sans-serif;
-    letter-spacing:0.3px;
+    font-family:'Arial Black',sans-serif;
+    letter-spacing:0.2px;
 }
 .date-box .d1,.date-box .d2{
     font-size:9px;
     font-weight:900;
     color:#1e40af;
     line-height:1.15;
+    text-shadow:
+        -0.3px -0.3px 0 #1e40af,
+        0.3px -0.3px 0 #1e40af,
+        -0.3px 0.3px 0 #1e40af,
+        0.3px 0.3px 0 #1e40af;
 }
 .date-box .to{
     font-size:8px;
@@ -233,7 +273,7 @@ tbody td{
     min-height:54px;
 }
 
-/* ============ PANNA ============ */
+/* ============ PANNA - FAKE BOLD ============ */
 .panna{
     display:flex;
     flex-direction:column;
@@ -243,26 +283,59 @@ tbody td{
     color:#111827;
     width:12px;
     align-items:center;
-    font-family:'Impact','Arial Black',sans-serif;
-    letter-spacing:0.3px;
+    font-family:'Arial Black',sans-serif;
+    letter-spacing:0.2px;
+    text-shadow:
+        -0.3px -0.3px 0 #111827,
+        0.3px -0.3px 0 #111827,
+        -0.3px 0.3px 0 #111827,
+        0.3px 0.3px 0 #111827;
 }
 
-/* ============ JODI - EXTRA BOLD ============ */
+/* ============ JODI - EXTRA BOLD (FAKE BOLD WITH 8-DIRECTION SHADOW) ============ */
 .jodi{
     font-size:20px;
     font-weight:900;
     color:#111827;
     margin:0 3px;
     letter-spacing:1px;
-    font-family:'Impact','Arial Black','Haettenschweiler',sans-serif;
+    font-family:'Arial Black','Helvetica',sans-serif;
     min-width:28px;
     text-align:center;
     line-height:1;
+    /* FAKE BOLD - 8 direction shadow for maximum thickness */
+    text-shadow:
+        -0.8px -0.8px 0 #111827,
+        0.8px -0.8px 0 #111827,
+        -0.8px 0.8px 0 #111827,
+        0.8px 0.8px 0 #111827,
+        -0.8px 0 0 #111827,
+        0.8px 0 0 #111827,
+        0 -0.8px 0 #111827,
+        0 0.8px 0 #111827;
 }
 
-/* ============ RED HOUSE ============ */
-.red-house .jodi,
-.red-house .panna{color:#dc2626!important;}
+/* ============ RED HOUSE - FAKE BOLD WITH RED ============ */
+.red-house .jodi{
+    color:#dc2626!important;
+    text-shadow:
+        -0.8px -0.8px 0 #dc2626,
+        0.8px -0.8px 0 #dc2626,
+        -0.8px 0.8px 0 #dc2626,
+        0.8px 0.8px 0 #dc2626,
+        -0.8px 0 0 #dc2626,
+        0.8px 0 0 #dc2626,
+        0 -0.8px 0 #dc2626,
+        0 0.8px 0 #dc2626;
+}
+.red-house .panna{
+    color:#dc2626!important;
+    text-shadow:
+        -0.3px -0.3px 0 #dc2626,
+        0.3px -0.3px 0 #dc2626,
+        -0.3px 0.3px 0 #dc2626,
+        0.3px 0.3px 0 #dc2626;
+}
 
 /* ============ LOCK CELL ============ */
 .lock-cell{
@@ -294,7 +367,12 @@ tbody td{
     letter-spacing:1px;
     text-transform:uppercase;
     box-shadow:0 4px 12px rgba(139,92,246,0.4);
-    font-family:'Impact','Arial Black',sans-serif;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.5px -0.5px 0 #ffffff,
+        0.5px -0.5px 0 #ffffff,
+        -0.5px 0.5px 0 #ffffff,
+        0.5px 0.5px 0 #ffffff;
 }
 
 /* ============ CTA ============ */
@@ -314,7 +392,12 @@ tbody td{
     margin-bottom:6px;
     text-transform:uppercase;
     letter-spacing:1px;
-    font-family:'Impact','Arial Black',sans-serif;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.6px -0.6px 0 #1e40af,
+        0.6px -0.6px 0 #1e40af,
+        -0.6px 0.6px 0 #1e40af,
+        0.6px 0.6px 0 #1e40af;
 }
 .cta-sub{
     font-size:11px;
@@ -336,8 +419,13 @@ tbody td{
     text-transform:uppercase;
     box-shadow:0 5px 20px rgba(22,163,74,0.4);
     text-align:center;
-    letter-spacing:1.5px;
-    font-family:'Impact','Arial Black',sans-serif;
+    letter-spacing:1px;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.7px -0.7px 0 #14532d,
+        0.7px -0.7px 0 #14532d,
+        -0.7px 0.7px 0 #14532d,
+        0.7px 0.7px 0 #14532d;
 }
 
 /* ============ BOTTOM ============ */
@@ -358,7 +446,12 @@ tbody td{
     text-transform:uppercase;
     border-radius:14px 14px 0 0;
     margin:0 12px;
-    font-family:'Impact','Arial Black',sans-serif;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.4px -0.4px 0 #fff,
+        0.4px -0.4px 0 #fff,
+        -0.4px 0.4px 0 #fff,
+        0.4px 0.4px 0 #fff;
 }
 
 /* ============ FLOATS ============ */
@@ -395,7 +488,12 @@ tbody td{
     cursor:pointer;
     z-index:9998;
     border:none;
-    font-family:'Impact','Arial Black',sans-serif;
+    font-family:'Arial Black',sans-serif;
+    text-shadow:
+        -0.5px -0.5px 0 #14532d,
+        0.5px -0.5px 0 #14532d,
+        -0.5px 0.5px 0 #14532d,
+        0.5px 0.5px 0 #14532d;
 }
 
 .loading{text-align:center;padding:40px 20px;color:#1e40af;font-size:13px;font-weight:900;}
@@ -422,7 +520,6 @@ tbody td{
     <a href="#" onclick="playGame();return false;" class="btn-play">PLAY GAME / गेम खेलें 🎮</a>
 </div>
 
-<!-- CHART CONTAINER (TITLE + TABLE CHIPKE HUE) -->
 <div class="chart-container">
     <div class="chart-title">ROYAL MAGIC PANEL CHART</div>
     <div class="chart-wrapper">

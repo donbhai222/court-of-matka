@@ -3,9 +3,9 @@ const SHEET_ID = '1IReRyQjRvWWVjZTym_8DDXvx9Jttjfgy18McY53gM5w';
 const SHEET_NAME = 'Sheet1';
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-const ROWS_PER_LOAD = 8;  // Kitne rows pehle dikhein
-let allRows = [];          // Sab rows store
-let shownRows = 0;         // Kitne dikh rahe
+const ROWS_PER_LOAD = 8;
+let allRows = [];
+let shownRows = 0;
 
 // ================= LOAD =================
 async function loadChart() {
@@ -35,7 +35,7 @@ function showMore(firstLoad) {
     const end = Math.min(shownRows + ROWS_PER_LOAD, allRows.length);
 
     for (let i = shownRows; i < end; i++) {
-        tbody.appendChild(buildRow(allRows[i]));
+        tbody.appendChild(buildRow(allRows[i], i === allRows.length - 1));
     }
     shownRows = end;
 
@@ -49,10 +49,10 @@ function showMore(firstLoad) {
 }
 
 // ================= BUILD ROW =================
-function buildRow(row) {
+function buildRow(row, isLastDataRow) {
     const tr = document.createElement('tr');
 
-    // DATE cell
+    // DATE
     const dateTd = document.createElement('td');
     dateTd.className = 'date-box';
     const dateText = row[0].trim();
@@ -64,24 +64,39 @@ function buildRow(row) {
     }
     tr.appendChild(dateTd);
 
-    // 6 days
+    // 6 days - find first empty cell for this row
+    let lockPlaced = false;
     for (let j = 1; j <= 6; j++) {
         const td = document.createElement('td');
         const val = (row[j] || '').trim();
 
         if (!val || val === '🔒' || val.toUpperCase() === 'LOCKED') {
-            td.className = 'lock-cell';
-            td.innerHTML = `<div class="lock-btn">🔒</div>`;
-            td.onclick = () => location.href = 'subscription.html';
+            if (!lockPlaced) {
+                // 🔒 SIRF PEHLA EMPTY CELL ME LOCK
+                td.className = 'lock-cell';
+                td.innerHTML = `<div class="lock-btn">🔒</div>`;
+                td.onclick = () => location.href = 'subscription.html';
+                lockPlaced = true;
+            }
+            // Baaki empty cells khaali
         } else if (val.includes('-')) {
             const parts = val.split('-');
             if (parts.length === 3) {
                 const [left, jodi, right] = parts.map(p => p.trim());
                 const isRed = jodi.length === 2 && (jodi[0] === jodi[1] || Math.abs(jodi[0] - jodi[1]) === 5);
                 if (isRed) td.classList.add('red-house');
+
+                // Determine neon color for jodi
+                let neonClass = '';
+                if (isRed) neonClass = 'red-neon';
+                else {
+                    const jn = parseInt(jodi);
+                    if (jn % 3 === 0) neonClass = 'green-neon';
+                }
+
                 td.innerHTML = `<div class="cell-content">
                     <div class="panna">${left.split('').map(n => `<span>${n}</span>`).join('')}</div>
-                    <div class="jodi">${jodi}</div>
+                    <div class="jodi ${neonClass}">${jodi}</div>
                     <div class="panna">${right.split('').map(n => `<span>${n}</span>`).join('')}</div>
                 </div>`;
             } else {
@@ -115,7 +130,7 @@ function parseCSV(text) {
 
 // ================= PLAY GAME =================
 function playGame() {
-    alert('🎮 Game section coming soon!\n\nStay tuned...');
+    alert('🎮 Game section coming soon!');
 }
 
 // ================= AUTO REFRESH =================

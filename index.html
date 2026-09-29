@@ -3,225 +3,225 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ROYAL MAGIC PANEL CHART | Daily Matka Results</title>
+<title>ROYAL MAGIC PANEL CHART</title>
 <style>
 :root{
-    --bg-page:#fff9e6;
-    --bg-header:#fef3c7;
-    --bg-header-2:#fde68a;
-    --bg-title-pink:#ec4899;
-    --bg-th-yellow:#fbbf24;
+    --bg-page:#fff3c4;
+    --bg-header:#fde68a;
+    --bg-header-2:#fcd34d;
+    --bg-pink:#ec4899;
+    --bg-pink-dark:#be185d;
+    --bg-yellow:#fbbf24;
+    --bg-yellow-light:#fef3c7;
     --bg-date:#fef9e7;
     --bg-cell:#ffffff;
+    --bg-cell-alt:#fffbeb;
     --bg-disclaimer:#fef9c3;
-    --text-main:#1a1a1a;
-    --text-soft:#1e40af;
-    --red:#dc2626;
+    --bg-cta:#ffffff;
+    --text-dark:#111827;
+    --text-blue:#1e40af;
+    --text-red:#dc2626;
     --green:#16a34a;
+    --green-dark:#15803d;
     --orange:#ea580c;
-    --purple:#8b5cf6;
-    --blue:#3b82f6;
-    --border:#f59e0b;
-    --border-soft:#fcd34d;
+    --purple:#a78bfa;
+    --purple-dark:#7c3aed;
+    --border-dark:#1e293b;
+    --neon-glow:0 0 10px rgba(251,191,36,0.7),0 0 20px rgba(236,72,153,0.4);
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{overflow-x:hidden;}
 body{
     background:var(--bg-page);
-    color:var(--text-main);
+    color:var(--text-dark);
     font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
     min-height:100vh;
-    padding-bottom:60px;
-    overflow-x:hidden;
+    padding-bottom:50px;
+    font-size:14px;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 .header{
-    background:linear-gradient(135deg,var(--bg-header),var(--bg-header-2));
-    padding:16px 15px 14px;
+    background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
+    padding:14px 60px 14px 14px;
     text-align:center;
-    position:relative;
-    border-bottom:2px solid #e5c78a;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:2px solid #f59e0b;
+    box-shadow:0 4px 15px rgba(245,158,11,0.3),0 0 25px rgba(251,191,36,0.4);
 }
 .header h1{
-    font-size:22px;
+    font-size:19px;
     font-weight:900;
-    color:#dc2626;
+    color:var(--text-red);
+    letter-spacing:1px;
+    margin-bottom:3px;
     text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:4px;
+    text-shadow:0 0 10px rgba(220,38,38,0.4);
 }
-.header h1 span{color:#1a1a1a;}
+.header h1 .black{color:#111827;text-shadow:0 0 10px rgba(251,191,36,0.8);}
 .header .sub-title{
-    font-size:11px;
-    color:#dc2626;
+    font-size:9px;
+    color:var(--text-red);
     font-weight:800;
     letter-spacing:1.5px;
     text-transform:uppercase;
 }
 .menu-icon{
     position:absolute;
-    right:18px;
+    right:16px;
     top:50%;
     transform:translateY(-50%);
-    font-size:26px;
-    color:#1a1a1a;
+    font-size:28px;
+    color:#111827;
     cursor:pointer;
     font-weight:900;
+    line-height:1;
 }
 
-/* ================= DISCLAIMER ================= */
+/* DISCLAIMER */
 .disclaimer{
     background:var(--bg-disclaimer);
-    border-radius:0;
     padding:14px 16px;
-    margin:0;
-    font-size:12px;
-    color:var(--text-soft);
+    font-size:11.5px;
+    color:var(--text-blue);
     line-height:1.55;
     text-align:center;
     font-weight:700;
+    border-bottom:1px solid #fde68a;
 }
 
-/* ================= TOP BUTTONS ================= */
+/* TOP BUTTONS */
 .top-buttons{
     display:flex;
     gap:10px;
     padding:12px 12px;
-    background:#fef3c7;
+    background:var(--bg-page);
     justify-content:center;
-    flex-wrap:wrap;
+    align-items:center;
 }
 .btn-goto{
-    flex:1;
-    max-width:200px;
-    padding:12px 8px;
-    background:#a78bfa;
-    color:#fff;
-    border:2px solid #7c3aed;
+    flex:0 0 auto;
+    padding:11px 18px;
+    background:#c4b5fd;
+    color:#111827;
+    border:2px solid var(--purple-dark);
     border-radius:8px;
-    font-size:12px;
+    font-size:11px;
     font-weight:900;
     cursor:pointer;
-    letter-spacing:0.5px;
+    letter-spacing:0.3px;
     text-transform:uppercase;
-    box-shadow:0 3px 10px rgba(139,92,246,0.4);
-    transition:0.2s;
+    box-shadow:0 3px 10px rgba(139,92,246,0.35);
     text-decoration:none;
-    text-align:center;
     display:inline-flex;
     align-items:center;
     justify-content:center;
+    white-space:nowrap;
 }
-.btn-goto:hover{transform:translateY(-2px);}
 .btn-play{
     flex:1;
-    max-width:220px;
-    padding:12px 8px;
+    padding:11px 12px;
     background:linear-gradient(135deg,#f97316,#ea580c);
-    color:#fff;
+    color:#ffffff;
     border:2px solid #c2410c;
     border-radius:8px;
-    font-size:12px;
+    font-size:11px;
     font-weight:900;
     cursor:pointer;
-    letter-spacing:0.5px;
+    letter-spacing:0.3px;
     text-transform:uppercase;
-    box-shadow:0 0 15px rgba(249,115,22,0.8),0 3px 10px rgba(234,88,12,0.4);
+    box-shadow:0 0 15px rgba(249,115,22,0.9),0 0 30px rgba(249,115,22,0.5);
     animation:playBlink 1.2s infinite;
     text-decoration:none;
-    text-align:center;
     display:inline-flex;
     align-items:center;
     justify-content:center;
+    white-space:nowrap;
 }
 @keyframes playBlink{
-    0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 15px rgba(249,115,22,0.8);}
-    50%{opacity:0.85;transform:scale(0.98);box-shadow:0 0 25px rgba(249,115,22,1);}
+    0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 15px rgba(249,115,22,0.9),0 0 30px rgba(249,115,22,0.5);}
+    50%{opacity:0.9;transform:scale(0.98);box-shadow:0 0 25px rgba(249,115,22,1),0 0 45px rgba(249,115,22,0.7);}
 }
 
-/* ================= CHART TITLE BAR ================= */
-.chart-title-bar{
-    background:#fef3c7;
-    padding:0 12px 12px;
-    display:flex;
-    justify-content:center;
+/* CHART TITLE BAR */
+.chart-title-wrap{
+    padding:0 12px 10px;
 }
 .chart-title{
     width:100%;
-    background:var(--bg-title-pink);
-    color:#fff;
-    padding:12px;
-    border-radius:6px 6px 0 0;
+    background:var(--bg-pink);
+    color:#ffffff;
+    padding:14px;
+    border-radius:10px;
     font-size:14px;
     font-weight:900;
     text-align:center;
     letter-spacing:1px;
     text-transform:uppercase;
-    box-shadow:0 3px 10px rgba(236,72,153,0.4);
+    box-shadow:0 0 20px rgba(236,72,153,0.8),0 0 40px rgba(236,72,153,0.4);
+    text-shadow:0 0 10px rgba(255,255,255,0.5);
 }
 
-/* ================= CHART TABLE ================= */
+/* TABLE */
 .chart-wrapper{
     width:100%;
-    padding:0 12px;
-    background:#fef3c7;
-    overflow-x:auto;
+    padding:0 8px 8px;
+    overflow-x:hidden;
 }
 table{
     border-collapse:collapse;
     width:100%;
-    min-width:640px;
     table-layout:fixed;
-    background:#fff;
-    border:2px solid #1e293b;
+    background:#ffffff;
+    border:2px solid var(--border-dark);
 }
 thead th{
-    background:var(--bg-th-yellow);
-    color:#1a1a1a;
-    font-size:12px;
-    padding:10px 4px;
-    border:1px solid #1e293b;
+    background:var(--bg-yellow);
+    color:#111827;
+    font-size:11px;
+    padding:10px 2px;
+    border:1px solid var(--border-dark);
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
 }
-thead th.date-h{width:96px;}
+thead th.date-h{width:52px;}
 tbody td{
-    border:1px solid #1e293b;
+    border:1px solid var(--border-dark);
     padding:0;
     text-align:center;
     vertical-align:middle;
-    background:#fff;
-    height:65px;
+    background:#ffffff;
+    height:56px;
     position:relative;
     font-family:'Segoe UI',sans-serif;
 }
-tbody tr:nth-child(even) td{background:#fff;}
 
-/* DATE Box */
+/* DATE BOX */
 .date-box{
-    background:#fef9e7!important;
-    font-size:10px;
-    font-weight:800;
-    color:#1a1a1a;
+    background:var(--bg-date)!important;
+    font-size:8px;
+    font-weight:900;
+    color:#1e40af;
     line-height:1.15;
-    padding:6px 3px;
-    width:96px;
+    padding:4px 2px;
 }
 .date-box .d1,.date-box .d2{
-    font-size:10px;
-    font-weight:800;
+    font-size:8px;
+    font-weight:900;
     color:#1e40af;
-    line-height:1.1;
+    line-height:1.15;
 }
 .date-box .to{
-    font-size:9px;
+    font-size:7px;
     color:#1e40af;
-    font-weight:800;
+    font-weight:900;
     margin:1px 0;
 }
 
-/* Cell Content */
+/* CELL CONTENT */
 .cell-content{
     display:flex;
     align-items:center;
@@ -229,255 +229,240 @@ tbody tr:nth-child(even) td{background:#fff;}
     gap:1px;
     width:100%;
     padding:2px 1px;
-    min-height:62px;
+    min-height:52px;
 }
 
-/* Panna Vertical (left/right 3 digits) */
+/* PANNA (side 3 digits) */
 .panna{
     display:flex;
     flex-direction:column;
-    font-size:11px;
+    font-size:9px;
     line-height:1.15;
-    font-weight:800;
-    color:#1a1a1a;
-    width:12px;
+    font-weight:700;
+    color:#374151;
+    width:10px;
     align-items:center;
 }
 
-/* Jodi Number (center 2 digits) */
+/* JODI (center 2 digits BOLD) */
 .jodi{
-    font-size:17px;
+    font-size:15px;
     font-weight:900;
-    color:#1a1a1a;
+    color:#111827;
     margin:0 2px;
     letter-spacing:0.5px;
     font-family:'Courier New',monospace;
-    min-width:30px;
+    min-width:24px;
     text-align:center;
+    text-shadow:0 0 3px rgba(0,0,0,0.05);
 }
 
-/* Red House */
+/* RED HOUSE */
 .red-house .jodi,
 .red-house .panna{color:#dc2626!important;}
 
-/* Lock Cell */
+/* LOCK CELL */
 .lock-cell{
-    background:#fef9e7!important;
+    background:var(--bg-date)!important;
     cursor:pointer;
-    transition:0.2s;
-    border:2px solid #f59e0b!important;
 }
-.lock-cell:hover{background:#fef3c7!important;}
 .lock-btn{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:26px;
-    padding:6px;
+    font-size:22px;
+    padding:4px;
 }
 
-/* ================= CTA SECTION ================= */
+/* HIDDEN ROWS (mobile me fil karne ke liye) */
+.hidden-row{display:none;}
+
+/* SHOW MORE BUTTON */
+.show-more-wrap{
+    text-align:center;
+    padding:14px;
+}
+.show-more-btn{
+    padding:11px 28px;
+    background:linear-gradient(135deg,#a78bfa,#7c3aed);
+    color:#ffffff;
+    border:none;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    box-shadow:0 0 15px rgba(167,139,250,0.6);
+    font-family:inherit;
+}
+
+/* CTA SECTION */
 .cta-section{
-    margin:16px 12px;
-    background:#fff;
+    margin:14px 12px;
+    background:var(--bg-cta);
     border:2px solid #fcd34d;
-    border-radius:12px;
+    border-radius:14px;
     padding:22px 16px;
     text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    box-shadow:0 4px 20px rgba(0,0,0,0.08),0 0 30px rgba(251,191,36,0.15);
 }
 .cta-title{
     font-size:17px;
     font-weight:900;
-    color:#1e40af;
-    margin-bottom:8px;
+    color:var(--text-blue);
+    margin-bottom:6px;
     text-transform:uppercase;
     letter-spacing:0.5px;
 }
 .cta-sub{
-    font-size:12px;
-    color:#1e40af;
+    font-size:11.5px;
+    color:var(--text-blue);
     margin-bottom:16px;
     font-weight:700;
     line-height:1.5;
-    padding:0 8px;
 }
 .cta-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    background:linear-gradient(135deg,#16a34a,#15803d);
-    color:#fff;
-    padding:15px 24px;
+    display:block;
+    width:100%;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#ffffff;
+    padding:15px;
     border-radius:10px;
     font-size:14px;
     font-weight:900;
     text-decoration:none;
     letter-spacing:0.5px;
     text-transform:uppercase;
-    box-shadow:0 5px 20px rgba(22,163,74,0.4);
-    transition:0.3s;
+    box-shadow:0 5px 20px rgba(22,163,74,0.5),0 0 30px rgba(34,197,94,0.3);
     border:none;
-    width:100%;
-    max-width:400px;
+    text-align:center;
 }
-.cta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(22,163,74,0.6);}
+.cta-btn:hover{transform:translateY(-2px);}
 
-/* ================= BOTTOM BUTTONS ================= */
+/* BOTTOM BUTTONS */
 .bottom-buttons{
     display:flex;
     gap:10px;
-    padding:12px 12px 20px;
-    background:#fef3c7;
+    padding:14px 12px 20px;
     justify-content:center;
-    flex-wrap:wrap;
 }
 
-/* ================= ALL RIGHTS ================= */
+/* ALL RIGHTS */
 .all-rights{
     background:#334155;
-    color:#fff;
+    color:#ffffff;
     text-align:center;
-    padding:12px 15px;
+    padding:14px 15px;
     font-size:11px;
     font-weight:800;
     letter-spacing:1px;
     text-transform:uppercase;
-    border-radius:12px 12px 0 0;
+    border-radius:14px 14px 0 0;
     margin:0 12px;
 }
 
-/* ================= WHATSAPP FLOAT ================= */
+/* WHATSAPP */
 .whatsapp-float{
     position:fixed;
-    bottom:20px;
-    right:18px;
-    width:56px;
-    height:56px;
+    bottom:18px;
+    right:16px;
+    width:54px;
+    height:54px;
     background:#25d366;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:30px;
-    box-shadow:0 5px 20px rgba(37,211,102,0.5);
+    font-size:28px;
+    box-shadow:0 5px 20px rgba(37,211,102,0.6),0 0 25px rgba(37,211,102,0.4);
     cursor:pointer;
     z-index:9999;
     text-decoration:none;
-    animation:waPulse 2s infinite;
-}
-@keyframes waPulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.08);}
 }
 
-/* Refresh button floating */
+/* REFRESH FLOAT */
 .refresh-float{
     position:fixed;
-    bottom:20px;
-    right:85px;
-    background:linear-gradient(135deg,#16a34a,#15803d);
-    color:#fff;
-    padding:12px 22px;
+    bottom:24px;
+    right:82px;
+    background:linear-gradient(135deg,#22c55e,#15803d);
+    color:#ffffff;
+    padding:12px 20px;
     border-radius:30px;
-    font-size:13px;
+    font-size:12px;
     font-weight:900;
     letter-spacing:1px;
     text-transform:uppercase;
-    box-shadow:0 5px 20px rgba(22,163,74,0.5);
+    box-shadow:0 0 20px rgba(34,197,94,0.7),0 5px 20px rgba(21,128,61,0.4);
     cursor:pointer;
     z-index:9998;
     border:none;
     font-family:inherit;
 }
 
-/* ================= LOADING ================= */
-.loading{text-align:center;padding:40px 20px;color:#1e40af;font-size:13px;font-weight:700;}
+/* LOADING */
+.loading{text-align:center;padding:40px 20px;color:var(--text-blue);font-size:13px;font-weight:700;}
 
-@media(max-width:600px){
-    .header h1{font-size:17px;}
-    .header .sub-title{font-size:9px;letter-spacing:1px;}
-    .disclaimer{font-size:11px;padding:12px 14px;}
-    .btn-goto,.btn-play{font-size:10px;padding:11px 6px;max-width:160px;}
-    .chart-title{font-size:12px;padding:10px;}
-    .jodi{font-size:15px;min-width:26px;}
-    .panna{font-size:9.5px;width:11px;}
-    tbody td{height:58px;}
-    .date-box{font-size:9px;width:80px;}
-    .date-box .d1,.date-box .d2{font-size:9px;}
-    .date-box .to{font-size:8px;}
-    .cta-title{font-size:15px;}
-    .cta-btn{font-size:12px;padding:13px 20px;}
-    .all-rights{font-size:10px;}
+@media(min-width:500px){
+    .date-box{width:64px;}
+    thead th.date-h{width:64px;}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
-    <h1><span>ROYAL</span> MAGIC PANEL CHART</h1>
+    <h1><span class="black">ROYAL</span> MAGIC PANEL CHART</h1>
     <div class="sub-title">Welcome to Royal Magic Panel Chart Matka</div>
     <div class="menu-icon">☰</div>
 </div>
 
-<!-- DISCLAIMER -->
 <div class="disclaimer">
     Disclaimer: Royal satta hause is for educational & entertainment purposes only. We do not promote or encourage gambling, betting, or illegal activities. Use this site at your own responsibility.
 </div>
 
-<!-- TOP BUTTONS -->
 <div class="top-buttons">
     <a href="#bottom" class="btn-goto">GO TO BOTTOM</a>
     <a href="#" onclick="playGame()" class="btn-play">PLAY GAME / गेम खेलें 🎮</a>
 </div>
 
-<!-- CHART TITLE BAR -->
-<div class="chart-title-bar">
+<div class="chart-title-wrap">
     <div class="chart-title">ROYAL MAGIC PANEL CHART</div>
 </div>
 
-<!-- CHART TABLE -->
 <div class="chart-wrapper">
     <table>
         <thead>
             <tr>
                 <th class="date-h">DATE</th>
-                <th>MON</th>
-                <th>TUE</th>
-                <th>WED</th>
-                <th>THU</th>
-                <th>FRI</th>
-                <th>SAT</th>
+                <th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th>
             </tr>
         </thead>
         <tbody id="chartBody">
-            <tr><td colspan="7" class="loading">Loading chart data...</td></tr>
+            <tr><td colspan="7" class="loading">Loading...</td></tr>
         </tbody>
     </table>
 </div>
 
-<!-- CTA SECTION -->
+<div class="show-more-wrap">
+    <button class="show-more-btn" id="showMoreBtn" onclick="showMore()">▼ SHOW MORE ▼</button>
+</div>
+
 <div class="cta-section">
     <div class="cta-title">Access Panel Charts</div>
     <div class="cta-sub">Create an account and complete the setup payment to view all charts.</div>
     <a href="subscription.html" class="cta-btn">CREATE ACCOUNT / खाता बनाएं 🔑</a>
 </div>
 
-<!-- BOTTOM BUTTONS -->
 <div class="bottom-buttons" id="bottom">
-    <a href="#" class="btn-goto" onclick="window.scrollTo({top:0,behavior:'smooth'})">GO TO TOP</a>
-    <a href="#" onclick="playGame()" class="btn-play">PLAY GAME / गेम खेलें 🎮</a>
+    <a href="#" class="btn-goto" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">GO TO TOP</a>
+    <a href="#" onclick="playGame();return false;" class="btn-play">PLAY GAME / गेम खेलें 🎮</a>
 </div>
 
-<!-- ALL RIGHTS -->
 <div class="all-rights">All Rights Reserved © 2026 Royal Magic Panel Chart</div>
 
-<!-- REFRESH FLOAT -->
 <button class="refresh-float" onclick="loadChart()">REFRESH</button>
-
-<!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/919999999999" target="_blank" class="whatsapp-float">💬</a>
 
 <script src="script.js"></script>

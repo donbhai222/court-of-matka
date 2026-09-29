@@ -27,7 +27,7 @@ body{
     font-weight:700;
 }
 
-/* ============ HEADER - NORMAL (NO BOLD) ============ */
+/* ============ HEADER - EXTRA BOLD ============ */
 .header{
     background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
     padding:14px 60px 14px 14px;
@@ -39,22 +39,40 @@ body{
     box-shadow:0 4px 15px rgba(245,158,11,0.3);
 }
 .header h1{
-    font-size:18px;
-    font-weight:700;
+    font-size:19px;
+    font-weight:900;
     color:#dc2626;
     letter-spacing:1px;
     margin-bottom:3px;
     text-transform:uppercase;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Arial Black','Helvetica',sans-serif;
     line-height:1.1;
+    text-shadow:
+        -0.8px -0.8px 0 #dc2626,
+        0.8px -0.8px 0 #dc2626,
+        -0.8px 0.8px 0 #dc2626,
+        0.8px 0.8px 0 #dc2626,
+        -0.8px 0 0 #dc2626,
+        0.8px 0 0 #dc2626,
+        0 -0.8px 0 #dc2626,
+        0 0.8px 0 #dc2626;
 }
 .header h1 .black{
     color:#111827;
+    text-shadow:
+        -0.8px -0.8px 0 #111827,
+        0.8px -0.8px 0 #111827,
+        -0.8px 0.8px 0 #111827,
+        0.8px 0.8px 0 #111827,
+        -0.8px 0 0 #111827,
+        0.8px 0 0 #111827,
+        0 -0.8px 0 #111827,
+        0 0.8px 0 #111827;
 }
 .header .sub-title{
     font-size:9px;
     color:#dc2626;
-    font-weight:600;
+    font-weight:700;
     letter-spacing:1.5px;
     text-transform:uppercase;
 }
@@ -70,7 +88,7 @@ body{
     line-height:1;
 }
 
-/* ============ DISCLAIMER - NORMAL ============ */
+/* ============ DISCLAIMER ============ */
 .disclaimer{
     background:#fef9c3;
     padding:14px 16px;
@@ -82,7 +100,7 @@ body{
     border-bottom:1px solid #fde68a;
 }
 
-/* ============ TOP BUTTONS - NORMAL ============ */
+/* ============ TOP BUTTONS ============ */
 .top-buttons{
     display:flex;
     gap:10px;
@@ -90,8 +108,6 @@ body{
     justify-content:center;
     align-items:center;
 }
-
-/* GO TO BOTTOM / TOP - SKY BLUE */
 .btn-goto{
     padding:11px 18px;
     background:linear-gradient(135deg,#38bdf8,#0ea5e9);
@@ -111,8 +127,6 @@ body{
     font-family:'Segoe UI',sans-serif;
     letter-spacing:0.5px;
 }
-
-/* PLAY GAME - ORANGE GRADIENT */
 .btn-play{
     flex:1;
     padding:11px 12px;
@@ -149,7 +163,7 @@ body{
     box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* ============ CHART TITLE - EXTRA BOLD (FAKE BOLD) ============ */
+/* ============ CHART TITLE - EXTRA BOLD ============ */
 .chart-title{
     background:var(--bg-pink);
     color:#ffffff;
@@ -184,20 +198,18 @@ table{
     table-layout:fixed;
     background:#fff;
 }
-
-/* TABLE HEADER - NORMAL */
 thead th{
     background:var(--bg-yellow);
     color:#111827;
-    font-size:11px;
-    padding:10px 2px;
+    font-size:10px;
+    padding:8px 2px;
     border:1px solid var(--border-dark);
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:0.5px;
     font-family:'Segoe UI',sans-serif;
 }
-thead th.date-h{width:52px;}
+thead th.date-h{width:56px;}
 tbody td{
     border:1px solid var(--border-dark);
     padding:0;
@@ -208,27 +220,32 @@ tbody td{
     position:relative;
 }
 
-/* ============ DATE BOX - NORMAL ============ */
+/* ============ DATE BOX - POORA DATE 3 LINES ME ============ */
 .date-box{
     background:var(--bg-date)!important;
-    font-size:8px;
+    font-size:7.5px;
     font-weight:700;
     color:#1e40af;
     line-height:1.15;
-    padding:4px 2px;
+    padding:3px 1px;
     font-family:'Segoe UI',sans-serif;
-    letter-spacing:0.2px;
+    width:56px;
+    vertical-align:middle;
+    text-align:center;
 }
-.date-box .d1,.date-box .d2{
-    font-size:9px;
+.date-box .d-full{
+    font-size:7.5px;
     font-weight:700;
     color:#1e40af;
     line-height:1.15;
+    white-space:nowrap;
+    letter-spacing:0;
 }
-.date-box .to{
-    font-size:8px;
-    color:#1e40af;
+.date-box .d-to{
+    font-size:7px;
     font-weight:600;
+    color:#1e40af;
+    line-height:1.1;
     margin:1px 0;
 }
 
@@ -257,40 +274,40 @@ tbody td{
     letter-spacing:0.2px;
 }
 
-/* ============ JODI - EXTRA BOLD (FAKE BOLD 8-DIRECTION) ============ */
+/* ============ JODI - CHHOTA + EXTRA BOLD ============ */
 .jodi{
-    font-size:20px;
+    font-size:17px;
     font-weight:900;
     color:#111827;
     margin:0 3px;
     letter-spacing:1px;
     font-family:'Arial Black','Helvetica',sans-serif;
-    min-width:28px;
+    min-width:24px;
     text-align:center;
     line-height:1;
     text-shadow:
-        -0.8px -0.8px 0 #111827,
-        0.8px -0.8px 0 #111827,
-        -0.8px 0.8px 0 #111827,
-        0.8px 0.8px 0 #111827,
-        -0.8px 0 0 #111827,
-        0.8px 0 0 #111827,
-        0 -0.8px 0 #111827,
-        0 0.8px 0 #111827;
+        -0.7px -0.7px 0 #111827,
+        0.7px -0.7px 0 #111827,
+        -0.7px 0.7px 0 #111827,
+        0.7px 0.7px 0 #111827,
+        -0.7px 0 0 #111827,
+        0.7px 0 0 #111827,
+        0 -0.7px 0 #111827,
+        0 0.7px 0 #111827;
 }
 
-/* ============ RED HOUSE - FAKE BOLD RED ============ */
+/* ============ RED HOUSE ============ */
 .red-house .jodi{
     color:#dc2626!important;
     text-shadow:
-        -0.8px -0.8px 0 #dc2626,
-        0.8px -0.8px 0 #dc2626,
-        -0.8px 0.8px 0 #dc2626,
-        0.8px 0.8px 0 #dc2626,
-        -0.8px 0 0 #dc2626,
-        0.8px 0 0 #dc2626,
-        0 -0.8px 0 #dc2626,
-        0 0.8px 0 #dc2626;
+        -0.7px -0.7px 0 #dc2626,
+        0.7px -0.7px 0 #dc2626,
+        -0.7px 0.7px 0 #dc2626,
+        0.7px 0.7px 0 #dc2626,
+        -0.7px 0 0 #dc2626,
+        0.7px 0 0 #dc2626,
+        0 -0.7px 0 #dc2626,
+        0 0.7px 0 #dc2626;
 }
 .red-house .panna{color:#dc2626!important;}
 
@@ -307,7 +324,7 @@ tbody td{
     padding:6px;
 }
 
-/* ============ SHOW MORE - NORMAL ============ */
+/* ============ SHOW MORE ============ */
 .show-more-wrap{
     text-align:center;
     padding:14px;
@@ -327,7 +344,7 @@ tbody td{
     font-family:'Segoe UI',sans-serif;
 }
 
-/* ============ CTA - NORMAL ============ */
+/* ============ CTA ============ */
 .cta-section{
     margin:14px 12px;
     background:#fff;
@@ -370,7 +387,7 @@ tbody td{
     font-family:'Segoe UI',sans-serif;
 }
 
-/* ============ BOTTOM - NORMAL ============ */
+/* ============ BOTTOM ============ */
 .bottom-buttons{
     display:flex;
     gap:10px;
@@ -432,6 +449,7 @@ tbody td{
 
 @media(min-width:500px){
     thead th.date-h{width:64px;}
+    .date-box{width:64px;}
 }
 </style>
 </head>

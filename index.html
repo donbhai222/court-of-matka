@@ -14,6 +14,8 @@
     --text-blue:#1e40af;
     --text-red:#dc2626;
     --border-dark:#1e293b;
+    --sky-blue:#0ea5e9;
+    --sky-blue-light:#38bdf8;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{overflow-x:hidden;}
@@ -27,7 +29,7 @@ body{
     font-weight:700;
 }
 
-/* ============ HEADER - EXTRA BOLD ============ */
+/* ============ HEADER ============ */
 .header{
     background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
     padding:14px 60px 14px 14px;
@@ -153,14 +155,14 @@ body{
     50%{transform:scale(1.02);}
 }
 
-/* ============ CHART CONTAINER ============ */
+/* ============ CHART CONTAINER - SKY BLUE OUTLINE ============ */
 .chart-container{
     margin:0 8px 12px;
-    border:2px solid var(--border-dark);
-    border-radius:10px;
+    border:3px solid var(--sky-blue);
+    border-radius:12px;
     overflow:hidden;
     background:#fff;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    box-shadow:0 4px 20px rgba(14,165,233,0.3),0 0 25px rgba(56,189,248,0.25);
 }
 
 /* ============ CHART TITLE - EXTRA BOLD ============ */
@@ -175,7 +177,7 @@ body{
     letter-spacing:1.5px;
     text-transform:uppercase;
     line-height:1.1;
-    border-bottom:2px solid var(--border-dark);
+    border-bottom:2px solid var(--sky-blue);
     text-shadow:
         -1px -1px 0 #ffffff,
         1px -1px 0 #ffffff,
@@ -220,7 +222,7 @@ tbody td{
     position:relative;
 }
 
-/* ============ DATE BOX - POORA DATE 3 LINES ME ============ */
+/* ============ DATE BOX ============ */
 .date-box{
     background:var(--bg-date)!important;
     font-size:7.5px;
@@ -260,7 +262,7 @@ tbody td{
     min-height:54px;
 }
 
-/* ============ PANNA - NORMAL ============ */
+/* ============ PANNA ============ */
 .panna{
     display:flex;
     flex-direction:column;
@@ -274,7 +276,7 @@ tbody td{
     letter-spacing:0.2px;
 }
 
-/* ============ JODI - CHHOTA + EXTRA BOLD ============ */
+/* ============ JODI ============ */
 .jodi{
     font-size:17px;
     font-weight:900;
@@ -320,28 +322,9 @@ tbody td{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
+    font-size:26px;
     padding:6px;
-}
-
-/* ============ SHOW MORE ============ */
-.show-more-wrap{
-    text-align:center;
-    padding:14px;
-}
-.show-more-btn{
-    padding:12px 30px;
-    background:linear-gradient(135deg,#a78bfa,#7c3aed);
-    color:#fff;
-    border:none;
-    border-radius:8px;
-    font-size:13px;
-    font-weight:700;
-    cursor:pointer;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    box-shadow:0 4px 12px rgba(139,92,246,0.4);
-    font-family:'Segoe UI',sans-serif;
+    line-height:1;
 }
 
 /* ============ CTA ============ */
@@ -485,10 +468,6 @@ tbody td{
             </tbody>
         </table>
     </div>
-</div>
-
-<div class="show-more-wrap">
-    <button class="show-more-btn" id="showMoreBtn" onclick="showMore()">▼ SHOW MORE ▼</button>
 </div>
 
 <div class="cta-section">

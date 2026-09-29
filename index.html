@@ -36,7 +36,7 @@ body{
     top:0;
     z-index:100;
     border-bottom:2px solid #f59e0b;
-    box-shadow:0 4px 15px rgba(245,158,11,0.3),0 0 25px rgba(251,191,36,0.4);
+    box-shadow:0 4px 15px rgba(245,158,11,0.3);
 }
 .header h1{
     font-size:16px;
@@ -47,12 +47,10 @@ body{
     text-transform:uppercase;
     font-family:'Arial Black','Segoe UI',sans-serif;
     -webkit-text-stroke:0.4px #7f1d1d;
-    text-shadow:0 0 10px rgba(220,38,38,0.6),0 0 20px rgba(220,38,38,0.4);
 }
 .header h1 .black{
     color:#111827;
     -webkit-text-stroke:0.4px #000;
-    text-shadow:0 0 10px rgba(251,191,36,0.9),0 0 20px rgba(251,191,36,0.6);
 }
 .header .sub-title{
     font-size:9px;
@@ -60,7 +58,6 @@ body{
     font-weight:900;
     letter-spacing:1.5px;
     text-transform:uppercase;
-    text-shadow:0 0 8px rgba(220,38,38,0.4);
 }
 .menu-icon{
     position:absolute;
@@ -94,48 +91,63 @@ body{
     justify-content:center;
     align-items:center;
 }
+
+/* GO TO BOTTOM / TOP - SKY BLUE */
 .btn-goto{
     padding:11px 18px;
-    background:#c4b5fd;
-    color:#111827;
-    border:2px solid #7c3aed;
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+    color:#ffffff;
+    border:2px solid #0284c7;
     border-radius:8px;
     font-size:10.5px;
     font-weight:900;
     cursor:pointer;
     text-transform:uppercase;
-    box-shadow:0 3px 10px rgba(139,92,246,0.35),0 0 15px rgba(167,139,250,0.4);
+    box-shadow:0 3px 10px rgba(14,165,233,0.4);
     text-decoration:none;
     display:inline-flex;
     align-items:center;
     justify-content:center;
     white-space:nowrap;
+    font-family:inherit;
+    text-shadow:0 1px 2px rgba(0,0,0,0.2);
 }
+.btn-goto:hover{
+    background:linear-gradient(135deg,#0ea5e9,#0284c7);
+    transform:translateY(-1px);
+}
+
+/* PLAY GAME - LIGHT ORANGE + DARK ORANGE MIX */
 .btn-play{
     flex:1;
     padding:11px 12px;
-    background:linear-gradient(135deg,#f97316,#ea580c);
-    color:#fff;
-    border:2px solid #c2410c;
+    background:linear-gradient(135deg,#fb923c 0%,#f97316 40%,#ea580c 70%,#c2410c 100%);
+    color:#ffffff;
+    border:2px solid #9a3412;
     border-radius:8px;
     font-size:10.5px;
     font-weight:900;
     cursor:pointer;
     text-transform:uppercase;
-    box-shadow:0 0 15px rgba(249,115,22,0.9),0 0 30px rgba(249,115,22,0.5);
-    animation:playBlink 1.2s infinite;
+    box-shadow:0 3px 12px rgba(234,88,12,0.5),inset 0 1px 3px rgba(255,255,255,0.3);
     text-decoration:none;
     display:inline-flex;
     align-items:center;
     justify-content:center;
     white-space:nowrap;
+    font-family:inherit;
+    text-shadow:0 1px 2px rgba(0,0,0,0.3);
+    animation:playBlink 1.5s infinite;
 }
 @keyframes playBlink{
-    0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 15px rgba(249,115,22,0.9),0 0 30px rgba(249,115,22,0.5);}
-    50%{opacity:0.9;transform:scale(0.98);box-shadow:0 0 25px rgba(249,115,22,1),0 0 45px rgba(249,115,22,0.7);}
+    0%,100%{transform:scale(1);box-shadow:0 3px 12px rgba(234,88,12,0.5),inset 0 1px 3px rgba(255,255,255,0.3);}
+    50%{transform:scale(1.02);box-shadow:0 6px 20px rgba(249,115,22,0.8),inset 0 1px 3px rgba(255,255,255,0.4);}
+}
+.btn-play:hover{
+    background:linear-gradient(135deg,#f97316 0%,#ea580c 40%,#c2410c 70%,#9a3412 100%);
 }
 
-/* ============ CHART TITLE - EXTRA HIGH BOLD ============ */
+/* ============ CHART TITLE - EXTRA BOLD NO NEON ============ */
 .chart-title-wrap{
     padding:0 12px 10px;
 }
@@ -151,19 +163,9 @@ body{
     text-align:center;
     letter-spacing:2.5px;
     text-transform:uppercase;
-    -webkit-text-stroke:1px #ffffff;
-    text-shadow:
-        0 0 3px #ffffff,
-        0 0 6px #ffffff,
-        0 0 12px #f9a8d4,
-        0 0 18px #ec4899,
-        0 0 28px #ec4899,
-        0 0 40px rgba(236,72,153,0.8);
-    box-shadow:
-        0 0 20px rgba(236,72,153,0.9),
-        0 0 40px rgba(236,72,153,0.6),
-        0 0 60px rgba(236,72,153,0.4),
-        inset 0 0 20px rgba(255,255,255,0.3);
+    -webkit-text-stroke:1.2px #ffffff;
+    text-shadow:0 2px 4px rgba(0,0,0,0.35);
+    box-shadow:0 6px 20px rgba(236,72,153,0.5);
     border:2px solid #fbcfe8;
 }
 
@@ -189,7 +191,6 @@ thead th{
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
-    text-shadow:0 0 5px rgba(251,191,36,0.6);
 }
 thead th.date-h{width:52px;}
 tbody td{
@@ -236,7 +237,7 @@ tbody td{
     min-height:54px;
 }
 
-/* ============ PANNA (side 3 digits) ============ */
+/* ============ PANNA (side 3 digits) - NO NEON ============ */
 .panna{
     display:flex;
     flex-direction:column;
@@ -248,11 +249,8 @@ tbody td{
     align-items:center;
     -webkit-text-stroke:0.2px #111827;
 }
-.panna span{
-    text-shadow:0 0 3px rgba(255,255,255,0.8),0 0 6px rgba(59,130,246,0.4);
-}
 
-/* ============ JODI - EXTRA HIGH BOLD + REAL NEON ============ */
+/* ============ JODI - EXTRA BOLD NO NEON ============ */
 .jodi{
     font-size:16px;
     font-weight:900;
@@ -263,56 +261,15 @@ tbody td{
     min-width:26px;
     text-align:center;
     -webkit-text-stroke:0.6px #000;
-    text-shadow:
-        0 0 2px #000,
-        0 0 4px #000,
-        0 0 8px #2563eb,
-        0 0 14px #3b82f6,
-        0 0 22px #60a5fa,
-        0 0 30px rgba(96,165,250,0.6);
-    position:relative;
-}
-
-/* Green neon */
-.jodi.green-neon{
-    color:#111827;
-    text-shadow:
-        0 0 2px #000,
-        0 0 4px #000,
-        0 0 8px #16a34a,
-        0 0 14px #22c55e,
-        0 0 22px #4ade80,
-        0 0 30px rgba(74,222,128,0.7);
-}
-
-/* Red neon */
-.jodi.red-neon{
-    color:#dc2626;
-    text-shadow:
-        0 0 2px #7f1d1d,
-        0 0 4px #7f1d1d,
-        0 0 8px #dc2626,
-        0 0 14px #ef4444,
-        0 0 22px #f87171,
-        0 0 30px rgba(248,113,113,0.8);
-    -webkit-text-stroke:0.6px #7f1d1d;
+    text-shadow:0 1px 2px rgba(0,0,0,0.15);
 }
 
 /* ============ RED HOUSE ============ */
 .red-house .jodi,
 .red-house .panna{color:#dc2626!important;}
 .red-house .jodi{
-    text-shadow:
-        0 0 2px #7f1d1d,
-        0 0 4px #7f1d1d,
-        0 0 8px #dc2626,
-        0 0 14px #ef4444,
-        0 0 22px #f87171,
-        0 0 30px rgba(248,113,113,0.8);
     -webkit-text-stroke:0.6px #7f1d1d;
-}
-.red-house .panna span{
-    text-shadow:0 0 3px rgba(255,255,255,0.8),0 0 6px rgba(220,38,38,0.6);
+    text-shadow:0 1px 2px rgba(0,0,0,0.15);
 }
 
 /* ============ LOCK CELL ============ */
@@ -326,7 +283,6 @@ tbody td{
     justify-content:center;
     font-size:24px;
     padding:6px;
-    text-shadow:0 0 8px rgba(220,38,38,0.6),0 0 16px rgba(220,38,38,0.4);
 }
 
 /* ============ SHOW MORE ============ */
@@ -345,7 +301,7 @@ tbody td{
     cursor:pointer;
     letter-spacing:1px;
     text-transform:uppercase;
-    box-shadow:0 0 15px rgba(167,139,250,0.7),0 0 25px rgba(139,92,246,0.4);
+    box-shadow:0 4px 12px rgba(139,92,246,0.4);
     font-family:inherit;
 }
 
@@ -357,7 +313,7 @@ tbody td{
     border-radius:14px;
     padding:22px 16px;
     text-align:center;
-    box-shadow:0 4px 20px rgba(0,0,0,0.08),0 0 30px rgba(251,191,36,0.2);
+    box-shadow:0 4px 20px rgba(0,0,0,0.08);
 }
 .cta-title{
     font-size:16px;
@@ -366,7 +322,6 @@ tbody td{
     margin-bottom:6px;
     text-transform:uppercase;
     letter-spacing:0.5px;
-    text-shadow:0 0 8px rgba(30,64,175,0.3);
 }
 .cta-sub{
     font-size:11px;
@@ -386,7 +341,7 @@ tbody td{
     font-weight:900;
     text-decoration:none;
     text-transform:uppercase;
-    box-shadow:0 5px 20px rgba(22,163,74,0.5),0 0 30px rgba(34,197,94,0.4);
+    box-shadow:0 5px 20px rgba(22,163,74,0.4);
     text-align:center;
     letter-spacing:1px;
 }
@@ -424,7 +379,7 @@ tbody td{
     align-items:center;
     justify-content:center;
     font-size:28px;
-    box-shadow:0 5px 20px rgba(37,211,102,0.6),0 0 25px rgba(37,211,102,0.5);
+    box-shadow:0 5px 20px rgba(37,211,102,0.5);
     cursor:pointer;
     z-index:9999;
     text-decoration:none;
@@ -441,7 +396,7 @@ tbody td{
     font-weight:900;
     letter-spacing:1px;
     text-transform:uppercase;
-    box-shadow:0 0 20px rgba(34,197,94,0.7),0 5px 20px rgba(21,128,61,0.4);
+    box-shadow:0 5px 20px rgba(21,128,61,0.4);
     cursor:pointer;
     z-index:9998;
     border:none;

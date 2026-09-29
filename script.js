@@ -3,10 +3,6 @@ const SHEET_ID = '1IReRyQjRvWWVjZTym_8DDXvx9Jttjfgy18McY53gM5w';
 const SHEET_NAME = 'Sheet1';
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-const ROWS_PER_LOAD = 8;
-let allRows = [];
-let shownRows = 0;
-
 // ================= LOAD =================
 async function loadChart() {
     try {
@@ -19,32 +15,21 @@ async function loadChart() {
             return;
         }
 
-        allRows = rows.slice(1).filter(r => r[0] && r[0].trim() !== '');
-        shownRows = 0;
-        document.getElementById('chartBody').innerHTML = '';
-        showMore(true);
+        const allRows = rows.slice(1).filter(r => r[0] && r[0].trim() !== '');
+        const tbody = document.getElementById('chartBody');
+        tbody.innerHTML = '';
+
+        // Saari rows ek saath dikhao
+        for (let i = 0; i < allRows.length; i++) {
+            tbody.appendChild(buildRow(allRows[i]));
+        }
+
+        if (tbody.children.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="loading">No data</td></tr>';
+        }
     } catch (err) {
         console.error(err);
         document.getElementById('chartBody').innerHTML = '<tr><td colspan="7" class="loading">Error loading chart</td></tr>';
-    }
-}
-
-// ================= SHOW MORE =================
-function showMore(firstLoad) {
-    const tbody = document.getElementById('chartBody');
-    const end = Math.min(shownRows + ROWS_PER_LOAD, allRows.length);
-
-    for (let i = shownRows; i < end; i++) {
-        tbody.appendChild(buildRow(allRows[i]));
-    }
-    shownRows = end;
-
-    const btn = document.getElementById('showMoreBtn');
-    if (shownRows >= allRows.length) {
-        btn.style.display = 'none';
-    } else {
-        btn.style.display = 'inline-block';
-        btn.innerText = '▼ SHOW MORE (' + (allRows.length - shownRows) + ') ▼';
     }
 }
 
@@ -52,7 +37,7 @@ function showMore(firstLoad) {
 function buildRow(row) {
     const tr = document.createElement('tr');
 
-    // DATE CELL - Poora date upar, to bich, poora date neeche
+    // DATE CELL
     const dateTd = document.createElement('td');
     dateTd.className = 'date-box';
     const dateText = row[0].trim();
@@ -69,7 +54,7 @@ function buildRow(row) {
     }
     tr.appendChild(dateTd);
 
-    // 6 days - lock sirf pehla empty cell me
+    // 6 days - LOCK sirf PEHLA EMPTY CELL me
     let lockPlaced = false;
     for (let j = 1; j <= 6; j++) {
         const td = document.createElement('td');
@@ -77,11 +62,13 @@ function buildRow(row) {
 
         if (!val || val === '🔒' || val.toUpperCase() === 'LOCKED') {
             if (!lockPlaced) {
+                // 🔒 Lock sirf pehla empty cell me
                 td.className = 'lock-cell';
                 td.innerHTML = `<div class="lock-btn">🔒</div>`;
                 td.onclick = () => location.href = 'subscription.html';
                 lockPlaced = true;
             }
+            // Baaki empty cells khaali (lock nahi)
         } else if (val.includes('-')) {
             const parts = val.split('-');
             if (parts.length === 3) {

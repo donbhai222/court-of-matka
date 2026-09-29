@@ -3,287 +3,251 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subscription Plans | Royal Magic Panel Chart</title>
+<title>Subscription | Royal Magic Panel Chart</title>
 <style>
-:root{--bg-main:#fdf8e8;--bg-header:#1a472a;--bg-header-2:#0f2d1a;--bg-card:#ffffff;--text-main:#1a1a1a;--text-soft:#555555;--gold:#d4af37;--gold-dark:#b8960f;--border-gold:#d4af37;--border-soft:#e8d99e;--red:#dc2626;--green:#16a34a;}
+:root{--bg-page:#fff9e6;--bg-header:#fef3c7;--bg-header-2:#fde68a;--text-main:#1a1a1a;--text-soft:#1e40af;--red:#dc2626;--green:#16a34a;--orange:#ea580c;--yellow:#fef9c3;--gold:#f59e0b;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg-main);color:var(--text-main);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh;padding:0 0 80px 0;}
-.header{background:linear-gradient(135deg,var(--bg-header),var(--bg-header-2));padding:20px 15px;text-align:center;border-bottom:3px solid var(--gold);box-shadow:0 4px 15px rgba(0,0,0,0.3);position:relative;}
-.header h1{font-size:22px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:2px;text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin-bottom:6px;}
-.header .sub-title{font-size:12px;color:#ffffff;font-weight:600;letter-spacing:1px;opacity:0.95;}
-.header::after{content:'⭐ ⭐ ⭐';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--gold);opacity:0.6;letter-spacing:8px;}
-.back-wrap{max-width:900px;margin:15px auto 0;padding:0 15px;}
-.back-btn{display:inline-flex;align-items:center;gap:6px;background:#fff4d6;border:1.5px solid var(--gold);color:var(--gold-dark);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer;transition:0.2s;}
-.back-btn:hover{background:var(--gold);color:#fff;}
-.status-bar{max-width:900px;margin:15px auto 0;padding:0 15px;}
-.status-box{background:linear-gradient(135deg,#fff4d6,#fef9e7);border:2px solid var(--gold);border-radius:12px;padding:16px;text-align:center;box-shadow:0 3px 10px rgba(212,175,55,0.2);}
-.status-box .sb-label{font-size:11px;color:var(--text-soft);text-transform:uppercase;letter-spacing:2px;font-weight:800;margin-bottom:6px;}
-.status-box .sb-value{font-size:20px;font-weight:900;color:var(--green);}
-.status-box .sb-value.free{color:var(--text-soft);}
-.status-box .sb-value.basic{color:#0891b2;}
-.status-box .sb-value.pro{color:var(--gold-dark);}
-.container{max-width:900px;margin:0 auto;padding:0 15px;}
-.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:25px;}
-.plan{background:var(--bg-card);border:2px solid var(--border-soft);border-radius:16px;padding:25px 20px;text-align:center;position:relative;transition:0.3s;box-shadow:0 4px 15px rgba(0,0,0,0.05);}
-.plan:hover{transform:translateY(-6px);box-shadow:0 12px 35px rgba(212,175,55,0.35);border-color:var(--gold);}
-.plan.popular{border-color:var(--gold);border-width:3px;box-shadow:0 6px 25px rgba(212,175,55,0.3);}
-.plan.popular:hover{box-shadow:0 15px 40px rgba(212,175,55,0.5);}
-.plan.current{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:var(--green);}
-.popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:5px 16px;border-radius:20px;font-size:10px;font-weight:900;letter-spacing:1.5px;box-shadow:0 3px 10px rgba(212,175,55,0.5);}
-.plan-icon{font-size:48px;margin-bottom:12px;}
-.plan-name{font-size:17px;font-weight:900;color:var(--text-main);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
-.plan-price{font-size:38px;font-weight:900;color:var(--gold-dark);margin-bottom:4px;font-family:'Courier New',monospace;}
-.plan-price span{font-size:14px;color:var(--text-soft);font-weight:600;}
-.plan-period{font-size:12px;color:var(--text-soft);margin-bottom:18px;font-weight:600;}
-.plan-features{text-align:left;margin-bottom:20px;min-height:130px;padding:0 5px;}
-.plan-features div{padding:7px 0;font-size:13px;color:var(--text-main);font-weight:600;border-bottom:1px dashed var(--border-soft);}
-.plan-features div:last-child{border-bottom:none;}
-.plan-features div::before{content:'✅ ';color:var(--green);margin-right:6px;font-weight:900;}
-.plan-features div.no::before{content:'❌ ';color:var(--red);}
-.plan-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--green),#059669);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:0.3s;font-family:inherit;box-shadow:0 4px 15px rgba(22,163,74,0.3);}
-.plan-btn:hover{transform:scale(1.03);box-shadow:0 8px 25px rgba(22,163,74,0.5);}
-.plan.popular .plan-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dark));box-shadow:0 4px 15px rgba(212,175,55,0.4);}
-.plan.popular .plan-btn:hover{box-shadow:0 8px 25px rgba(212,175,55,0.6);}
-.plan.current .plan-btn{background:var(--text-soft);cursor:not-allowed;box-shadow:none;}
-.plan.current .plan-btn:hover{transform:none;box-shadow:none;}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:10000;align-items:center;justify-content:center;padding:20px;}
-.modal.show{display:flex;}
-.modal-card{background:var(--bg-card);border:3px solid var(--gold);border-radius:20px;padding:30px 25px;width:100%;max-width:420px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:modalPop 0.3s ease;}
-@keyframes modalPop{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
-.modal-title{font-size:20px;font-weight:900;color:var(--gold-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-.modal-amount{font-size:42px;font-weight:900;color:var(--green);margin-bottom:20px;font-family:'Courier New',monospace;}
-.upi-box{background:#fdf8e8;border:2px solid var(--border-gold);border-radius:12px;padding:16px;margin-bottom:15px;}
-.upi-box .lbl{font-size:11px;font-weight:800;color:var(--text-soft);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-.upi-box .val{font-size:16px;font-weight:900;color:var(--text-main);letter-spacing:1px;user-select:all;word-break:break-all;}
-.copy-btn{background:var(--gold);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer;margin-top:8px;font-family:inherit;}
-.copy-btn:hover{background:var(--gold-dark);}
-.modal-note{font-size:12px;color:var(--text-soft);margin-bottom:15px;line-height:1.6;text-align:left;background:#fff4d6;padding:10px 12px;border-radius:8px;border-left:3px solid var(--gold);}
-.modal-input{width:100%;padding:14px;background:#ffffff;border:2px solid var(--border-gold);border-radius:10px;color:var(--text-main);font-size:14px;margin-bottom:15px;outline:none;font-family:inherit;font-weight:700;}
-.modal-input:focus{border-color:var(--green);}
-.modal-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--green),#059669);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:900;cursor:pointer;margin-bottom:10px;font-family:inherit;letter-spacing:1px;text-transform:uppercase;}
-.modal-btn:hover{transform:scale(1.02);}
-.modal-btn.cancel{background:#f5f5f5;color:var(--text-soft);border:1px solid var(--border-soft);}
-.modal-btn.cancel:hover{background:#e8d99e;color:var(--text-main);}
-.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:linear-gradient(135deg,var(--green),#059669);color:#fff;padding:14px 26px;border-radius:30px;font-weight:800;font-size:13px;z-index:10001;display:none;opacity:0;transition:0.3s;max-width:90%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.3);}
-.toast.show{display:block;opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.error{background:linear-gradient(135deg,var(--red),#991b1b);}
-.footer{text-align:center;padding:25px 15px;font-size:11px;color:var(--text-soft);font-weight:700;letter-spacing:0.5px;border-top:1px solid var(--border-soft);margin-top:40px;}
-@media(max-width:600px){.header h1{font-size:16px;}.header .sub-title{font-size:10px;}.plan-price{font-size:32px;}.modal-card{padding:25px 20px;}.modal-amount{font-size:36px;}}
+body{background:var(--bg-page);color:var(--text-main);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh;padding-bottom:80px;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,var(--bg-header),var(--bg-header-2));padding:16px 15px;text-align:center;position:relative;border-bottom:2px solid #e5c78a;}
+.header h1{font-size:20px;font-weight:900;color:#dc2626;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.header h1 span{color:#1a1a1a;}
+.header .sub-title{font-size:10px;color:#dc2626;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+.menu-icon{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:26px;color:#1a1a1a;cursor:pointer;font-weight:900;}
+
+/* CARD */
+.card{margin:16px 14px;background:#fff;border:2px solid #fcd34d;border-radius:14px;padding:24px 20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);}
+
+.card-title{font-size:18px;font-weight:900;color:#1a1a1a;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
+.card-sub{font-size:12px;font-weight:800;color:#1e40af;text-align:center;margin-bottom:18px;}
+
+/* NOTICE BOX */
+.notice-box{background:#fefce8;border:1.5px dashed #f59e0b;border-radius:10px;padding:14px;margin-bottom:18px;}
+.notice-title{font-size:12px;font-weight:900;color:#1a1a1a;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.notice-text{font-size:11px;color:#1e40af;line-height:1.55;font-weight:700;}
+.notice-text b{color:#dc2626;}
+
+/* FEE BOX */
+.fee-box{background:#fefce8;border:1.5px solid #fcd34d;border-radius:12px;padding:20px;text-align:center;margin-bottom:20px;}
+.fee-lbl{font-size:11px;color:#1e40af;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.fee-amt{font-size:38px;font-weight:900;color:#dc2626;font-family:'Courier New',monospace;}
+
+/* SCAN LABEL */
+.scan-lbl{text-align:center;font-size:12px;font-weight:900;color:#1a1a1a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+
+/* QR BOX */
+.qr-wrap{text-align:center;margin-bottom:16px;}
+.qr-box{display:inline-block;padding:14px;background:#fff;border:3px solid #06b6d4;border-radius:14px;box-shadow:0 4px 15px rgba(6,182,212,0.2);}
+.qr-img{width:220px;height:220px;display:block;}
+
+/* UPI SECTION */
+.upi-label{font-size:12px;font-weight:900;color:#1a1a1a;text-transform:uppercase;text-align:center;letter-spacing:0.5px;margin-bottom:10px;}
+.upi-box{background:#fefce8;border:2px solid #fcd34d;border-radius:12px;padding:16px;text-align:center;margin-bottom:12px;}
+.upi-val{font-size:16px;font-weight:900;color:#1a1a1a;letter-spacing:0.5px;word-break:break-all;margin-bottom:10px;user-select:all;}
+.copy-btn{background:linear-gradient(135deg,#fb923c,#ea580c);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;letter-spacing:0.5px;font-family:inherit;box-shadow:0 3px 10px rgba(234,88,12,0.3);}
+.copy-btn:hover{transform:translateY(-2px);}
+
+/* INSTRUCTIONS */
+.instr-box{background:#fefce8;border:1.5px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:18px;}
+.instr-title{font-size:13px;font-weight:900;color:#1a1a1a;margin-bottom:10px;text-transform:uppercase;}
+.instr-item{font-size:11.5px;color:#1e40af;line-height:1.6;font-weight:700;margin-bottom:8px;padding-left:16px;position:relative;}
+.instr-item::before{content:'•';position:absolute;left:4px;color:#dc2626;font-weight:900;font-size:16px;}
+.instr-item b{background:#fef3c7;padding:1px 6px;border-radius:3px;color:#dc2626;}
+
+/* SUBMIT BTN */
+.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.5px;text-transform:uppercase;font-family:inherit;box-shadow:0 5px 20px rgba(22,163,74,0.4);margin-bottom:10px;}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(22,163,74,0.6);}
+
+/* FORM */
+.form-label{font-size:11px;font-weight:900;color:#ea580c;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;margin-top:14px;}
+.form-input{width:100%;padding:14px;background:#fff;border:2px solid #fcd34d;border-radius:10px;color:#1a1a1a;font-size:14px;outline:none;font-family:inherit;font-weight:700;}
+.form-input:focus{border-color:#16a34a;}
+
+/* ENTER DETAILS SPECIFIC */
+.enter-card{margin:16px 14px;background:#fff;border:2px solid #fcd34d;border-radius:14px;padding:28px 20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);text-align:center;}
+.enter-title{font-size:22px;font-weight:900;color:#1a1a1a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.enter-sub{font-size:13px;font-weight:800;color:#1e40af;margin-bottom:20px;}
+
+/* NEXT BTN */
+.next-btn{width:100%;padding:16px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:1px;text-transform:uppercase;font-family:inherit;box-shadow:0 5px 20px rgba(22,163,74,0.4);}
+.next-btn:hover{transform:translateY(-2px);}
+
+/* TERMS */
+.terms{text-align:center;font-size:11px;color:#1e40af;font-weight:700;margin:14px 0 0;line-height:1.5;}
+.terms a{color:#dc2626;text-decoration:none;font-weight:900;}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{position:fixed;bottom:20px;right:18px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 5px 20px rgba(37,211,102,0.5);cursor:pointer;z-index:9999;text-decoration:none;}
+.whatsapp-float::before{content:'';position:absolute;top:0;right:0;width:18px;height:18px;background:#dc2626;border-radius:50%;border:2px solid #fff;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1;}
+.whatsapp-float::after{content:'1';position:absolute;top:-1px;right:0;color:#fff;font-size:11px;font-weight:900;}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:#1e40af;font-weight:700;font-size:13px;}
+
+@media(max-width:600px){
+    .header h1{font-size:16px;}
+    .header .sub-title{font-size:9px;}
+    .card{padding:20px 16px;margin:12px 10px;}
+    .card-title{font-size:16px;}
+    .fee-amt{font-size:34px;}
+    .qr-img{width:180px;height:180px;}
+    .enter-title{font-size:18px;}
+    .next-btn,.submit-btn{font-size:14px;padding:14px;}
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>ROYAL MAGIC PANEL CHART</h1>
-    <div class="sub-title">Subscription Plans</div>
+    <h1><span>ROYAL</span> MAGIC PANEL CHART</h1>
+    <div class="sub-title">Welcome to Royal Magic Panel Chart Matka</div>
+    <div class="menu-icon">☰</div>
 </div>
 
-<div class="back-wrap">
-    <a href="index.html" class="back-btn">← Back to Chart</a>
-</div>
+<!-- STEP 1: ENTER DETAILS -->
+<div id="step1" class="enter-card">
+    <div class="enter-title">ENTER DETAILS</div>
+    <div class="enter-sub">विवरण दर्ज करें</div>
 
-<div class="status-bar">
-    <div class="status-box">
-        <div class="sb-label">Aapka Current Plan</div>
-        <div class="sb-value free" id="currentPlanText">FREE</div>
+    <div class="notice-box" style="text-align:left;">
+        <div class="notice-title">ℹ️ Account Activation Notice</div>
+        <div class="notice-text">
+            After submitting your details and payment, your account will be activated by the admin. You will be able to access the charts once approved.<br>
+            <b>विवरण और भुगतान जमा करने के बाद, आपका account admin द्वारा activate किया जाएगा।</b>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="plans-grid">
+    <label class="form-label" style="text-align:left;display:block;">FULL NAME / पूरा नाम</label>
+    <input type="text" id="userName" class="form-input" placeholder="अपना पूरा नाम / Enter your full name" maxlength="50">
 
-        <div class="plan current" id="planFree">
-            <div class="plan-icon">🆓</div>
-            <div class="plan-name">FREE</div>
-            <div class="plan-price">₹0</div>
-            <div class="plan-period">Forever</div>
-            <div class="plan-features">
-                <div>Limited chart access</div>
-                <div>Basic panel view</div>
-                <div class="no">Locked charts</div>
-                <div class="no">No full history</div>
-            </div>
-            <button class="plan-btn" onclick="selectPlan('Free', 0)">CURRENT PLAN</button>
-        </div>
-
-        <div class="plan popular" id="planBasic">
-            <div class="popular-badge">POPULAR</div>
-            <div class="plan-icon">⚡</div>
-            <div class="plan-name">BASIC</div>
-            <div class="plan-price">₹99<span>/month</span></div>
-            <div class="plan-period">30 Days Access</div>
-            <div class="plan-features">
-                <div>Full chart access</div>
-                <div>All 6 days results</div>
-                <div>Panel chart unlocked</div>
-                <div>Daily updates</div>
-                <div>Priority support</div>
-            </div>
-            <button class="plan-btn" onclick="selectPlan('Basic', 99)">SUBSCRIBE NOW</button>
-        </div>
-
-        <div class="plan" id="planPro">
-            <div class="plan-icon">💎</div>
-            <div class="plan-name">PRO</div>
-            <div class="plan-price">₹299<span>/month</span></div>
-            <div class="plan-period">30 Days Access</div>
-            <div class="plan-features">
-                <div>Everything in Basic</div>
-                <div>VIP badge</div>
-                <div>Full history access</div>
-                <div>24/7 support</div>
-                <div>Early result updates</div>
-            </div>
-            <button class="plan-btn" onclick="selectPlan('Pro', 299)">SUBSCRIBE NOW</button>
-        </div>
-
+    <label class="form-label" style="text-align:left;display:block;">PHONE NUMBER / फ़ोन नंबर</label>
+    <div style="display:flex;gap:8px;">
+        <div style="background:#fefce8;border:2px solid #fcd34d;border-radius:10px;padding:14px 12px;font-weight:900;color:#ea580c;font-size:13px;">+91</div>
+        <input type="tel" id="userPhone" class="form-input" placeholder="10 अंकों का नंबर / 10-digit num" maxlength="10" inputmode="numeric">
     </div>
+
+    <button class="next-btn" style="margin-top:20px;" onclick="goToPayment()">NEXT → आगे बढ़ें</button>
+
+    <div class="terms">By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></div>
 </div>
 
-<div class="modal" id="paymentModal">
-    <div class="modal-card">
-        <div class="modal-title" id="modalPlanName">Subscribe</div>
-        <div class="modal-amount" id="modalAmount">₹99</div>
+<!-- STEP 2: PAYMENT -->
+<div id="step2" class="card" style="display:none;">
+    <div class="card-title">One-Time Account Activation</div>
+    <div class="card-sub">एक बार का खाता सक्रियण भुगतान</div>
 
-        <div class="upi-box">
-            <div class="lbl">Pay to UPI ID:</div>
-            <div class="val" id="upiIdText">yourname@paytm</div>
-            <button class="copy-btn" onclick="copyUpi()">📋 Copy UPI ID</button>
-        </div>
-
-        <div class="modal-note">
-            <b>Steps:</b><br>
-            1. UPI app se upar diye UPI ID pe payment karo<br>
-            2. UTR / Transaction ID neeche daalo<br>
-            3. Submit karo — admin verify karega
-        </div>
-
-        <input type="text" class="modal-input" id="utrInput" placeholder="12 Digit UTR / Transaction ID" inputmode="numeric">
-
-        <button class="modal-btn" onclick="submitPayment()">✅ PAYMENT DONE</button>
-        <button class="modal-btn cancel" onclick="closePayment()">Cancel</button>
+    <div class="fee-box">
+        <div class="fee-lbl">Registration Fee / पंजीकरण शुल्क</div>
+        <div class="fee-amt">₹500</div>
     </div>
+
+    <div class="scan-lbl">SCAN QR CODE TO PAY / क्यूआर कोड स्कैन करें</div>
+
+    <div class="qr-wrap">
+        <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=dd2335763@okaxis%26pn=RoyalMagicPanel" alt="QR Code" class="qr-img">
+        </div>
+    </div>
+
+    <div class="upi-label">OR PAY VIA UPI ID / या यूपीआई आईडी से भुगतान करें</div>
+
+    <div class="upi-box">
+        <div class="upi-val" id="upiIdText">dd2335763@okaxis</div>
+        <button class="copy-btn" onclick="copyUpi()">📋 Copy / कॉपी करें</button>
+    </div>
+
+    <div class="instr-box">
+        <div class="instr-title">INSTRUCTIONS / निर्देश</div>
+        <div class="instr-item"><b>English:</b> Scan the QR code above or copy the UPI ID.</div>
+        <div class="instr-item">Complete the payment of <b>₹500</b> using Google Pay, PhonePe, Paytm, or any UPI app.</div>
+        <div class="instr-item">Save the Transaction Reference ID (UTR / Txn ID) after paying.</div>
+        <div class="instr-item">Click the "Payment Done" button below to submit details.</div>
+        <div class="instr-item" style="margin-top:12px;"><b>Hindi / हिंदी:</b> ऊपर दिए गए क्यूआर कोड को स्कैन करें या यूपीआई आईडी कॉपी करें।</div>
+        <div class="instr-item">Google Pay, PhonePe, Paytm या किसी भी UPI ऐप से <b>₹500</b> का भुगतान करें।</div>
+        <div class="instr-item">भुगतान के बाद ट्रांजेक्शन आईडी (UTR / Txn ID) सुरक्षित रखें।</div>
+        <div class="instr-item">विवरण सबमिट करने के लिए नीचे "Payment Done" बटन पर क्लिक करें।</div>
+    </div>
+
+    <button class="submit-btn" onclick="showUtrForm()">PAYMENT DONE / भुगतान हो गया</button>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- STEP 3: UTR FORM -->
+<div id="step3" class="card" style="display:none;">
+    <div class="card-title">ENTER UTR / Txn ID</div>
+    <div class="card-sub">ट्रांजेक्शन आईडी दर्ज करें</div>
 
-<div class="footer">
-    © 2026 ROYAL MAGIC PANEL CHART • All Rights Reserved
+    <label class="form-label" style="display:block;text-align:left;">UTR / Transaction ID</label>
+    <input type="text" id="utrInput" class="form-input" placeholder="12 अंकों की UTR / Txn ID" inputmode="numeric" maxlength="20">
+
+    <button class="submit-btn" style="margin-top:18px;" onclick="submitPayment()">SUBMIT / सबमिट करें</button>
 </div>
+
+<!-- STEP 4: THANK YOU -->
+<div id="step4" class="card" style="display:none;text-align:center;">
+    <div style="font-size:60px;margin-bottom:12px;">✅</div>
+    <div class="card-title">Thank You!</div>
+    <div class="card-sub">धन्यवाद!</div>
+    <div class="notice-box" style="text-align:left;margin-top:16px;">
+        <div class="notice-text">
+            Your payment is submitted successfully. Admin will verify and activate your account shortly.<br><br>
+            <b>आपका भुगतान सफलतापूर्वक जमा हो गया है। एडमिन जल्द ही सत्यापित करके आपका खाता सक्रिय कर देगा।</b>
+        </div>
+    </div>
+    <a href="index.html" class="next-btn" style="display:inline-block;text-align:center;text-decoration:none;margin-top:14px;">← Back to Chart</a>
+</div>
+
+<a href="https://wa.me/919999999999" target="_blank" class="whatsapp-float">💬</a>
 
 <script>
 const ADMIN_URL = 'https://script.google.com/macros/s/AKfycbzbZwYvAae-eMqoqDJfOCZ61LeVWuDRbVzLJzp-CAqPiEXQw5aYubvVFI5Fsodma9ws/exec';
-const UPI_ID = 'yourname@paytm';
+const UPI_ID = 'dd2335763@okaxis';
+const AMOUNT = 500;
+let userName = '', userPhone = '';
 
-let selectedPlan = { name: '', price: 0 };
-
-window.addEventListener('load', loadUserStatus);
-
-function loadUserStatus() {
-    const userData = JSON.parse(localStorage.getItem('royalGamesData') || 'null');
-    const subscriptions = JSON.parse(localStorage.getItem('royalSubscriptions') || '{}');
-    if (!userData || !userData.mobile) { updatePlanUI('Free'); return; }
-    const userSub = subscriptions[userData.mobile];
-    if (userSub && userSub.status === 'Active' && new Date(userSub.expiry) > new Date()) {
-        updatePlanUI(userSub.plan);
-    } else {
-        updatePlanUI('Free');
-    }
-}
-
-function updatePlanUI(planName) {
-    document.querySelectorAll('.plan').forEach(p => p.classList.remove('current'));
-    document.querySelectorAll('.plan-btn').forEach(b => b.disabled = false);
-    const statusText = document.getElementById('currentPlanText');
-    statusText.className = 'sb-value ' + planName.toLowerCase();
-    statusText.innerText = planName.toUpperCase() + ' PLAN';
-    if (planName === 'Free') {
-        document.getElementById('planFree').classList.add('current');
-        document.querySelector('#planFree .plan-btn').innerText = 'CURRENT PLAN';
-        document.querySelector('#planFree .plan-btn').disabled = true;
-    } else if (planName === 'Basic') {
-        document.getElementById('planBasic').classList.add('current');
-        document.querySelector('#planBasic .plan-btn').innerText = 'CURRENT PLAN';
-        document.querySelector('#planBasic .plan-btn').disabled = true;
-    } else if (planName === 'Pro') {
-        document.getElementById('planPro').classList.add('current');
-        document.querySelector('#planPro .plan-btn').innerText = 'CURRENT PLAN';
-        document.querySelector('#planPro .plan-btn').disabled = true;
-    }
-}
-
-function selectPlan(name, price) {
-    if (price === 0) return showToast("⚠️ Ye aapka current plan hai!");
-    const userData = JSON.parse(localStorage.getItem('royalGamesData') || 'null');
-    if (!userData || !userData.mobile) {
-        showToast("⚠️ Pehle chart page pe login karo!", "error");
-        setTimeout(() => window.location.href = 'index.html', 1500);
-        return;
-    }
-    selectedPlan = { name, price };
-    document.getElementById('modalPlanName').innerText = name + ' Plan';
-    document.getElementById('modalAmount').innerText = '₹' + price;
-    document.getElementById('upiIdText').innerText = UPI_ID;
-    document.getElementById('utrInput').value = '';
-    document.getElementById('paymentModal').classList.add('show');
-}
-
-function closePayment() {
-    document.getElementById('paymentModal').classList.remove('show');
+function goToPayment() {
+    const name = document.getElementById('userName').value.trim();
+    const phone = document.getElementById('userPhone').value.trim();
+    if (!name || name.length < 2) return alert('कृपया अपना पूरा नाम दर्ज करें!');
+    if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) return alert('कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!');
+    userName = name;
+    userPhone = phone;
+    localStorage.setItem('royalUser', JSON.stringify({ name, phone }));
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
 }
 
 function copyUpi() {
     navigator.clipboard.writeText(UPI_ID);
-    showToast("📋 UPI ID copied!");
+    alert('✅ UPI ID कॉपी हो गई!');
+}
+
+function showUtrForm() {
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'block';
 }
 
 function submitPayment() {
     const utr = document.getElementById('utrInput').value.trim();
-    if (utr.length < 6) return showToast("⚠️ Sahi UTR daalo (6+ digits)!", "error");
-    const userData = JSON.parse(localStorage.getItem('royalGamesData') || 'null');
-    if (!userData) return showToast("⚠️ Login karo pehle!", "error");
-    showToast("⏳ Payment submit ho raha hai...");
+    if (utr.length < 6) return alert('कृपया सही UTR / Txn ID दर्ज करें!');
+
     const params = new URLSearchParams();
     params.append('action', 'subscribe');
-    params.append('name', userData.name);
-    params.append('mobile', userData.mobile);
-    params.append('plan', selectedPlan.name);
-    params.append('amount', selectedPlan.price);
+    params.append('name', userName);
+    params.append('mobile', userPhone);
+    params.append('plan', 'Account Activation');
+    params.append('amount', AMOUNT);
     params.append('utr', utr);
+
     fetch(ADMIN_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString()
-    })
-    .then(() => {
-        const pendingSubs = JSON.parse(localStorage.getItem('royalPendingSubs') || '{}');
-        pendingSubs[userData.mobile] = {
-            plan: selectedPlan.name,
-            price: selectedPlan.price,
-            utr: utr,
-            submittedAt: new Date().toISOString(),
-            status: 'Pending'
-        };
-        localStorage.setItem('royalPendingSubs', JSON.stringify(pendingSubs));
-        closePayment();
-        showToast("✅ Payment submit! Admin verify karega (5-10 min).");
-        setTimeout(() => {
-            alert('Aapka payment admin ke paas chala gaya hai.\n\nVerify hone ke baad subscription automatically activate ho jayega.\n\nPage refresh karke check karte rahiye.');
-        }, 1200);
-    })
-    .catch(err => {
-        console.error(err);
-        showToast("⚠️ Error! Dobara try karo.", "error");
-    });
-}
+    }).catch(e => console.log(e));
 
-function showToast(msg, type = '') {
-    const t = document.getElementById('toast');
-    t.innerText = msg;
-    t.className = 'toast show ' + type;
-    clearTimeout(t._t);
-    t._t = setTimeout(() => t.className = 'toast ' + type, 3000);
+    document.getElementById('step3').style.display = 'none';
+    document.getElementById('step4').style.display = 'block';
 }
 </script>
 </body>

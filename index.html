@@ -229,12 +229,12 @@ tbody td{
     margin:1px 0;
 }
 
-/* ============ CELL ============ */
+/* ============ CELL — नंबर छोटे किए ============ */
 .cell-content{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:2px;
+    gap:1px;
     width:100%;
     padding:2px 1px;
     min-height:54px;
@@ -242,23 +242,23 @@ tbody td{
 .panna{
     display:flex;
     flex-direction:column;
-    font-size:10px;
-    line-height:1.1;
+    font-size:8px;
+    line-height:1;
     font-weight:700;
     color:#111827;
-    width:12px;
+    width:9px;
     align-items:center;
     font-family:'Segoe UI',sans-serif;
-    letter-spacing:0.2px;
+    letter-spacing:0;
 }
 .jodi{
-    font-size:17px;
+    font-size:14px;
     font-weight:900;
     color:#111827;
-    margin:0 3px;
-    letter-spacing:1px;
+    margin:0 2px;
+    letter-spacing:0.5px;
     font-family:'Arial Black','Helvetica',sans-serif;
-    min-width:24px;
+    min-width:20px;
     text-align:center;
     line-height:1;
 }
@@ -275,14 +275,14 @@ tbody td{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:26px;
+    font-size:22px;
     padding:6px;
     line-height:1;
     animation:lockPulse 2s infinite;
 }
 @keyframes lockPulse{
     0%,100%{transform:scale(1);opacity:1;}
-    50%{transform:scale(1.1);opacity:0.75;}
+    50%{transform:scale(1.08);opacity:0.75;}
 }
 
 /* ============ CTA ============ */
@@ -432,7 +432,7 @@ tbody td{
 <div class="cta-section">
     <div class="cta-title">Access Panel Charts</div>
     <div class="cta-sub">Create an account and complete the setup payment to view all charts.</div>
-    <a href="subscription.html" class="cta-btn">CREATE ACCOUNT / खाता बनाएं 🔑</a>
+    <a href="#" onclick="alert('खाता बनाने के लिए WhatsApp करें: +91 99999 99999');return false;" class="cta-btn">CREATE ACCOUNT / खाता बनाएं 🔑</a>
 </div>
 
 <div class="bottom-buttons" id="bottom">
@@ -503,13 +503,14 @@ function loadChart() {
     setTimeout(function () {
         let html = "";
         const lockIndex = getTodayLockIndex();
+        let cellCount = 0;   // एक row में कितने cells भर गए
 
         chartData.forEach(function (row, index) {
-            // हर 7 दिन पर नई पंक्ति
-            if (index % 7 === 0) {
+            // हर 7 दिन पर नई पंक्ति (MON-SAT = 6, तो 6 पर नई row)
+            if (cellCount === 0) {
                 if (index !== 0) html += "</tr>";
                 html += "<tr>";
-                const endIdx = Math.min(index + 6, chartData.length - 1);
+                const endIdx = Math.min(index + 5, chartData.length - 1);
                 html += '<td class="date-box">' +
                             '<div class="d-full">' + chartData[index].display + '</div>' +
                             '<div class="d-to">TO</div>' +
@@ -517,7 +518,7 @@ function loadChart() {
                         '</td>';
             }
 
-            // 🔒 आज का दिन → lock दिखाएँ
+            // 🔒 आज का दिन → lock उसी cell में लगाएँ (extra cell नहीं)
             if (index === lockIndex) {
                 html += '<td class="lock-cell">' +
                             '<div class="lock-btn">🔒</div>' +
@@ -540,9 +541,21 @@ function loadChart() {
                             '</div>' +
                         '</td>';
             }
+
+            cellCount++;
+
+            // 6 cells (MON-SAT) पूरे हो गए → अगली row शुरू करो
+            if (cellCount === 6) {
+                html += "</tr>";
+                cellCount = 0;
+            }
         });
 
-        html += "</tr>";
+        // अगर आखिरी row अधूरी है तो बंद करो
+        if (cellCount > 0) {
+            html += "</tr>";
+        }
+
         tbody.innerHTML = html;
     }, 400);
 }

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account - Royal Magic Panel Chart</title>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<title>खाता बनाएं - Royal Magic Panel Chart</title>
 <style>
 :root{
     --bg-page:#fff3c4;
     --text-dark:#111827;
     --text-blue:#1e40af;
     --sky-blue:#0ea5e9;
+    --green:#16a34a;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
@@ -57,19 +57,93 @@ body{
 }
 .form-sub{
     text-align:center;
-    font-size:11px;
+    font-size:12px;
     color:var(--text-blue);
-    margin-bottom:20px;
+    margin-bottom:18px;
+    line-height:1.6;
+}
+
+/* ============ ACTIVATION CHARGE BOX ============ */
+.activation-box{
+    background:linear-gradient(135deg,#fef3c7,#fde68a);
+    border:2px dashed #f59e0b;
+    border-radius:12px;
+    padding:14px 12px 0 12px;
+    text-align:center;
+    margin-bottom:18px;
+    overflow:hidden;
+}
+.activation-box .main-part{
+    padding-bottom:12px;
+}
+.activation-box .lbl{
+    font-size:11px;
+    color:#92400e;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:2px;
+}
+.activation-box .amt{
+    font-size:34px;
+    color:#dc2626;
+    font-weight:900;
+    font-family:'Arial Black',sans-serif;
+    line-height:1.05;
+}
+.activation-box .note{
+    font-size:11px;
+    color:#78350f;
+    margin-top:4px;
     line-height:1.5;
 }
+
+/* ============ EXTRA ROW — लाल रंग में ₹500 ============ */
+.activation-box .extra-row{
+    background:#fff;
+    border-top:2px dashed #f59e0b;
+    padding:10px 12px;
+    margin:0 -12px;
+    border-radius:0 0 10px 10px;
+}
+.activation-box .extra-label{
+    font-size:11px;
+    color:#7f1d1d;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:2px;
+    line-height:1.3;
+}
+.activation-box .extra-label .hindi{
+    display:block;
+    font-size:11px;
+    color:#7f1d1d;
+    font-weight:700;
+}
+.activation-box .extra-label .english{
+    display:block;
+    font-size:9.5px;
+    color:#991b1b;
+    font-weight:600;
+    letter-spacing:0.3px;
+    margin-top:1px;
+}
+.activation-box .extra-amount{
+    font-size:26px;
+    color:#dc2626;
+    font-weight:900;
+    font-family:'Arial Black',sans-serif;
+    line-height:1.1;
+    letter-spacing:1px;
+}
+
 label{
     display:block;
-    font-size:12px;
+    font-size:13px;
     color:var(--text-blue);
     margin-bottom:5px;
     margin-top:14px;
 }
-input, select{
+input{
     width:100%;
     padding:12px;
     border:2px solid #cbd5e1;
@@ -80,7 +154,7 @@ input, select{
     outline:none;
     font-family:'Segoe UI',sans-serif;
 }
-input:focus, select:focus{
+input:focus{
     border-color:var(--sky-blue);
     background:#fff;
     box-shadow:0 0 0 3px rgba(14,165,233,0.2);
@@ -103,7 +177,6 @@ input:focus, select:focus{
     font-family:'Segoe UI',sans-serif;
 }
 .btn-submit:active{transform:scale(0.98);}
-.btn-submit:disabled{background:#94a3b8;cursor:not-allowed;box-shadow:none;}
 .back-btn{
     display:block;
     width:100%;
@@ -123,17 +196,6 @@ input:focus, select:focus{
     box-shadow:0 3px 10px rgba(14,165,233,0.4);
     font-family:'Segoe UI',sans-serif;
 }
-.pay-info{
-    background:#fef9c3;
-    border:1px solid #fde68a;
-    border-radius:8px;
-    padding:12px;
-    margin-top:16px;
-    font-size:11px;
-    color:#1e40af;
-    line-height:1.6;
-    text-align:center;
-}
 .all-rights{
     background:#334155;
     color:#fff;
@@ -148,18 +210,190 @@ input:focus, select:focus{
     max-width:480px;
     font-family:'Segoe UI',sans-serif;
 }
-.status-msg{
+
+/* ============ QR PAYMENT POPUP ============ */
+.qr-overlay{
     display:none;
-    margin-top:14px;
-    padding:12px;
-    border-radius:8px;
-    font-size:12px;
-    text-align:center;
-    line-height:1.5;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:99999;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    overflow-y:auto;
 }
-.status-success{background:#dcfce7;color:#166534;border:1px solid #86efac;display:block;}
-.status-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;display:block;}
-.status-loading{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;display:block;}
+.qr-overlay.show{display:flex;}
+.qr-modal{
+    background:#fff;
+    border-radius:16px;
+    max-width:420px;
+    width:100%;
+    padding:22px 18px 18px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    position:relative;
+    text-align:center;
+    animation:popIn 0.25s ease;
+    max-height:95vh;
+    overflow-y:auto;
+}
+@keyframes popIn{
+    from{transform:scale(0.9);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+.qr-close{
+    position:absolute;
+    top:10px;
+    right:12px;
+    background:#ef4444;
+    color:#fff;
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    line-height:1;
+}
+.qr-title{
+    font-size:16px;
+    color:#dc2626;
+    font-weight:900;
+    text-transform:uppercase;
+    margin-bottom:4px;
+    font-family:'Arial Black',sans-serif;
+}
+.qr-sub{
+    font-size:11px;
+    color:var(--text-blue);
+    margin-bottom:14px;
+}
+.qr-amount-box{
+    background:linear-gradient(135deg,#fef3c7,#fde68a);
+    border:2px dashed #f59e0b;
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:14px;
+}
+.qr-amount-box .lbl{
+    font-size:11px;
+    color:#92400e;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+.qr-amount-box .amt{
+    font-size:32px;
+    color:#dc2626;
+    font-weight:900;
+    font-family:'Arial Black',sans-serif;
+    line-height:1.1;
+}
+.qr-amount-box .who{
+    font-size:11px;
+    color:#78350f;
+    margin-top:4px;
+}
+.qr-img-box{
+    background:#fff;
+    border:2px solid #e2e8f0;
+    border-radius:12px;
+    padding:10px;
+    display:inline-block;
+    margin-bottom:14px;
+}
+.qr-img-box img{
+    width:240px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    border-radius:6px;
+}
+.qr-img-box .no-qr{
+    font-size:11px;
+    color:#dc2626;
+    padding:40px 10px;
+}
+.qr-instructions{
+    background:#f0f9ff;
+    border:1px solid #bae6fd;
+    border-radius:10px;
+    padding:14px;
+    text-align:left;
+    margin-bottom:14px;
+}
+.qr-instructions h4{
+    font-size:12px;
+    color:#0369a1;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    letter-spacing:0.5px;
+}
+.qr-instructions ol{
+    padding-left:20px;
+    font-size:12px;
+    color:#0c4a6e;
+    line-height:1.9;
+    font-weight:600;
+}
+.qr-instructions ol li{margin-bottom:2px;}
+.qr-upi-row{
+    display:flex;
+    gap:6px;
+    margin-top:10px;
+}
+.qr-upi-row input{
+    flex:1;
+    font-size:12px;
+    padding:9px;
+    background:#fff;
+    border:2px solid #cbd5e1;
+}
+.qr-copy-btn{
+    padding:9px 14px;
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+    text-transform:uppercase;
+    font-family:'Segoe UI',sans-serif;
+}
+.btn-done{
+    display:block;
+    width:100%;
+    padding:14px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    box-shadow:0 5px 18px rgba(22,163,74,0.4);
+    font-family:'Segoe UI',sans-serif;
+}
+.btn-cancel{
+    display:block;
+    width:100%;
+    margin-top:8px;
+    padding:11px;
+    background:#e2e8f0;
+    color:#334155;
+    border:none;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    font-family:'Segoe UI',sans-serif;
+}
 </style>
 </head>
 <body>
@@ -169,139 +403,196 @@ input:focus, select:focus{
 </div>
 
 <div class="form-box">
-    <div class="form-title">Create Account / खाता बनाएं 🔑</div>
-    <div class="form-sub">खाता बनाने के लिए जानकारी भरें और पेमेंट पूरा करें।</div>
+    <div class="form-title">खाता बनाएं / Create Account 🔑</div>
+    <div class="form-sub">
+        नाम और मोबाइल नंबर भरें, फिर QR स्कैन करके भुगतान करें।<br>
+        Enter name and mobile, then scan QR to pay.
+    </div>
 
-    <form id="signupForm" onsubmit="handlePayment(event)">
+    <!-- 💰 Activation Charge Box -->
+    <div class="activation-box">
+
+        <!-- मुख्य हिस्सा -->
+        <div class="main-part">
+            <div class="lbl">खाता सक्रिय करने का शुल्क / Activation Charge</div>
+            <div class="amt">₹500</div>
+            <div class="note">
+                एक बार का शुल्क • पूरे साल के लिए<br>
+                One-time charge • Valid for full year
+            </div>
+        </div>
+
+        <!-- 🔴 EXTRA ROW — लाल रंग में ₹500 (Hindi + English) -->
+        <div class="extra-row">
+            <div class="extra-label">
+                <span class="hindi">वन टाइम एप्लीकेशन चार्ज</span>
+                <span class="english">One Time Application Charge</span>
+            </div>
+            <div class="extra-amount">₹500</div>
+        </div>
+
+    </div>
+
+    <form id="signupForm" onsubmit="openQR(event)">
         <label>पूरा नाम / Full Name</label>
-        <input type="text" id="name" placeholder="अपना नाम लिखें" required>
+        <input type="text" id="name" placeholder="अपना पूरा नाम लिखें / Enter your full name" required>
 
         <label>मोबाइल नंबर / Mobile Number</label>
-        <input type="tel" id="mobile" placeholder="10 अंकों का नंबर"
+        <input type="tel" id="mobile" placeholder="10 अंकों का मोबाइल नंबर / 10-digit mobile"
                pattern="[6-9][0-9]{9}" required>
 
-        <label>ईमेल / Email</label>
-        <input type="email" id="email" placeholder="example@mail.com" required>
-
-        <label>पासवर्ड / Password</label>
-        <input type="password" id="password" placeholder="मजबूत पासवर्ड"
-               minlength="6" required>
-
-        <label>प्लान चुनें / Select Plan</label>
-        <select id="plan" required onchange="updateAmount()">
-            <option value="">-- प्लान चुनें --</option>
-            <option value="500">Basic - ₹500 / महीना</option>
-            <option value="1000">Standard - ₹1000 / 3 महीने</option>
-            <option value="2500">Premium - ₹2500 / 6 महीने</option>
-        </select>
-
-        <button type="submit" id="payBtn" class="btn-submit">
-            PAY NOW / अभी भुगतान करें 💳
+        <button type="submit" class="btn-submit">
+            भुगतान करें / PROCEED TO PAYMENT 💳
         </button>
-
-        <div id="statusMsg" class="status-msg"></div>
     </form>
-
-    <div class="pay-info">
-        🔒 सुरक्षित पेमेंट — UPI, कार्ड, नेटबैंकिंग, वॉलेट सभी स्वीकार्य।<br>
-        Razorpay द्वारा संचालित।
-    </div>
 
     <a href="index.html" class="back-btn">← वापस जाएं / GO BACK</a>
 </div>
 
 <div class="all-rights">All Rights Reserved © 2026 Royal Magic Panel Chart</div>
 
-<script>
-// ⚠️ यहाँ अपनी Razorpay Key ID डालें
-const RAZORPAY_KEY_ID = "rzp_test_XXXXXXXXXXXX";
+<!-- ============ QR PAYMENT POPUP ============ -->
+<div class="qr-overlay" id="qrOverlay">
+    <div class="qr-modal">
+        <button class="qr-close" onclick="closeQR()">✕</button>
 
-function handlePayment(e) {
+        <div class="qr-title">QR स्कैन करें / Scan QR</div>
+        <div class="qr-sub">UPI से भुगतान करें / Pay via UPI</div>
+
+        <!-- 💰 Amount Box -->
+        <div class="qr-amount-box">
+            <div class="lbl">भुगतान राशि / Amount to Pay</div>
+            <div class="amt" id="qrAmount">₹500</div>
+            <div class="who" id="qrWho">—</div>
+        </div>
+
+        <!-- 🖼️ QR Image -->
+        <div class="qr-img-box">
+            <img id="qrImage" src="" alt="Payment QR Code"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div class="no-qr" style="display:none;">
+                ⚠️ QR कोड सेट नहीं है / QR Code not set.<br>
+                कृपया नीचे दी UPI ID से भुगतान करें / Please pay using UPI ID below.
+            </div>
+        </div>
+
+        <!-- 📋 Instructions -->
+        <div class="qr-instructions">
+            <h4>📖 भुगतान के निर्देश / Payment Instructions</h4>
+            <ol>
+                <li>ऊपर दिख रहा QR कोड अपने UPI ऐप (PhonePe / GPay / Paytm / BHIM) से <b>स्कैन</b> करें।<br>
+                    <span style="font-size:10.5px;color:#475569;">Scan the QR code above with your UPI app.</span></li>
+
+                <li>राशि <b>₹500</b> अपने आप भर जाएगी — न हो तो मैन्युअल डालें।<br>
+                    <span style="font-size:10.5px;color:#475569;">Amount ₹500 will be auto-filled — enter manually if not.</span></li>
+
+                <li>भुगतान पूरा करके <b>Screenshot</b> ज़रूर लें।<br>
+                    <span style="font-size:10.5px;color:#475569;">Please take a screenshot after payment.</span></li>
+
+                <li>नीचे दी गई UPI ID पर सीधे भी भुगतान कर सकते हैं।<br>
+                    <span style="font-size:10.5px;color:#475569;">You can also pay directly to the UPI ID below.</span></li>
+
+                <li>भुगतान के बाद नीचे <b>DONE</b> बटन दबाएं।<br>
+                    <span style="font-size:10.5px;color:#475569;">After payment, tap the DONE button below.</span></li>
+
+                <li>वेरिफिकेशन के बाद आपका खाता <b>10 मिनट</b> में सक्रिय हो जाएगा।<br>
+                    <span style="font-size:10.5px;color:#475569;">Your account will be activated within 10 minutes.</span></li>
+            </ol>
+
+            <!-- UPI ID + Copy -->
+            <div class="qr-upi-row">
+                <input type="text" id="upiIdField" value="" readonly>
+                <button type="button" class="qr-copy-btn" onclick="copyUPI()">COPY</button>
+            </div>
+        </div>
+
+        <button class="btn-done" onclick="confirmPayment()">✅ मैंने भुगतान कर दिया / I Have Paid</button>
+        <button class="btn-cancel" onclick="closeQR()">रद्द करें / Cancel</button>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// ⚙️ यहाँ सेटिंग बदलें — बस इतना ही!
+// ============================================================
+
+// 1️⃣ QR Code की image का path
+const QR_IMAGE_URL = "myqr.png";
+
+// 2️⃣ UPI ID (जिस पर पैसे आएंगे)
+const UPI_ID = "yourname@upi";
+
+// 3️⃣ Account Activation Charge (₹ में)
+const ACTIVATION_CHARGE = 500;
+
+// ============================================================
+
+function openQR(e) {
     e.preventDefault();
 
-    const name     = document.getElementById("name").value.trim();
-    const mobile   = document.getElementById("mobile").value.trim();
-    const email    = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const amount   = parseInt(document.getElementById("plan").value);
+    const name   = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
 
-    if (!name || !mobile || !email || !password || !amount) {
-        showStatus("कृपया सभी जानकारी सही भरें!", "error");
+    if (!name || !mobile) {
+        alert("कृपया नाम और मोबाइल नंबर भरें!\nPlease enter name and mobile number!");
         return;
     }
     if (!/^[6-9][0-9]{9}$/.test(mobile)) {
-        showStatus("मोबाइल नंबर सही नहीं है (10 अंक, 6-9 से शुरू)!", "error");
+        alert("मोबाइल नंबर सही नहीं है (10 अंक, 6-9 से शुरू)!\nInvalid mobile number (10 digits, starting 6-9)!");
         return;
     }
 
-    const options = {
-        key: RAZORPAY_KEY_ID,
-        amount: amount * 100,
-        currency: "INR",
-        name: "Royal Magic Panel Chart",
-        description: "Account Setup Payment",
-        prefill: { name: name, email: email, contact: mobile },
-        notes: { plan: amount, user_name: name },
-        theme: { color: "#0ea5e9" },
-        handler: function (response) {
-            onPaymentSuccess(response, { name: name, mobile: mobile, email: email, amount: amount });
-        },
-        modal: {
-            ondismiss: function () {
-                showStatus("पेमेंट रद्द कर दिया गया।", "error");
-                resetButton();
-            }
-        }
-    };
+    document.getElementById("qrAmount").textContent = "₹" + ACTIVATION_CHARGE;
+    document.getElementById("qrWho").textContent = name + " • " + mobile;
 
+    const img = document.getElementById("qrImage");
+    img.src = QR_IMAGE_URL;
+    img.style.display = "block";
+    img.nextElementSibling.style.display = "none";
+
+    document.getElementById("upiIdField").value = UPI_ID;
+
+    document.getElementById("qrOverlay").classList.add("show");
+}
+
+function closeQR() {
+    document.getElementById("qrOverlay").classList.remove("show");
+}
+
+function copyUPI() {
+    const input = document.getElementById("upiIdField");
+    input.select();
+    input.setSelectionRange(0, 99999);
     try {
-        showStatus("पेमेंट विंडो खुल रही है...", "loading");
-        const rzp = new Razorpay(options);
-        rzp.on("payment.failed", function (resp) {
-            showStatus("❌ पेमेंट विफल: " + resp.error.description, "error");
-            resetButton();
-        });
-        rzp.open();
-        document.getElementById("payBtn").disabled = true;
-        document.getElementById("payBtn").textContent = "प्रोसेस हो रहा है...";
+        document.execCommand("copy");
+        alert("✅ UPI ID कॉपी हो गई / UPI ID copied:\n" + UPI_ID);
     } catch (err) {
-        showStatus("पेमेंट शुरू नहीं हो सका: " + err.message, "error");
-        resetButton();
+        alert("कॉपी नहीं हो सका / Could not copy.\nमैन्युअल कॉपी करें / Copy manually: " + UPI_ID);
     }
 }
 
-function onPaymentSuccess(response, user) {
-    showStatus("✅ पेमेंट सफल! Payment ID: " + response.razorpay_payment_id, "success");
+function confirmPayment() {
+    const name   = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+
+    alert(
+        "✅ धन्यवाद " + name + "!\n" +
+        "Thank you " + name + "!\n\n" +
+        "आपका भुगतान विवरण प्राप्त हो गया है।\n" +
+        "Your payment details have been received.\n\n" +
+        "मोबाइल / Mobile: " + mobile + "\n" +
+        "राशि / Amount: ₹" + ACTIVATION_CHARGE + "\n\n" +
+        "कृपया 10 मिनट प्रतीक्षा करें।\n" +
+        "Please wait 10 minutes.\n\n" +
+        "वेरिफिकेशन के बाद आपका खाता सक्रिय हो जाएगा।\n" +
+        "Your account will be activated after verification."
+    );
+
+    closeQR();
+
     setTimeout(function () {
-        alert(
-            "🎉 धन्यवाद " + user.name + "!\n\n" +
-            "पेमेंट सफल हो गया।\n" +
-            "Payment ID: " + response.razorpay_payment_id + "\n" +
-            "राशि: ₹" + user.amount + "\n\n" +
-            "आपका खाता सक्रिय कर दिया गया है।"
-        );
         window.location.href = "index.html?payment=success";
-    }, 1500);
-}
-
-function showStatus(msg, type) {
-    const el = document.getElementById("statusMsg");
-    el.className = "status-msg status-" + type;
-    el.textContent = msg;
-}
-
-function resetButton() {
-    const btn = document.getElementById("payBtn");
-    btn.disabled = false;
-    btn.textContent = "PAY NOW / अभी भुगतान करें 💳";
-}
-
-function updateAmount() {
-    const amount = document.getElementById("plan").value;
-    if (amount) {
-        document.getElementById("payBtn").textContent =
-            "PAY ₹" + amount + " / भुगतान करें 💳";
-    }
+    }, 2000);
 }
 </script>
 

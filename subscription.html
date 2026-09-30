@@ -21,7 +21,7 @@ body{
     font-weight:700;
 }
 
-/* ============ HEADER — ROYAL लाल + MAGIC PANEL CHART काला ============ */
+/* ============ HEADER ============ */
 .header{
     background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
     padding:16px;
@@ -81,7 +81,7 @@ body{
     line-height:1.6;
 }
 
-/* ============ ACTIVATION CHARGE BOX — एक ही box ============ */
+/* ============ ACTIVATION CHARGE BOX ============ */
 .activation-box{
     background:linear-gradient(135deg,#fef3c7,#fde68a);
     border:2px dashed #f59e0b;
@@ -354,6 +354,65 @@ input:focus{
     text-transform:uppercase;
     font-family:'Segoe UI',sans-serif;
 }
+
+/* ============ UTR INPUT SECTION ============ */
+.utr-section{
+    background:#fff7ed;
+    border:2px solid #fdba74;
+    border-radius:12px;
+    padding:14px 12px;
+    margin-bottom:14px;
+    text-align:left;
+}
+.utr-section .utr-title{
+    font-size:12px;
+    color:#c2410c;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:3px;
+}
+.utr-section .utr-title-en{
+    font-size:10px;
+    color:#9a3412;
+    font-weight:600;
+    margin-bottom:10px;
+    letter-spacing:0.3px;
+}
+.utr-section label{
+    font-size:12px;
+    color:#7c2d12;
+    margin-top:0;
+    margin-bottom:5px;
+    font-weight:700;
+}
+.utr-section input{
+    font-size:13px;
+    padding:11px 12px;
+    border:2px solid #fdba74;
+    background:#fff;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+}
+.utr-section input:focus{
+    border-color:#ea580c;
+    box-shadow:0 0 0 3px rgba(234,88,12,0.2);
+}
+.utr-section .utr-hint{
+    font-size:10px;
+    color:#9a3412;
+    margin-top:6px;
+    line-height:1.5;
+    font-weight:600;
+}
+.utr-section .utr-hint-en{
+    font-size:9.5px;
+    color:#a16207;
+    margin-top:2px;
+    line-height:1.5;
+    font-weight:600;
+}
+
 .btn-done{
     display:block;
     width:100%;
@@ -370,6 +429,7 @@ input:focus{
     box-shadow:0 5px 18px rgba(22,163,74,0.4);
     font-family:'Segoe UI',sans-serif;
 }
+.btn-done:active{transform:scale(0.98);}
 .btn-cancel{
     display:block;
     width:100%;
@@ -401,7 +461,7 @@ input:focus{
         Enter name and mobile, then scan QR to pay.
     </div>
 
-    <!-- 💰 Activation Charge Box — एक ही box, ₹500 एक बार -->
+    <!-- 💰 Activation Charge Box -->
     <div class="activation-box">
         <div class="lbl-hi">एक बार का एप्लीकेशन चार्ज</div>
         <div class="lbl-en">One Time Application Charge</div>
@@ -463,14 +523,14 @@ input:focus{
                 <li>राशि <b>₹500</b> अपने आप भर जाएगी — न हो तो मैन्युअल डालें।<br>
                     <span style="font-size:10.5px;color:#475569;">Amount ₹500 will be auto-filled — enter manually if not.</span></li>
 
-                <li>भुगतान पूरा करके <b>Screenshot</b> ज़रूर लें।<br>
-                    <span style="font-size:10.5px;color:#475569;">Please take a screenshot after payment.</span></li>
+                <li>भुगतान पूरा करके <b>UTR / Transaction ID</b> कॉपी करें।<br>
+                    <span style="font-size:10.5px;color:#475569;">Copy the UTR / Transaction ID after payment.</span></li>
 
                 <li>नीचे दी गई UPI ID पर सीधे भी भुगतान कर सकते हैं।<br>
                     <span style="font-size:10.5px;color:#475569;">You can also pay directly to the UPI ID below.</span></li>
 
-                <li>भुगतान के बाद नीचे <b>DONE</b> बटन दबाएं।<br>
-                    <span style="font-size:10.5px;color:#475569;">After payment, tap the DONE button below.</span></li>
+                <li>नीचे <b>UTR नंबर</b> डालकर <b>DONE</b> बटन दबाएं।<br>
+                    <span style="font-size:10.5px;color:#475569;">Enter UTR number below and tap DONE.</span></li>
 
                 <li>वेरिफिकेशन के बाद आपका खाता <b>10 मिनट</b> में सक्रिय हो जाएगा।<br>
                     <span style="font-size:10.5px;color:#475569;">Your account will be activated within 10 minutes.</span></li>
@@ -480,6 +540,25 @@ input:focus{
             <div class="qr-upi-row">
                 <input type="text" id="upiIdField" value="" readonly>
                 <button type="button" class="qr-copy-btn" onclick="copyUPI()">COPY</button>
+            </div>
+        </div>
+
+        <!-- 🧾 UTR INPUT SECTION -->
+        <div class="utr-section">
+            <div class="utr-title">UTR / ट्रांजैक्शन आईडी डालें</div>
+            <div class="utr-title-en">Enter UTR / Transaction ID</div>
+
+            <label>UTR नंबर / UTR Number</label>
+            <input type="text" id="utrInput"
+                   placeholder="जैसे: 407812345678 / e.g., 407812345678"
+                   maxlength="22"
+                   autocomplete="off">
+
+            <div class="utr-hint">
+                💡 UPI ऐप में "Payment Successful" स्क्रीन पर UTR / Reference ID मिलेगी।
+            </div>
+            <div class="utr-hint-en">
+                You'll find the UTR / Reference ID on the "Payment Successful" screen in your UPI app.
             </div>
         </div>
 
@@ -529,6 +608,9 @@ function openQR(e) {
 
     document.getElementById("upiIdField").value = UPI_ID;
 
+    // UTR field खाली करें
+    document.getElementById("utrInput").value = "";
+
     document.getElementById("qrOverlay").classList.add("show");
 }
 
@@ -551,6 +633,26 @@ function copyUPI() {
 function confirmPayment() {
     const name   = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
+    const utr    = document.getElementById("utrInput").value.trim();
+
+    // UTR validation — कम से कम 6 अंक/अक्षर
+    if (!utr) {
+        alert(
+            "कृपया UTR / Transaction ID डालें!\n" +
+            "Please enter UTR / Transaction ID!"
+        );
+        document.getElementById("utrInput").focus();
+        return;
+    }
+
+    if (utr.length < 6) {
+        alert(
+            "UTR नंबर कम से कम 6 अक्षर का होना चाहिए!\n" +
+            "UTR must be at least 6 characters!"
+        );
+        document.getElementById("utrInput").focus();
+        return;
+    }
 
     alert(
         "✅ धन्यवाद " + name + "!\n" +
@@ -558,7 +660,8 @@ function confirmPayment() {
         "आपका भुगतान विवरण प्राप्त हो गया है।\n" +
         "Your payment details have been received.\n\n" +
         "मोबाइल / Mobile: " + mobile + "\n" +
-        "राशि / Amount: ₹" + ACTIVATION_CHARGE + "\n\n" +
+        "राशि / Amount: ₹" + ACTIVATION_CHARGE + "\n" +
+        "UTR नंबर / UTR No: " + utr + "\n\n" +
         "कृपया 10 मिनट प्रतीक्षा करें।\n" +
         "Please wait 10 minutes.\n\n" +
         "वेरिफिकेशन के बाद आपका खाता सक्रिय हो जाएगा।\n" +

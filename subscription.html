@@ -20,6 +20,8 @@ body{
     padding:20px 14px;
     font-weight:700;
 }
+
+/* ============ HEADER — ROYAL लाल + MAGIC PANEL CHART काला ============ */
 .header{
     background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
     padding:16px;
@@ -32,11 +34,27 @@ body{
 .header h1{
     font-size:18px;
     font-weight:900;
-    color:#dc2626;
     text-transform:uppercase;
-    font-family:'Arial Black',sans-serif;
+    font-family:'Arial Black','Helvetica',sans-serif;
     letter-spacing:1px;
 }
+.header h1 .royal{
+    color:#dc2626;
+    text-shadow:
+        -0.8px -0.8px 0 #dc2626,
+        0.8px -0.8px 0 #dc2626,
+        -0.8px 0.8px 0 #dc2626,
+        0.8px 0.8px 0 #dc2626;
+}
+.header h1 .black{
+    color:#111827;
+    text-shadow:
+        -0.8px -0.8px 0 #111827,
+        0.8px -0.8px 0 #111827,
+        -0.8px 0.8px 0 #111827,
+        0.8px 0.8px 0 #111827;
+}
+
 .form-box{
     background:#fff;
     border:3px solid var(--sky-blue);
@@ -399,7 +417,7 @@ input:focus{
 <body>
 
 <div class="header">
-    <h1>ROYAL MAGIC PANEL CHART</h1>
+    <h1><span class="royal">ROYAL</span> <span class="black">MAGIC PANEL CHART</span></h1>
 </div>
 
 <div class="form-box">
@@ -417,8 +435,8 @@ input:focus{
             <div class="lbl">खाता सक्रिय करने का शुल्क / Activation Charge</div>
             <div class="amt">₹500</div>
             <div class="note">
-                एक बार का शुल्क • पूरे साल के लिए<br>
-                One-time charge • Valid for full year
+                एक बार का शुल्क<br>
+                One-time charge
             </div>
         </div>
 

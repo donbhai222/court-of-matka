@@ -3,252 +3,307 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subscription | Royal Magic Panel Chart</title>
+<title>Create Account - Royal Magic Panel Chart</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-:root{--bg-page:#fff9e6;--bg-header:#fef3c7;--bg-header-2:#fde68a;--text-main:#1a1a1a;--text-soft:#1e40af;--red:#dc2626;--green:#16a34a;--orange:#ea580c;--yellow:#fef9c3;--gold:#f59e0b;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg-page);color:var(--text-main);font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;min-height:100vh;padding-bottom:80px;}
-
-/* HEADER */
-.header{background:linear-gradient(135deg,var(--bg-header),var(--bg-header-2));padding:16px 15px;text-align:center;position:relative;border-bottom:2px solid #e5c78a;}
-.header h1{font-size:20px;font-weight:900;color:#dc2626;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
-.header h1 span{color:#1a1a1a;}
-.header .sub-title{font-size:10px;color:#dc2626;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
-.menu-icon{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:26px;color:#1a1a1a;cursor:pointer;font-weight:900;}
-
-/* CARD */
-.card{margin:16px 14px;background:#fff;border:2px solid #fcd34d;border-radius:14px;padding:24px 20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);}
-
-.card-title{font-size:18px;font-weight:900;color:#1a1a1a;text-align:center;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
-.card-sub{font-size:12px;font-weight:800;color:#1e40af;text-align:center;margin-bottom:18px;}
-
-/* NOTICE BOX */
-.notice-box{background:#fefce8;border:1.5px dashed #f59e0b;border-radius:10px;padding:14px;margin-bottom:18px;}
-.notice-title{font-size:12px;font-weight:900;color:#1a1a1a;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.notice-text{font-size:11px;color:#1e40af;line-height:1.55;font-weight:700;}
-.notice-text b{color:#dc2626;}
-
-/* FEE BOX */
-.fee-box{background:#fefce8;border:1.5px solid #fcd34d;border-radius:12px;padding:20px;text-align:center;margin-bottom:20px;}
-.fee-lbl{font-size:11px;color:#1e40af;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
-.fee-amt{font-size:38px;font-weight:900;color:#dc2626;font-family:'Courier New',monospace;}
-
-/* SCAN LABEL */
-.scan-lbl{text-align:center;font-size:12px;font-weight:900;color:#1a1a1a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
-
-/* QR BOX */
-.qr-wrap{text-align:center;margin-bottom:16px;}
-.qr-box{display:inline-block;padding:14px;background:#fff;border:3px solid #06b6d4;border-radius:14px;box-shadow:0 4px 15px rgba(6,182,212,0.2);}
-.qr-img{width:220px;height:220px;display:block;}
-
-/* UPI SECTION */
-.upi-label{font-size:12px;font-weight:900;color:#1a1a1a;text-transform:uppercase;text-align:center;letter-spacing:0.5px;margin-bottom:10px;}
-.upi-box{background:#fefce8;border:2px solid #fcd34d;border-radius:12px;padding:16px;text-align:center;margin-bottom:12px;}
-.upi-val{font-size:16px;font-weight:900;color:#1a1a1a;letter-spacing:0.5px;word-break:break-all;margin-bottom:10px;user-select:all;}
-.copy-btn{background:linear-gradient(135deg,#fb923c,#ea580c);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;letter-spacing:0.5px;font-family:inherit;box-shadow:0 3px 10px rgba(234,88,12,0.3);}
-.copy-btn:hover{transform:translateY(-2px);}
-
-/* INSTRUCTIONS */
-.instr-box{background:#fefce8;border:1.5px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:18px;}
-.instr-title{font-size:13px;font-weight:900;color:#1a1a1a;margin-bottom:10px;text-transform:uppercase;}
-.instr-item{font-size:11.5px;color:#1e40af;line-height:1.6;font-weight:700;margin-bottom:8px;padding-left:16px;position:relative;}
-.instr-item::before{content:'•';position:absolute;left:4px;color:#dc2626;font-weight:900;font-size:16px;}
-.instr-item b{background:#fef3c7;padding:1px 6px;border-radius:3px;color:#dc2626;}
-
-/* SUBMIT BTN */
-.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:0.5px;text-transform:uppercase;font-family:inherit;box-shadow:0 5px 20px rgba(22,163,74,0.4);margin-bottom:10px;}
-.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(22,163,74,0.6);}
-
-/* FORM */
-.form-label{font-size:11px;font-weight:900;color:#ea580c;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;display:block;margin-top:14px;}
-.form-input{width:100%;padding:14px;background:#fff;border:2px solid #fcd34d;border-radius:10px;color:#1a1a1a;font-size:14px;outline:none;font-family:inherit;font-weight:700;}
-.form-input:focus{border-color:#16a34a;}
-
-/* ENTER DETAILS SPECIFIC */
-.enter-card{margin:16px 14px;background:#fff;border:2px solid #fcd34d;border-radius:14px;padding:28px 20px;box-shadow:0 4px 15px rgba(0,0,0,0.06);text-align:center;}
-.enter-title{font-size:22px;font-weight:900;color:#1a1a1a;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.enter-sub{font-size:13px;font-weight:800;color:#1e40af;margin-bottom:20px;}
-
-/* NEXT BTN */
-.next-btn{width:100%;padding:16px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:900;cursor:pointer;letter-spacing:1px;text-transform:uppercase;font-family:inherit;box-shadow:0 5px 20px rgba(22,163,74,0.4);}
-.next-btn:hover{transform:translateY(-2px);}
-
-/* TERMS */
-.terms{text-align:center;font-size:11px;color:#1e40af;font-weight:700;margin:14px 0 0;line-height:1.5;}
-.terms a{color:#dc2626;text-decoration:none;font-weight:900;}
-
-/* WHATSAPP FLOAT */
-.whatsapp-float{position:fixed;bottom:20px;right:18px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 5px 20px rgba(37,211,102,0.5);cursor:pointer;z-index:9999;text-decoration:none;}
-.whatsapp-float::before{content:'';position:absolute;top:0;right:0;width:18px;height:18px;background:#dc2626;border-radius:50%;border:2px solid #fff;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1;}
-.whatsapp-float::after{content:'1';position:absolute;top:-1px;right:0;color:#fff;font-size:11px;font-weight:900;}
-
-/* LOADING */
-.loading{text-align:center;padding:40px;color:#1e40af;font-weight:700;font-size:13px;}
-
-@media(max-width:600px){
-    .header h1{font-size:16px;}
-    .header .sub-title{font-size:9px;}
-    .card{padding:20px 16px;margin:12px 10px;}
-    .card-title{font-size:16px;}
-    .fee-amt{font-size:34px;}
-    .qr-img{width:180px;height:180px;}
-    .enter-title{font-size:18px;}
-    .next-btn,.submit-btn{font-size:14px;padding:14px;}
+:root{
+    --bg-page:#fff3c4;
+    --text-dark:#111827;
+    --text-blue:#1e40af;
+    --sky-blue:#0ea5e9;
 }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+    background:var(--bg-page);
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    min-height:100vh;
+    padding:20px 14px;
+    font-weight:700;
+}
+.header{
+    background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
+    padding:16px;
+    text-align:center;
+    border-radius:12px;
+    margin-bottom:20px;
+    border-bottom:2px solid #f59e0b;
+    box-shadow:0 4px 15px rgba(245,158,11,0.3);
+}
+.header h1{
+    font-size:18px;
+    font-weight:900;
+    color:#dc2626;
+    text-transform:uppercase;
+    font-family:'Arial Black',sans-serif;
+    letter-spacing:1px;
+}
+.form-box{
+    background:#fff;
+    border:3px solid var(--sky-blue);
+    border-radius:14px;
+    padding:22px 18px;
+    box-shadow:0 4px 20px rgba(14,165,233,0.3);
+    max-width:480px;
+    margin:0 auto;
+}
+.form-title{
+    text-align:center;
+    font-size:17px;
+    color:#dc2626;
+    font-weight:900;
+    text-transform:uppercase;
+    margin-bottom:6px;
+    font-family:'Arial Black',sans-serif;
+}
+.form-sub{
+    text-align:center;
+    font-size:11px;
+    color:var(--text-blue);
+    margin-bottom:20px;
+    line-height:1.5;
+}
+label{
+    display:block;
+    font-size:12px;
+    color:var(--text-blue);
+    margin-bottom:5px;
+    margin-top:14px;
+}
+input, select{
+    width:100%;
+    padding:12px;
+    border:2px solid #cbd5e1;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    background:#f8fafc;
+    outline:none;
+    font-family:'Segoe UI',sans-serif;
+}
+input:focus, select:focus{
+    border-color:var(--sky-blue);
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(14,165,233,0.2);
+}
+.btn-submit{
+    display:block;
+    width:100%;
+    margin-top:22px;
+    padding:15px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    box-shadow:0 5px 20px rgba(22,163,74,0.4);
+    font-family:'Segoe UI',sans-serif;
+}
+.btn-submit:active{transform:scale(0.98);}
+.btn-submit:disabled{background:#94a3b8;cursor:not-allowed;box-shadow:none;}
+.back-btn{
+    display:block;
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+    color:#fff;
+    border:2px solid #0284c7;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    cursor:pointer;
+    text-align:center;
+    text-decoration:none;
+    box-shadow:0 3px 10px rgba(14,165,233,0.4);
+    font-family:'Segoe UI',sans-serif;
+}
+.pay-info{
+    background:#fef9c3;
+    border:1px solid #fde68a;
+    border-radius:8px;
+    padding:12px;
+    margin-top:16px;
+    font-size:11px;
+    color:#1e40af;
+    line-height:1.6;
+    text-align:center;
+}
+.all-rights{
+    background:#334155;
+    color:#fff;
+    text-align:center;
+    padding:14px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    border-radius:14px;
+    margin:20px auto 0;
+    max-width:480px;
+    font-family:'Segoe UI',sans-serif;
+}
+.status-msg{
+    display:none;
+    margin-top:14px;
+    padding:12px;
+    border-radius:8px;
+    font-size:12px;
+    text-align:center;
+    line-height:1.5;
+}
+.status-success{background:#dcfce7;color:#166534;border:1px solid #86efac;display:block;}
+.status-error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;display:block;}
+.status-loading{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd;display:block;}
 </style>
 </head>
 <body>
 
 <div class="header">
-    <h1><span>ROYAL</span> MAGIC PANEL CHART</h1>
-    <div class="sub-title">Welcome to Royal Magic Panel Chart Matka</div>
-    <div class="menu-icon">☰</div>
+    <h1>ROYAL MAGIC PANEL CHART</h1>
 </div>
 
-<!-- STEP 1: ENTER DETAILS -->
-<div id="step1" class="enter-card">
-    <div class="enter-title">ENTER DETAILS</div>
-    <div class="enter-sub">विवरण दर्ज करें</div>
+<div class="form-box">
+    <div class="form-title">Create Account / खाता बनाएं 🔑</div>
+    <div class="form-sub">खाता बनाने के लिए जानकारी भरें और पेमेंट पूरा करें।</div>
 
-    <div class="notice-box" style="text-align:left;">
-        <div class="notice-title">ℹ️ Account Activation Notice</div>
-        <div class="notice-text">
-            After submitting your details and payment, your account will be activated by the admin. You will be able to access the charts once approved.<br>
-            <b>विवरण और भुगतान जमा करने के बाद, आपका account admin द्वारा activate किया जाएगा।</b>
-        </div>
+    <form id="signupForm" onsubmit="handlePayment(event)">
+        <label>पूरा नाम / Full Name</label>
+        <input type="text" id="name" placeholder="अपना नाम लिखें" required>
+
+        <label>मोबाइल नंबर / Mobile Number</label>
+        <input type="tel" id="mobile" placeholder="10 अंकों का नंबर"
+               pattern="[6-9][0-9]{9}" required>
+
+        <label>ईमेल / Email</label>
+        <input type="email" id="email" placeholder="example@mail.com" required>
+
+        <label>पासवर्ड / Password</label>
+        <input type="password" id="password" placeholder="मजबूत पासवर्ड"
+               minlength="6" required>
+
+        <label>प्लान चुनें / Select Plan</label>
+        <select id="plan" required onchange="updateAmount()">
+            <option value="">-- प्लान चुनें --</option>
+            <option value="500">Basic - ₹500 / महीना</option>
+            <option value="1000">Standard - ₹1000 / 3 महीने</option>
+            <option value="2500">Premium - ₹2500 / 6 महीने</option>
+        </select>
+
+        <button type="submit" id="payBtn" class="btn-submit">
+            PAY NOW / अभी भुगतान करें 💳
+        </button>
+
+        <div id="statusMsg" class="status-msg"></div>
+    </form>
+
+    <div class="pay-info">
+        🔒 सुरक्षित पेमेंट — UPI, कार्ड, नेटबैंकिंग, वॉलेट सभी स्वीकार्य।<br>
+        Razorpay द्वारा संचालित।
     </div>
 
-    <label class="form-label" style="text-align:left;display:block;">FULL NAME / पूरा नाम</label>
-    <input type="text" id="userName" class="form-input" placeholder="अपना पूरा नाम / Enter your full name" maxlength="50">
-
-    <label class="form-label" style="text-align:left;display:block;">PHONE NUMBER / फ़ोन नंबर</label>
-    <div style="display:flex;gap:8px;">
-        <div style="background:#fefce8;border:2px solid #fcd34d;border-radius:10px;padding:14px 12px;font-weight:900;color:#ea580c;font-size:13px;">+91</div>
-        <input type="tel" id="userPhone" class="form-input" placeholder="10 अंकों का नंबर / 10-digit num" maxlength="10" inputmode="numeric">
-    </div>
-
-    <button class="next-btn" style="margin-top:20px;" onclick="goToPayment()">NEXT → आगे बढ़ें</button>
-
-    <div class="terms">By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></div>
+    <a href="index.html" class="back-btn">← वापस जाएं / GO BACK</a>
 </div>
 
-<!-- STEP 2: PAYMENT -->
-<div id="step2" class="card" style="display:none;">
-    <div class="card-title">One-Time Account Activation</div>
-    <div class="card-sub">एक बार का खाता सक्रियण भुगतान</div>
-
-    <div class="fee-box">
-        <div class="fee-lbl">Registration Fee / पंजीकरण शुल्क</div>
-        <div class="fee-amt">₹500</div>
-    </div>
-
-    <div class="scan-lbl">SCAN QR CODE TO PAY / क्यूआर कोड स्कैन करें</div>
-
-    <div class="qr-wrap">
-        <div class="qr-box">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=dd2335763@okaxis%26pn=RoyalMagicPanel" alt="QR Code" class="qr-img">
-        </div>
-    </div>
-
-    <div class="upi-label">OR PAY VIA UPI ID / या यूपीआई आईडी से भुगतान करें</div>
-
-    <div class="upi-box">
-        <div class="upi-val" id="upiIdText">dd2335763@okaxis</div>
-        <button class="copy-btn" onclick="copyUpi()">📋 Copy / कॉपी करें</button>
-    </div>
-
-    <div class="instr-box">
-        <div class="instr-title">INSTRUCTIONS / निर्देश</div>
-        <div class="instr-item"><b>English:</b> Scan the QR code above or copy the UPI ID.</div>
-        <div class="instr-item">Complete the payment of <b>₹500</b> using Google Pay, PhonePe, Paytm, or any UPI app.</div>
-        <div class="instr-item">Save the Transaction Reference ID (UTR / Txn ID) after paying.</div>
-        <div class="instr-item">Click the "Payment Done" button below to submit details.</div>
-        <div class="instr-item" style="margin-top:12px;"><b>Hindi / हिंदी:</b> ऊपर दिए गए क्यूआर कोड को स्कैन करें या यूपीआई आईडी कॉपी करें।</div>
-        <div class="instr-item">Google Pay, PhonePe, Paytm या किसी भी UPI ऐप से <b>₹500</b> का भुगतान करें।</div>
-        <div class="instr-item">भुगतान के बाद ट्रांजेक्शन आईडी (UTR / Txn ID) सुरक्षित रखें।</div>
-        <div class="instr-item">विवरण सबमिट करने के लिए नीचे "Payment Done" बटन पर क्लिक करें।</div>
-    </div>
-
-    <button class="submit-btn" onclick="showUtrForm()">PAYMENT DONE / भुगतान हो गया</button>
-</div>
-
-<!-- STEP 3: UTR FORM -->
-<div id="step3" class="card" style="display:none;">
-    <div class="card-title">ENTER UTR / Txn ID</div>
-    <div class="card-sub">ट्रांजेक्शन आईडी दर्ज करें</div>
-
-    <label class="form-label" style="display:block;text-align:left;">UTR / Transaction ID</label>
-    <input type="text" id="utrInput" class="form-input" placeholder="12 अंकों की UTR / Txn ID" inputmode="numeric" maxlength="20">
-
-    <button class="submit-btn" style="margin-top:18px;" onclick="submitPayment()">SUBMIT / सबमिट करें</button>
-</div>
-
-<!-- STEP 4: THANK YOU -->
-<div id="step4" class="card" style="display:none;text-align:center;">
-    <div style="font-size:60px;margin-bottom:12px;">✅</div>
-    <div class="card-title">Thank You!</div>
-    <div class="card-sub">धन्यवाद!</div>
-    <div class="notice-box" style="text-align:left;margin-top:16px;">
-        <div class="notice-text">
-            Your payment is submitted successfully. Admin will verify and activate your account shortly.<br><br>
-            <b>आपका भुगतान सफलतापूर्वक जमा हो गया है। एडमिन जल्द ही सत्यापित करके आपका खाता सक्रिय कर देगा।</b>
-        </div>
-    </div>
-    <a href="index.html" class="next-btn" style="display:inline-block;text-align:center;text-decoration:none;margin-top:14px;">← Back to Chart</a>
-</div>
-
-<a href="https://wa.me/919999999999" target="_blank" class="whatsapp-float">💬</a>
+<div class="all-rights">All Rights Reserved © 2026 Royal Magic Panel Chart</div>
 
 <script>
-const ADMIN_URL = 'https://script.google.com/macros/s/AKfycbzbZwYvAae-eMqoqDJfOCZ61LeVWuDRbVzLJzp-CAqPiEXQw5aYubvVFI5Fsodma9ws/exec';
-const UPI_ID = 'dd2335763@okaxis';
-const AMOUNT = 500;
-let userName = '', userPhone = '';
+// ⚠️ यहाँ अपनी Razorpay Key ID डालें
+const RAZORPAY_KEY_ID = "rzp_test_XXXXXXXXXXXX";
 
-function goToPayment() {
-    const name = document.getElementById('userName').value.trim();
-    const phone = document.getElementById('userPhone').value.trim();
-    if (!name || name.length < 2) return alert('कृपया अपना पूरा नाम दर्ज करें!');
-    if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) return alert('कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!');
-    userName = name;
-    userPhone = phone;
-    localStorage.setItem('royalUser', JSON.stringify({ name, phone }));
-    document.getElementById('step1').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
+function handlePayment(e) {
+    e.preventDefault();
+
+    const name     = document.getElementById("name").value.trim();
+    const mobile   = document.getElementById("mobile").value.trim();
+    const email    = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const amount   = parseInt(document.getElementById("plan").value);
+
+    if (!name || !mobile || !email || !password || !amount) {
+        showStatus("कृपया सभी जानकारी सही भरें!", "error");
+        return;
+    }
+    if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+        showStatus("मोबाइल नंबर सही नहीं है (10 अंक, 6-9 से शुरू)!", "error");
+        return;
+    }
+
+    const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: amount * 100,
+        currency: "INR",
+        name: "Royal Magic Panel Chart",
+        description: "Account Setup Payment",
+        prefill: { name: name, email: email, contact: mobile },
+        notes: { plan: amount, user_name: name },
+        theme: { color: "#0ea5e9" },
+        handler: function (response) {
+            onPaymentSuccess(response, { name: name, mobile: mobile, email: email, amount: amount });
+        },
+        modal: {
+            ondismiss: function () {
+                showStatus("पेमेंट रद्द कर दिया गया।", "error");
+                resetButton();
+            }
+        }
+    };
+
+    try {
+        showStatus("पेमेंट विंडो खुल रही है...", "loading");
+        const rzp = new Razorpay(options);
+        rzp.on("payment.failed", function (resp) {
+            showStatus("❌ पेमेंट विफल: " + resp.error.description, "error");
+            resetButton();
+        });
+        rzp.open();
+        document.getElementById("payBtn").disabled = true;
+        document.getElementById("payBtn").textContent = "प्रोसेस हो रहा है...";
+    } catch (err) {
+        showStatus("पेमेंट शुरू नहीं हो सका: " + err.message, "error");
+        resetButton();
+    }
 }
 
-function copyUpi() {
-    navigator.clipboard.writeText(UPI_ID);
-    alert('✅ UPI ID कॉपी हो गई!');
+function onPaymentSuccess(response, user) {
+    showStatus("✅ पेमेंट सफल! Payment ID: " + response.razorpay_payment_id, "success");
+    setTimeout(function () {
+        alert(
+            "🎉 धन्यवाद " + user.name + "!\n\n" +
+            "पेमेंट सफल हो गया।\n" +
+            "Payment ID: " + response.razorpay_payment_id + "\n" +
+            "राशि: ₹" + user.amount + "\n\n" +
+            "आपका खाता सक्रिय कर दिया गया है।"
+        );
+        window.location.href = "index.html?payment=success";
+    }, 1500);
 }
 
-function showUtrForm() {
-    document.getElementById('step2').style.display = 'none';
-    document.getElementById('step3').style.display = 'block';
+function showStatus(msg, type) {
+    const el = document.getElementById("statusMsg");
+    el.className = "status-msg status-" + type;
+    el.textContent = msg;
 }
 
-function submitPayment() {
-    const utr = document.getElementById('utrInput').value.trim();
-    if (utr.length < 6) return alert('कृपया सही UTR / Txn ID दर्ज करें!');
+function resetButton() {
+    const btn = document.getElementById("payBtn");
+    btn.disabled = false;
+    btn.textContent = "PAY NOW / अभी भुगतान करें 💳";
+}
 
-    const params = new URLSearchParams();
-    params.append('action', 'subscribe');
-    params.append('name', userName);
-    params.append('mobile', userPhone);
-    params.append('plan', 'Account Activation');
-    params.append('amount', AMOUNT);
-    params.append('utr', utr);
-
-    fetch(ADMIN_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
-    }).catch(e => console.log(e));
-
-    document.getElementById('step3').style.display = 'none';
-    document.getElementById('step4').style.display = 'block';
+function updateAmount() {
+    const amount = document.getElementById("plan").value;
+    if (amount) {
+        document.getElementById("payBtn").textContent =
+            "PAY ₹" + amount + " / भुगतान करें 💳";
+    }
 }
 </script>
+
 </body>
 </html>

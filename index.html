@@ -190,7 +190,7 @@ thead th{
     letter-spacing:0.5px;
     font-family:'Segoe UI',sans-serif;
 }
-thead th.date-h{width:56px;}
+thead th.date-h{width:70px;}
 tbody td{
     border:1px solid #e2e8f0;
     padding:0;
@@ -201,35 +201,36 @@ tbody td{
     position:relative;
 }
 
-/* ============ DATE BOX ============ */
+/* ============ DATE BOX — पूरी date दिखे ============ */
 .date-box{
     background:var(--bg-date)!important;
-    font-size:7.5px;
+    font-size:7px;
     font-weight:700;
     color:#1e40af;
     line-height:1.15;
     padding:3px 1px;
     font-family:'Segoe UI',sans-serif;
-    width:56px;
+    width:70px;
     vertical-align:middle;
     text-align:center;
 }
 .date-box .d-full{
-    font-size:7.5px;
+    font-size:7px;
     font-weight:700;
     color:#1e40af;
-    line-height:1.15;
+    line-height:1.2;
     white-space:nowrap;
+    letter-spacing:0;
 }
 .date-box .d-to{
-    font-size:7px;
+    font-size:6.5px;
     font-weight:600;
     color:#1e40af;
     line-height:1.1;
     margin:1px 0;
 }
 
-/* ============ CELL — नंबर छोटे किए ============ */
+/* ============ CELL — नंबर छोटे ============ */
 .cell-content{
     display:flex;
     align-items:center;
@@ -390,8 +391,9 @@ tbody td{
 .loading{text-align:center;padding:40px 20px;color:#1e40af;font-size:13px;font-weight:700;}
 
 @media(min-width:500px){
-    thead th.date-h{width:64px;}
-    .date-box{width:64px;}
+    thead th.date-h{width:80px;}
+    .date-box{width:80px;}
+    .date-box .d-full{font-size:7.5px;}
 }
 </style>
 </head>
@@ -432,7 +434,7 @@ tbody td{
 <div class="cta-section">
     <div class="cta-title">Access Panel Charts</div>
     <div class="cta-sub">Create an account and complete the setup payment to view all charts.</div>
-    <a href="#" onclick="alert('खाता बनाने के लिए WhatsApp करें: +91 99999 99999');return false;" class="cta-btn">CREATE ACCOUNT / खाता बनाएं 🔑</a>
+    <a href="subscription.html" class="cta-btn">CREATE ACCOUNT / खाता बनाएं 🔑</a>
 </div>
 
 <div class="bottom-buttons" id="bottom">
@@ -451,30 +453,30 @@ tbody td{
 // ============================================================
 
 // ⚠️ नमूना डेटा — यहाँ अपना असली डेटा डालें
-// ज़रूरी: "date" हमेशा YYYY-MM-DD format में रखें
-// "display" वो है जो चार्ट में दिखेगा (जैसे 15/01)
+// "date" = lock और पूरी date के लिए (YYYY-MM-DD)
+// "display" = चार्ट में जो date दिखेगी (DD-MM-YYYY)
 const chartData = [
-    { date: "2026-01-01", display: "01/01", jodi: "45", panna: ["1","2","3"], red: false },
-    { date: "2026-01-02", display: "02/01", jodi: "78", panna: ["4","5","6"], red: true  },
-    { date: "2026-01-03", display: "03/01", jodi: "12", panna: ["7","8","9"], red: false },
-    { date: "2026-01-04", display: "04/01", jodi: "90", panna: ["2","3","4"], red: false },
-    { date: "2026-01-05", display: "05/01", jodi: "34", panna: ["5","6","7"], red: true  },
-    { date: "2026-01-06", display: "06/01", jodi: "56", panna: ["8","9","0"], red: false },
-    { date: "2026-01-07", display: "07/01", jodi: "23", panna: ["1","4","7"], red: false },
-    { date: "2026-01-08", display: "08/01", jodi: "67", panna: ["2","5","8"], red: true  },
-    { date: "2026-01-09", display: "09/01", jodi: "89", panna: ["3","6","9"], red: false },
-    { date: "2026-01-10", display: "10/01", jodi: "01", panna: ["0","1","2"], red: false },
-    { date: "2026-01-11", display: "11/01", jodi: "55", panna: ["4","4","4"], red: true  },
-    { date: "2026-01-12", display: "12/01", jodi: "44", panna: ["5","5","5"], red: false },
-    { date: "2026-01-13", display: "13/01", jodi: "33", panna: ["6","6","6"], red: false },
-    { date: "2026-01-14", display: "14/01", jodi: "22", panna: ["7","7","7"], red: true  },
-    { date: "2026-01-15", display: "15/01", jodi: "11", panna: ["8","8","8"], red: false },
-    { date: "2026-01-16", display: "16/01", jodi: "99", panna: ["9","9","9"], red: false },
-    { date: "2026-01-17", display: "17/01", jodi: "10", panna: ["1","0","2"], red: true  },
-    { date: "2026-01-18", display: "18/01", jodi: "20", panna: ["2","0","3"], red: false },
-    { date: "2026-01-19", display: "19/01", jodi: "30", panna: ["3","0","4"], red: false },
-    { date: "2026-01-20", display: "20/01", jodi: "40", panna: ["4","0","5"], red: true  },
-    { date: "2026-01-21", display: "21/01", jodi: "50", panna: ["5","0","6"], red: false }
+    { date: "2026-01-01", display: "01-01-2026", jodi: "45", panna: ["1","2","3"], red: false },
+    { date: "2026-01-02", display: "02-01-2026", jodi: "78", panna: ["4","5","6"], red: true  },
+    { date: "2026-01-03", display: "03-01-2026", jodi: "12", panna: ["7","8","9"], red: false },
+    { date: "2026-01-04", display: "04-01-2026", jodi: "90", panna: ["2","3","4"], red: false },
+    { date: "2026-01-05", display: "05-01-2026", jodi: "34", panna: ["5","6","7"], red: true  },
+    { date: "2026-01-06", display: "06-01-2026", jodi: "56", panna: ["8","9","0"], red: false },
+    { date: "2026-01-07", display: "07-01-2026", jodi: "23", panna: ["1","4","7"], red: false },
+    { date: "2026-01-08", display: "08-01-2026", jodi: "67", panna: ["2","5","8"], red: true  },
+    { date: "2026-01-09", display: "09-01-2026", jodi: "89", panna: ["3","6","9"], red: false },
+    { date: "2026-01-10", display: "10-01-2026", jodi: "01", panna: ["0","1","2"], red: false },
+    { date: "2026-01-11", display: "11-01-2026", jodi: "55", panna: ["4","4","4"], red: true  },
+    { date: "2026-01-12", display: "12-01-2026", jodi: "44", panna: ["5","5","5"], red: false },
+    { date: "2026-01-13", display: "13-01-2026", jodi: "33", panna: ["6","6","6"], red: false },
+    { date: "2026-01-14", display: "14-01-2026", jodi: "22", panna: ["7","7","7"], red: true  },
+    { date: "2026-01-15", display: "15-01-2026", jodi: "11", panna: ["8","8","8"], red: false },
+    { date: "2026-01-16", display: "16-01-2026", jodi: "99", panna: ["9","9","9"], red: false },
+    { date: "2026-01-17", display: "17-01-2026", jodi: "10", panna: ["1","0","2"], red: true  },
+    { date: "2026-01-18", display: "18-01-2026", jodi: "20", panna: ["2","0","3"], red: false },
+    { date: "2026-01-19", display: "19-01-2026", jodi: "30", panna: ["3","0","4"], red: false },
+    { date: "2026-01-20", display: "20-01-2026", jodi: "40", panna: ["4","0","5"], red: true  },
+    { date: "2026-01-21", display: "21-01-2026", jodi: "50", panna: ["5","0","6"], red: false }
 ];
 
 // ============ आज का lock index निकालें ============
@@ -489,7 +491,6 @@ function getTodayLockIndex() {
     });
 
     if (index !== -1) return index;
-    // अगर आज की तारीख डेटा में नहीं है तो आखिरी सेल पर lock
     return chartData.length > 0 ? chartData.length - 1 : 0;
 }
 
@@ -503,10 +504,10 @@ function loadChart() {
     setTimeout(function () {
         let html = "";
         const lockIndex = getTodayLockIndex();
-        let cellCount = 0;   // एक row में कितने cells भर गए
+        let cellCount = 0;
 
         chartData.forEach(function (row, index) {
-            // हर 7 दिन पर नई पंक्ति (MON-SAT = 6, तो 6 पर नई row)
+            // हर 6 दिन पर नई पंक्ति (MON-SAT)
             if (cellCount === 0) {
                 if (index !== 0) html += "</tr>";
                 html += "<tr>";
@@ -518,7 +519,7 @@ function loadChart() {
                         '</td>';
             }
 
-            // 🔒 आज का दिन → lock उसी cell में लगाएँ (extra cell नहीं)
+            // 🔒 lock उसी दिन की cell में
             if (index === lockIndex) {
                 html += '<td class="lock-cell">' +
                             '<div class="lock-btn">🔒</div>' +
@@ -544,14 +545,12 @@ function loadChart() {
 
             cellCount++;
 
-            // 6 cells (MON-SAT) पूरे हो गए → अगली row शुरू करो
             if (cellCount === 6) {
                 html += "</tr>";
                 cellCount = 0;
             }
         });
 
-        // अगर आखिरी row अधूरी है तो बंद करो
         if (cellCount > 0) {
             html += "</tr>";
         }
@@ -565,7 +564,7 @@ function playGame() {
     alert("🎮 गेम खेलने के लिए कृपया पहले खाता बनाएं!\n\nCREATE ACCOUNT बटन दबाएँ।");
 }
 
-// ============ पेज लोड होते ही चार्ट दिखाएँ ============
+// ============ पेज लोड ============
 document.addEventListener("DOMContentLoaded", function () {
     loadChart();
 
@@ -577,7 +576,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// ============ हर मिनट auto-check (दिन बदलते ही lock खुद आगे बढ़े) ============
 setInterval(function () {
     loadChart();
 }, 60000);

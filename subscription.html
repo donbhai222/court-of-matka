@@ -81,77 +81,51 @@ body{
     line-height:1.6;
 }
 
-/* ============ ACTIVATION CHARGE BOX ============ */
+/* ============ ACTIVATION CHARGE BOX — एक ही box ============ */
 .activation-box{
     background:linear-gradient(135deg,#fef3c7,#fde68a);
     border:2px dashed #f59e0b;
     border-radius:12px;
-    padding:14px 12px 0 12px;
+    padding:16px 12px;
     text-align:center;
     margin-bottom:18px;
-    overflow:hidden;
 }
-.activation-box .main-part{
-    padding-bottom:12px;
-}
-.activation-box .lbl{
-    font-size:11px;
+.activation-box .lbl-hi{
+    font-size:12px;
     color:#92400e;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:2px;
+    font-weight:700;
+    line-height:1.4;
+    letter-spacing:0.3px;
+}
+.activation-box .lbl-en{
+    font-size:10.5px;
+    color:#a16207;
+    font-weight:600;
+    line-height:1.4;
+    margin-top:2px;
+    letter-spacing:0.3px;
 }
 .activation-box .amt{
-    font-size:34px;
-    color:#dc2626;
-    font-weight:900;
-    font-family:'Arial Black',sans-serif;
-    line-height:1.05;
-}
-.activation-box .note{
-    font-size:11px;
-    color:#78350f;
-    margin-top:4px;
-    line-height:1.5;
-}
-
-/* ============ EXTRA ROW — लाल रंग में ₹500 ============ */
-.activation-box .extra-row{
-    background:#fff;
-    border-top:2px dashed #f59e0b;
-    padding:10px 12px;
-    margin:0 -12px;
-    border-radius:0 0 10px 10px;
-}
-.activation-box .extra-label{
-    font-size:11px;
-    color:#7f1d1d;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    margin-bottom:2px;
-    line-height:1.3;
-}
-.activation-box .extra-label .hindi{
-    display:block;
-    font-size:11px;
-    color:#7f1d1d;
-    font-weight:700;
-}
-.activation-box .extra-label .english{
-    display:block;
-    font-size:9.5px;
-    color:#991b1b;
-    font-weight:600;
-    letter-spacing:0.3px;
-    margin-top:1px;
-}
-.activation-box .extra-amount{
-    font-size:26px;
+    font-size:38px;
     color:#dc2626;
     font-weight:900;
     font-family:'Arial Black',sans-serif;
     line-height:1.1;
+    margin:8px 0 4px;
     letter-spacing:1px;
+}
+.activation-box .note-hi{
+    font-size:11px;
+    color:#78350f;
+    font-weight:600;
+    line-height:1.4;
+}
+.activation-box .note-en{
+    font-size:10px;
+    color:#a16207;
+    font-weight:600;
+    line-height:1.4;
+    margin-top:2px;
 }
 
 label{
@@ -427,28 +401,13 @@ input:focus{
         Enter name and mobile, then scan QR to pay.
     </div>
 
-    <!-- 💰 Activation Charge Box -->
+    <!-- 💰 Activation Charge Box — एक ही box, ₹500 एक बार -->
     <div class="activation-box">
-
-        <!-- मुख्य हिस्सा -->
-        <div class="main-part">
-            <div class="lbl">खाता सक्रिय करने का शुल्क / Activation Charge</div>
-            <div class="amt">₹500</div>
-            <div class="note">
-                एक बार का शुल्क<br>
-                One-time charge
-            </div>
-        </div>
-
-        <!-- 🔴 EXTRA ROW — लाल रंग में ₹500 (Hindi + English) -->
-        <div class="extra-row">
-            <div class="extra-label">
-                <span class="hindi">वन टाइम एप्लीकेशन चार्ज</span>
-                <span class="english">One Time Application Charge</span>
-            </div>
-            <div class="extra-amount">₹500</div>
-        </div>
-
+        <div class="lbl-hi">एक बार का एप्लीकेशन चार्ज</div>
+        <div class="lbl-en">One Time Application Charge</div>
+        <div class="amt">₹500</div>
+        <div class="note-hi">एक बार का शुल्क</div>
+        <div class="note-en">One-time charge</div>
     </div>
 
     <form id="signupForm" onsubmit="openQR(event)">

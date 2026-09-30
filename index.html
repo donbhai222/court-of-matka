@@ -4,7 +4,396 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ROYAL MAGIC PANEL CHART</title>
-<link rel="stylesheet" href="style.css">
+<style>
+:root{
+    --bg-page:#fff3c4;
+    --bg-pink:#ec4899;
+    --bg-yellow:#fbbf24;
+    --bg-date:#fef9e7;
+    --text-dark:#111827;
+    --text-blue:#1e40af;
+    --text-red:#dc2626;
+    --border-dark:#1e293b;
+    --sky-blue:#0ea5e9;
+    --sky-blue-light:#38bdf8;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{overflow-x:hidden;}
+body{
+    background:var(--bg-page);
+    color:var(--text-dark);
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    min-height:100vh;
+    padding-bottom:50px;
+    font-size:14px;
+    font-weight:700;
+}
+
+/* ============ HEADER ============ */
+.header{
+    background:linear-gradient(135deg,#fde68a 0%,#fcd34d 50%,#fbbf24 100%);
+    padding:14px 60px 14px 14px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:2px solid #f59e0b;
+    box-shadow:0 4px 15px rgba(245,158,11,0.3);
+}
+.header h1{
+    font-size:19px;
+    font-weight:900;
+    color:#dc2626;
+    letter-spacing:1px;
+    margin-bottom:3px;
+    text-transform:uppercase;
+    font-family:'Arial Black','Helvetica',sans-serif;
+    line-height:1.1;
+    text-shadow:
+        -0.8px -0.8px 0 #dc2626,
+        0.8px -0.8px 0 #dc2626,
+        -0.8px 0.8px 0 #dc2626,
+        0.8px 0.8px 0 #dc2626;
+}
+.header h1 .black{
+    color:#111827;
+    text-shadow:
+        -0.8px -0.8px 0 #111827,
+        0.8px -0.8px 0 #111827,
+        -0.8px 0.8px 0 #111827,
+        0.8px 0.8px 0 #111827;
+}
+.header .sub-title{
+    font-size:9px;
+    color:#dc2626;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+.menu-icon{
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:28px;
+    color:#111827;
+    cursor:pointer;
+    font-weight:700;
+    line-height:1;
+}
+
+/* ============ DISCLAIMER ============ */
+.disclaimer{
+    background:#fef9c3;
+    padding:14px 16px;
+    font-size:11px;
+    color:#1e40af;
+    line-height:1.55;
+    text-align:center;
+    font-weight:600;
+    border-bottom:1px solid #fde68a;
+}
+
+/* ============ TOP BUTTONS ============ */
+.top-buttons{
+    display:flex;
+    gap:10px;
+    padding:12px;
+    justify-content:center;
+    align-items:center;
+}
+.btn-goto{
+    padding:11px 18px;
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+    color:#ffffff;
+    border:2px solid #0284c7;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    text-transform:uppercase;
+    box-shadow:0 3px 10px rgba(14,165,233,0.4);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+    font-family:'Segoe UI',sans-serif;
+    letter-spacing:0.5px;
+}
+.btn-play{
+    flex:1;
+    padding:11px 12px;
+    background:linear-gradient(135deg,#fb923c 0%,#f97316 40%,#ea580c 70%,#c2410c 100%);
+    color:#ffffff;
+    border:2px solid #9a3412;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    text-transform:uppercase;
+    box-shadow:0 3px 12px rgba(234,88,12,0.5);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
+    font-family:'Segoe UI',sans-serif;
+    letter-spacing:0.5px;
+    animation:playBlink 1.5s infinite;
+}
+@keyframes playBlink{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.02);}
+}
+
+/* ============ CHART CONTAINER - LIGHT OUTLINE ============ */
+.chart-container{
+    margin:0 8px 12px;
+    border:2px solid #bae6fd;
+    border-radius:12px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(14,165,233,0.15);
+}
+.chart-title{
+    background:var(--bg-pink);
+    color:#ffffff;
+    padding:12px 10px;
+    font-size:15px;
+    font-weight:900;
+    font-family:'Arial Black','Helvetica',sans-serif;
+    text-align:center;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    line-height:1.1;
+    border-bottom:1px solid #bae6fd;
+}
+.chart-wrapper{
+    width:100%;
+    overflow-x:hidden;
+}
+table{
+    border-collapse:collapse;
+    width:100%;
+    table-layout:fixed;
+    background:#fff;
+}
+thead th{
+    background:var(--bg-yellow);
+    color:#111827;
+    font-size:10px;
+    padding:8px 2px;
+    border:1px solid #cbd5e1;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    font-family:'Segoe UI',sans-serif;
+}
+thead th.date-h{width:56px;}
+tbody td{
+    border:1px solid #e2e8f0;
+    padding:0;
+    text-align:center;
+    vertical-align:middle;
+    background:#fff;
+    height:58px;
+    position:relative;
+}
+
+/* ============ DATE BOX ============ */
+.date-box{
+    background:var(--bg-date)!important;
+    font-size:7.5px;
+    font-weight:700;
+    color:#1e40af;
+    line-height:1.15;
+    padding:3px 1px;
+    font-family:'Segoe UI',sans-serif;
+    width:56px;
+    vertical-align:middle;
+    text-align:center;
+}
+.date-box .d-full{
+    font-size:7.5px;
+    font-weight:700;
+    color:#1e40af;
+    line-height:1.15;
+    white-space:nowrap;
+}
+.date-box .d-to{
+    font-size:7px;
+    font-weight:600;
+    color:#1e40af;
+    line-height:1.1;
+    margin:1px 0;
+}
+
+/* ============ CELL ============ */
+.cell-content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    width:100%;
+    padding:2px 1px;
+    min-height:54px;
+}
+.panna{
+    display:flex;
+    flex-direction:column;
+    font-size:10px;
+    line-height:1.1;
+    font-weight:700;
+    color:#111827;
+    width:12px;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    letter-spacing:0.2px;
+}
+.jodi{
+    font-size:17px;
+    font-weight:900;
+    color:#111827;
+    margin:0 3px;
+    letter-spacing:1px;
+    font-family:'Arial Black','Helvetica',sans-serif;
+    min-width:24px;
+    text-align:center;
+    line-height:1;
+}
+.red-house .jodi{color:#dc2626!important;}
+.red-house .panna{color:#dc2626!important;}
+
+/* ============ LOCK CELL ============ */
+.lock-cell{
+    background:#f0f9ff !important;
+    cursor:pointer;
+    border:1px solid #bae6fd !important;
+}
+.lock-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    padding:6px;
+    line-height:1;
+    animation:lockPulse 2s infinite;
+}
+@keyframes lockPulse{
+    0%,100%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.1);opacity:0.75;}
+}
+
+/* ============ CTA ============ */
+.cta-section{
+    margin:14px 12px;
+    background:#fff;
+    border:2px solid #fcd34d;
+    border-radius:14px;
+    padding:22px 16px;
+    text-align:center;
+    box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.cta-title{
+    font-size:18px;
+    font-weight:700;
+    color:#1e40af;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-family:'Segoe UI',sans-serif;
+}
+.cta-sub{
+    font-size:11px;
+    color:#1e40af;
+    margin-bottom:16px;
+    font-weight:600;
+    line-height:1.5;
+}
+.cta-btn{
+    display:block;
+    width:100%;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:#fff;
+    padding:15px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    text-decoration:none;
+    text-transform:uppercase;
+    box-shadow:0 5px 20px rgba(22,163,74,0.4);
+    text-align:center;
+    letter-spacing:1px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ============ BOTTOM ============ */
+.bottom-buttons{
+    display:flex;
+    gap:10px;
+    padding:14px 12px 20px;
+    justify-content:center;
+}
+.all-rights{
+    background:#334155;
+    color:#fff;
+    text-align:center;
+    padding:14px 15px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    border-radius:14px 14px 0 0;
+    margin:0 12px;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* ============ FLOATS ============ */
+.whatsapp-float{
+    position:fixed;
+    bottom:18px;
+    right:16px;
+    width:54px;
+    height:54px;
+    background:#25d366;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 5px 20px rgba(37,211,102,0.5);
+    cursor:pointer;
+    z-index:9999;
+    text-decoration:none;
+    color:#fff;
+}
+.refresh-float{
+    position:fixed;
+    bottom:24px;
+    right:82px;
+    background:linear-gradient(135deg,#22c55e,#15803d);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    box-shadow:0 5px 20px rgba(21,128,61,0.4);
+    cursor:pointer;
+    z-index:9998;
+    border:none;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.loading{text-align:center;padding:40px 20px;color:#1e40af;font-size:13px;font-weight:700;}
+
+@media(min-width:500px){
+    thead th.date-h{width:64px;}
+    .date-box{width:64px;}
+}
+</style>
 </head>
 <body>
 
@@ -56,6 +445,130 @@
 <button class="refresh-float" onclick="loadChart()">REFRESH</button>
 <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="whatsapp-float">💬</a>
 
-<script src="script.js"></script>
+<script>
+// ============================================================
+// ROYAL MAGIC PANEL CHART - SCRIPT (Auto Daily Lock)
+// ============================================================
+
+// ⚠️ नमूना डेटा — यहाँ अपना असली डेटा डालें
+// ज़रूरी: "date" हमेशा YYYY-MM-DD format में रखें
+// "display" वो है जो चार्ट में दिखेगा (जैसे 15/01)
+const chartData = [
+    { date: "2026-01-01", display: "01/01", jodi: "45", panna: ["1","2","3"], red: false },
+    { date: "2026-01-02", display: "02/01", jodi: "78", panna: ["4","5","6"], red: true  },
+    { date: "2026-01-03", display: "03/01", jodi: "12", panna: ["7","8","9"], red: false },
+    { date: "2026-01-04", display: "04/01", jodi: "90", panna: ["2","3","4"], red: false },
+    { date: "2026-01-05", display: "05/01", jodi: "34", panna: ["5","6","7"], red: true  },
+    { date: "2026-01-06", display: "06/01", jodi: "56", panna: ["8","9","0"], red: false },
+    { date: "2026-01-07", display: "07/01", jodi: "23", panna: ["1","4","7"], red: false },
+    { date: "2026-01-08", display: "08/01", jodi: "67", panna: ["2","5","8"], red: true  },
+    { date: "2026-01-09", display: "09/01", jodi: "89", panna: ["3","6","9"], red: false },
+    { date: "2026-01-10", display: "10/01", jodi: "01", panna: ["0","1","2"], red: false },
+    { date: "2026-01-11", display: "11/01", jodi: "55", panna: ["4","4","4"], red: true  },
+    { date: "2026-01-12", display: "12/01", jodi: "44", panna: ["5","5","5"], red: false },
+    { date: "2026-01-13", display: "13/01", jodi: "33", panna: ["6","6","6"], red: false },
+    { date: "2026-01-14", display: "14/01", jodi: "22", panna: ["7","7","7"], red: true  },
+    { date: "2026-01-15", display: "15/01", jodi: "11", panna: ["8","8","8"], red: false },
+    { date: "2026-01-16", display: "16/01", jodi: "99", panna: ["9","9","9"], red: false },
+    { date: "2026-01-17", display: "17/01", jodi: "10", panna: ["1","0","2"], red: true  },
+    { date: "2026-01-18", display: "18/01", jodi: "20", panna: ["2","0","3"], red: false },
+    { date: "2026-01-19", display: "19/01", jodi: "30", panna: ["3","0","4"], red: false },
+    { date: "2026-01-20", display: "20/01", jodi: "40", panna: ["4","0","5"], red: true  },
+    { date: "2026-01-21", display: "21/01", jodi: "50", panna: ["5","0","6"], red: false }
+];
+
+// ============ आज का lock index निकालें ============
+function getTodayLockIndex() {
+    const today = new Date();
+    const todayStr = today.getFullYear() + "-" +
+                     String(today.getMonth() + 1).padStart(2, "0") + "-" +
+                     String(today.getDate()).padStart(2, "0");
+
+    const index = chartData.findIndex(function (row) {
+        return row.date === todayStr;
+    });
+
+    if (index !== -1) return index;
+    // अगर आज की तारीख डेटा में नहीं है तो आखिरी सेल पर lock
+    return chartData.length > 0 ? chartData.length - 1 : 0;
+}
+
+// ============ चार्ट लोड करें ============
+function loadChart() {
+    const tbody = document.getElementById("chartBody");
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="7" class="loading">Loading...</td></tr>';
+
+    setTimeout(function () {
+        let html = "";
+        const lockIndex = getTodayLockIndex();
+
+        chartData.forEach(function (row, index) {
+            // हर 7 दिन पर नई पंक्ति
+            if (index % 7 === 0) {
+                if (index !== 0) html += "</tr>";
+                html += "<tr>";
+                const endIdx = Math.min(index + 6, chartData.length - 1);
+                html += '<td class="date-box">' +
+                            '<div class="d-full">' + chartData[index].display + '</div>' +
+                            '<div class="d-to">TO</div>' +
+                            '<div class="d-full">' + chartData[endIdx].display + '</div>' +
+                        '</td>';
+            }
+
+            // 🔒 आज का दिन → lock दिखाएँ
+            if (index === lockIndex) {
+                html += '<td class="lock-cell">' +
+                            '<div class="lock-btn">🔒</div>' +
+                        '</td>';
+            } else {
+                const redClass = row.red ? "red-house" : "";
+                html += '<td class="' + redClass + '">' +
+                            '<div class="cell-content">' +
+                                '<div class="panna">' +
+                                    '<span>' + row.panna[0] + '</span>' +
+                                    '<span>' + row.panna[1] + '</span>' +
+                                    '<span>' + row.panna[2] + '</span>' +
+                                '</div>' +
+                                '<div class="jodi">' + row.jodi + '</div>' +
+                                '<div class="panna">' +
+                                    '<span>' + row.panna[2] + '</span>' +
+                                    '<span>' + row.panna[1] + '</span>' +
+                                    '<span>' + row.panna[0] + '</span>' +
+                                '</div>' +
+                            '</div>' +
+                        '</td>';
+            }
+        });
+
+        html += "</tr>";
+        tbody.innerHTML = html;
+    }, 400);
+}
+
+// ============ गेम खेलें ============
+function playGame() {
+    alert("🎮 गेम खेलने के लिए कृपया पहले खाता बनाएं!\n\nCREATE ACCOUNT बटन दबाएँ।");
+}
+
+// ============ पेज लोड होते ही चार्ट दिखाएँ ============
+document.addEventListener("DOMContentLoaded", function () {
+    loadChart();
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("payment") === "success") {
+        setTimeout(function () {
+            alert("✅ पेमेंट सफल! आपका खाता सक्रिय है।");
+        }, 500);
+    }
+});
+
+// ============ हर मिनट auto-check (दिन बदलते ही lock खुद आगे बढ़े) ============
+setInterval(function () {
+    loadChart();
+}, 60000);
+</script>
+
 </body>
 </html>
